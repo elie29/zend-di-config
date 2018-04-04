@@ -51,6 +51,12 @@ The `dependencies` sub associative array can contain the following keys:
   [Expressive delegators documentation](https://docs.zendframework.com/zend-servicemanager/delegators/)
   for more details.
 
+>**N.B.:** The whole configuration is merged within the `$container`:
+>
+>```php
+>$dependencies = $container->get('dependencies');
+>```
+
 ## Using with Expressive
 
 Replace contents of `config/container.php` with the following:
