@@ -24,6 +24,12 @@ $container = $factory(
             'delegators' => [],
         ],
         // ... other configuration
+
+        // Enable compilation
+        Config::DI_CACHE_PATH => __DIR__, // Folder path
+        
+        // Enable cache
+        Config::ENABLE_CACHE_DEFINITION => false, // boolean, true if APCu is activated
     ])
 );
 ```

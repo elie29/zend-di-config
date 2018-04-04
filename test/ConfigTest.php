@@ -31,6 +31,19 @@ class ConfigTest extends TestCase
         self::assertSame('d', $container->get('c'));
     }
 
+    public function testConfigurationEnableCompilation()
+    {
+        $config = [Config::DI_CACHE_PATH => __DIR__, Config::ENABLE_CACHE_DEFINITION => false];
+
+        $container = $this->getContainer($config);
+
+        self::assertNotEmpty($container->getKnownEntryNames());
+        self::assertSame(__DIR__, $container->get(Config::DI_CACHE_PATH));
+        self::assertFalse($container->get(Config::ENABLE_CACHE_DEFINITION));
+
+        @unlink(__DIR__ . '/CompiledContainer.php');
+    }
+
     public function testConfigurationServices()
     {
         $config = ['dependencies' => [
