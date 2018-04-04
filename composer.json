@@ -1,0 +1,46 @@
+{
+    "name": "zendframework/zend-di-config",
+    "description": "PSR-11 PHP-DI container configurator for ZF and Expressive applications",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "expressive",
+        "zf",
+        "zendframework",
+        "php-di",
+        "di",
+        "container",
+        "psr-11"
+    ],
+    "require": {
+        "php": "^7.1",
+        "php-di/php-di": "^6.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^7.0.2",
+        "zendframework/zend-coding-standard": "~1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zend\\DI\\Config\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZendTest\\DI\\Config\\": "test"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-clover clover.xml"
+    }
+}
