@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Zend\DI\Config;
 
 use DI\ContainerBuilder;
+use Psr\Container\ContainerInterface;
 use function DI\create;
 use function DI\factory;
 use function DI\get;
@@ -41,6 +42,7 @@ class Config implements ConfigInterface
         $this->addInvokables();
         $this->addFactories();
         $this->addAliases();
+        $this->addDelegators();
 
         $builder->addDefinitions($this->definitions);
     }
@@ -70,6 +72,24 @@ class Config implements ConfigInterface
     {
         foreach ($this->get('aliases') as $alias => $target) {
             $this->definitions[$alias] = get($target);
+        }
+    }
+
+    private function addDelegators(): void
+    {
+        foreach ($this->get('delegators') as $name => $delegators) {
+            foreach ($delegators as $delegator) {
+                $previous = uniqid($name, true);
+                $this->definitions[$previous] = $this->definitions[$name];
+                $callable = function (ContainerInterface $c) use ($delegator, $previous, $name) {
+                    $factory = new $delegator();
+                    $callable = function () use ($previous, $c) {
+                        return $c->get($previous);
+                    };
+                    return $factory($c, $name, $callable);
+                };
+                $this->definitions[$name] = $callable;
+            }
         }
     }
 

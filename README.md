@@ -2,6 +2,8 @@
 
 ## Configuration
 
+[Service Manager Configuration](https://docs.zendframework.com/zend-servicemanager/configuring-the-service-manager/)
+
 To get a configured [PSR-11](http://www.php-fig.org/psr/psr-11/)
 PHP-DI container, do the following:
 
@@ -19,6 +21,7 @@ $container = $factory(
             'invokables' => [],
             'factories'  => [],
             'aliases'    => [],
+            'delegators' => [],
         ],
         // ... other configuration
     ])
@@ -37,6 +40,10 @@ The `dependencies` sub associative array can contain the following keys:
   and callable once instantiated (i.e., implement the `__invoke()` method).
 - `aliases`: an associative array that maps an alias to a service name (or
   another alias).
+- `delegators`: an associative array that maps service names to lists of
+  delegator factory keys, see the
+  [Expressive delegators documentation](https://docs.zendframework.com/zend-servicemanager/delegators/)
+  for more details.
 
 ## Using with Expressive
 

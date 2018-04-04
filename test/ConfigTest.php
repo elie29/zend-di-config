@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace ZendTest\DI\Config;
 
-use DI\Container;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use Zend\DI\Config\Config;
 use Zend\DI\Config\ContainerFactory;
+use ZendTest\DI\Config\TestAsset\DelegatorService;
+use ZendTest\DI\Config\TestAsset\DelegatorServiceFactory;
+use ZendTest\DI\Config\TestAsset\DelegatorServiceFactory1;
+use ZendTest\DI\Config\TestAsset\DelegatorServiceFactory2;
 use ZendTest\DI\Config\TestAsset\Service;
 use ZendTest\DI\Config\TestAsset\ServiceFactory;
 use ZendTest\DI\Config\TestAsset\ServiceInterface;
@@ -38,7 +42,7 @@ class ConfigTest extends TestCase
                 'service-3' => function () {
                     return new Service();
                 },
-                'service-4' => function (Container $container) {
+                'service-4' => function (ContainerInterface $container) {
                     return $container->get('service-3');
                 },
                 'service-5' => function (Service $service) {
@@ -129,7 +133,50 @@ class ConfigTest extends TestCase
         self::assertInstanceOf(Service::class, $container->get('alias-4'));
     }
 
-    private function getContainer(array $config): Container
+    public function testConfigurationDelegators()
+    {
+        $config = ['dependencies' => [
+            'services' => [
+                'service-1' => Service::class,
+            ],
+            'delegators' => [
+                'service-1' => [
+                    DelegatorServiceFactory::class
+                ]
+            ]
+        ]];
+
+        $container = $this->getContainer($config);
+
+        self::assertNotEmpty($container->getKnownEntryNames());
+        self::assertInstanceOf(DelegatorService::class, $container->get('service-1'));
+        self::assertInstanceOf(ServiceInterface::class, $container->get('service-1')->service);
+    }
+
+    public function testConfigurationMultiDelegators()
+    {
+        $config = ['dependencies' => [
+            'factories' => [
+                'key-1' => ServiceFactory::class,
+            ],
+            'delegators' => [
+                'key-1' => [
+                    DelegatorServiceFactory1::class,
+                    DelegatorServiceFactory2::class
+                ]
+            ]
+        ]];
+
+        $container = $this->getContainer($config);
+
+        $expected = [DelegatorServiceFactory1::class, DelegatorServiceFactory2::class];
+
+        self::assertNotEmpty($container->getKnownEntryNames());
+        self::assertInstanceOf(ServiceInterface::class, $container->get('key-1'));
+        self::assertEquals($expected, $container->get('key-1')->getInjected());
+    }
+
+    private function getContainer(array $config): ContainerInterface
     {
         $factory = new ContainerFactory();
         $config = new Config($config);
