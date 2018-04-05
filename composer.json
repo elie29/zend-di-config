@@ -11,6 +11,12 @@
         "container",
         "psr-11"
     ],
+    "authors": [
+        {
+            "name": "Elie NEHME",
+            "email": "elie29@gmail.com"
+        }
+    ],
     "require": {
         "php": "^7.1",
         "php-di/php-di": "^6.0"
