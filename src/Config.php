@@ -39,8 +39,8 @@ class Config implements ConfigInterface
     private function addDefinitions(ContainerBuilder $builder): void
     {
         $this->addServices();
-        $this->addInvokables();
         $this->addFactories();
+        $this->addInvokables();
         $this->addAliases();
         $this->addDelegators();
 
@@ -54,17 +54,17 @@ class Config implements ConfigInterface
         }
     }
 
-    private function addInvokables(): void
-    {
-        foreach ($this->get('invokables') as $name => $object) {
-            $this->definitions[$name] = create($object);
-        }
-    }
-
     private function addFactories(): void
     {
         foreach ($this->get('factories') as $name => $factory) {
             $this->definitions[$name] = factory($factory);
+        }
+    }
+
+    private function addInvokables(): void
+    {
+        foreach ($this->get('invokables') as $name => $object) {
+            $this->definitions[$name] = create($object);
         }
     }
 
