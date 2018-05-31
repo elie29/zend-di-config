@@ -1,4 +1,4 @@
-# zend-di-config
+# zend-phpdi-config
 
 ## Configuration
 

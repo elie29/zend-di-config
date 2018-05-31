@@ -1,7 +1,7 @@
 {
-    "name": "zendframework/zend-di-config",
+    "name": "zendframework/zend-phpdi-config",
     "description": "PSR-11 PHP-DI container configurator for ZF and Expressive applications",
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "keywords": [
         "expressive",
         "zf",
