@@ -9,6 +9,7 @@ notifications:
 cache:
   directories:
     - $HOME/.composer/cache
+
 env:
   global:
     - COMPOSER_ARGS="--no-interaction"
