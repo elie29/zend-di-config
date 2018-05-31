@@ -1,6 +1,6 @@
 {
     "name": "elie29/zend-phpdi-config",
-    "description": "PSR-11 PHP-DI autowire container configurator for ZF and Expressive applications",
+    "description": "PSR-11 PHP-DI autowire container configurator for ZF2, ZF3 and Zend Expressive applications",
     "license": "MIT",
     "keywords": [
         "expressive",
