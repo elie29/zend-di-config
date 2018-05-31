@@ -1,6 +1,7 @@
 # zend-phpdi-config
 
 [![Build Status](https://travis-ci.org/elie29/zend-di-config.svg?branch=master)](https://travis-ci.org/elie29/zend-di-config)
+[![Coverage Status](https://coveralls.io/repos/github/elie29/zend-di-config/badge.svg)](https://coveralls.io/github/elie29/zend-di-config)
 
 ## Introduction
 Zend-PhpDi-Config allows us to use the configProvider without creating repetable factories that wire
