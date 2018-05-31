@@ -6,6 +6,7 @@ namespace Zend\DI\Config;
 
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
+use function DI\autowire;
 use function DI\create;
 use function DI\factory;
 use function DI\get;
@@ -64,7 +65,7 @@ class Config implements ConfigInterface
     private function addInvokables(): void
     {
         foreach ($this->get('invokables') as $name => $object) {
-            $this->definitions[$name] = create($object);
+            $this->definitions[$name] = autowire($object);
         }
     }
 
