@@ -25,10 +25,12 @@ class ConfigTest extends TestCase
 
         $container = $this->getContainer($config);
 
-        self::assertNotEmpty($container->getKnownEntryNames());
-        self::assertInstanceOf(\DateTime::class, $container->get('a'));
-        self::assertSame([1, 2, 3], $container->get('b'));
-        self::assertSame('d', $container->get('c'));
+        $config = $container->get('config');
+
+        self::assertNotEmpty($config);
+        self::assertInstanceOf(\DateTime::class, $config['a']);
+        self::assertSame([1, 2, 3], $config['b']);
+        self::assertSame('d', $config['c']);
     }
 
     public function testConfigurationEnableCompilation()
@@ -37,9 +39,11 @@ class ConfigTest extends TestCase
 
         $container = $this->getContainer($config);
 
-        self::assertNotEmpty($container->getKnownEntryNames());
-        self::assertSame(__DIR__, $container->get(Config::DI_CACHE_PATH));
-        self::assertFalse($container->get(Config::ENABLE_CACHE_DEFINITION));
+        $config = $container->get('config');
+
+        self::assertNotEmpty($config);
+        self::assertSame(__DIR__, $config[Config::DI_CACHE_PATH]);
+        self::assertFalse($config[Config::ENABLE_CACHE_DEFINITION]);
 
         @unlink(__DIR__ . '/CompiledContainer.php');
     }

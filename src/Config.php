@@ -6,11 +6,11 @@ namespace Zend\DI\Config;
 
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
-use function DI\autowire;
 use function DI\create;
 use function DI\factory;
 use function DI\get;
 use function is_array;
+use function DI\autowire;
 
 class Config implements ConfigInterface
 {
@@ -21,7 +21,7 @@ class Config implements ConfigInterface
 
     public function __construct(array $config)
     {
-        $this->definitions = $config;
+        $this->definitions = ['config' => $config];
     }
 
     public function configureContainer(ContainerBuilder $builder): void
@@ -34,7 +34,7 @@ class Config implements ConfigInterface
 
     private function setDependencies(): void
     {
-        $this->dependencies = $this->definitions['dependencies'] ?? [];
+        $this->dependencies = $this->definitions['config']['dependencies'] ?? [];
     }
 
     private function addDefinitions(ContainerBuilder $builder): void

@@ -1,5 +1,9 @@
 # zend-phpdi-config
 
+## Introduction
+Zend-PhpDi-Config allows us to use the configProvider without creating repetable factories that wire
+the ContainerInterface.
+
 ## Configuration
 
 [Service Manager Configuration](https://docs.zendframework.com/zend-servicemanager/configuring-the-service-manager/)
@@ -27,7 +31,7 @@ $container = $factory(
 
         // Enable compilation
         Config::DI_CACHE_PATH => __DIR__, // Folder path
-        
+
         // Enable cache
         Config::ENABLE_CACHE_DEFINITION => false, // boolean, true if APCu is activated
     ])
@@ -37,8 +41,9 @@ $container = $factory(
 The `dependencies` sub associative array can contain the following keys:
 
 - `services`: an associative array that maps a key to a specific service instance or service name.
-- `invokables`: an associative array that map a key to a constructor-less
-  service; i.e., for services that do not require arguments to the constructor.
+- `invokables`: an associative array that map a key to a **service with or without a constructor**;
+  PHP-DI offers an autowire technique that will scan the code and see
+  what are the parameters needed in the constructors.
   The key and service name usually are the same; if they are not, the key is
   treated as an alias.
 - `factories`: an associative array that maps a service name to a factory class
@@ -51,10 +56,10 @@ The `dependencies` sub associative array can contain the following keys:
   [Expressive delegators documentation](https://docs.zendframework.com/zend-servicemanager/delegators/)
   for more details.
 
->**N.B.:** The whole configuration is merged within the `$container`:
+>**N.B.:** The whole configuration is merged in a `config` key within the `$container`:
 >
 >```php
->$dependencies = $container->get('dependencies');
+>$config = $container->get('config');
 >```
 
 ## Using with Expressive
@@ -72,3 +77,62 @@ $factory = new ContainerFactory();
 
 return $factory(new Config($config));
 ```
+
+## Example of a configProvider
+```php
+<?php
+
+class ConfigProvider
+{
+
+    /**
+     * Returns the configuration array
+     */
+    public function __invoke(): array
+    {
+        return [
+            'dependencies' => $this->getDependencies()
+        ];
+    }
+
+    /**
+     * Returns the container dependencies
+     */
+    public function getDependencies(): array
+    {
+        return [
+            'invokables' => [
+                UserManager::class => UserManager::class
+            ]
+        ];
+    }
+}
+```
+
+Where UserManager depends on Mailer as follow:
+```php
+class UserManager
+{
+    private $mailer;
+
+    public function __construct(Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
+    public function register($email, $password)
+    {
+        $this->mailer->mail($email, 'Hello and welcome!');
+    }
+}
+
+class Mailer
+{
+    public function mail($recipient, $content)
+    {
+    }
+}
+
+```
+
+
