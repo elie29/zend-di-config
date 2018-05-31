@@ -96,14 +96,14 @@ class Config implements ConfigInterface
 
     private function enableCompilation(ContainerBuilder $builder): void
     {
-        if (! empty($this->definitions[static::DI_CACHE_PATH])) {
-            $builder->enableCompilation($this->definitions[static::DI_CACHE_PATH]);
+        if (! empty($this->definitions['config'][static::DI_CACHE_PATH])) {
+            $builder->enableCompilation($this->definitions['config'][static::DI_CACHE_PATH]);
         }
     }
 
     private function enableCache(ContainerBuilder $builder): void
     {
-        if (! empty($this->definitions[static::ENABLE_CACHE_DEFINITION])) {
+        if (! empty($this->definitions['config'][static::ENABLE_CACHE_DEFINITION])) {
             $builder->enableDefinitionCache();
         }
     }
