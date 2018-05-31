@@ -1,0 +1,50 @@
+sudo: false
+
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - vendor
+
+env:
+  global:
+    - COMPOSER_ARGS="--no-interaction"
+
+matrix:
+  include:
+    - php: 7.1
+      env:
+        - DEPS=lowest
+    - php: 7.1
+      env:
+        - DEPS=locked
+        - CS_CHECK=true
+    - php: 7.1
+      env:
+        - DEPS=latest
+    - php: 7.2
+      env:
+        - DEPS=lowest
+    - php: 7.2
+      env:
+        - DEPS=locked
+    - php: 7.2
+      env:
+        - DEPS=latest
+
+before_install:
+  - travis_retry composer self-update
+
+  install:
+  - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
+  - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
+  - travis_retry composer install $COMPOSER_ARGS
+  - composer info
+
+script:
+  - composer test
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
+
+notifications:
+  email: true
