@@ -1,12 +1,14 @@
+language: php
+
 sudo: false
 
-language: php
+notifications:
+  email:
+    on_success: never
 
 cache:
   directories:
     - $HOME/.composer/cache
-    - vendor
-
 env:
   global:
     - COMPOSER_ARGS="--no-interaction"
@@ -45,6 +47,3 @@ before_install:
 script:
   - composer test
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
-
-notifications:
-  email: true
