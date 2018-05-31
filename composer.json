@@ -1,5 +1,5 @@
 {
-    "name": "zendframework/zend-phpdi-config",
+    "name": "elie29/zend-phpdi-config",
     "description": "PSR-11 PHP-DI container configurator for ZF and Expressive applications",
     "license": "MIT",
     "keywords": [
