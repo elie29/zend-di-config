@@ -85,7 +85,7 @@ $factory = new ContainerFactory();
 return $factory(new Config($config));
 ```
 
-## Example of a configProvider
+## Example of a ConfigProvider class
 ```php
 <?php
 
