@@ -34,7 +34,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\DI\\Config\\": "test"
+            "ZendTest\\DI\\Config\\": "tests"
         }
     },
     "config": {
