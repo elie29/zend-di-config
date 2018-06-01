@@ -42,6 +42,7 @@ class Config implements ConfigInterface
         $this->addServices();
         $this->addFactories();
         $this->addInvokables();
+        $this->addAutowires();
         $this->addAliases();
         $this->addDelegators();
 
@@ -65,6 +66,13 @@ class Config implements ConfigInterface
     private function addInvokables(): void
     {
         foreach ($this->get('invokables') as $name => $object) {
+            $this->definitions[$name] = create($object);
+        }
+    }
+
+    private function addAutowires(): void
+    {
+        foreach ($this->get('autowires') as $name => $object) {
             $this->definitions[$name] = autowire($object);
         }
     }
