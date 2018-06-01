@@ -15,6 +15,7 @@ use ZendTest\DI\Config\TestAsset\DelegatorServiceFactory2;
 use ZendTest\DI\Config\TestAsset\Service;
 use ZendTest\DI\Config\TestAsset\ServiceFactory;
 use ZendTest\DI\Config\TestAsset\ServiceInterface;
+use ZendTest\DI\Config\TestAsset\UserManager;
 
 class ConfigTest extends TestCase
 {
@@ -93,6 +94,22 @@ class ConfigTest extends TestCase
         self::assertNotEmpty($container->getKnownEntryNames());
         self::assertInstanceOf(Service::class, $container->get(Service::class));
         self::assertInstanceOf(Service::class, $container->get('service-1'));
+    }
+
+    public function testConfigurationAutowires()
+    {
+        $config = ['dependencies' => [
+            'autowires' => [
+                UserManager::class => UserManager::class,
+                'user-manager' => UserManager::class,
+            ]
+        ]];
+
+        $container = $this->getContainer($config);
+
+        self::assertNotEmpty($container->getKnownEntryNames());
+        self::assertInstanceOf(UserManager::class, $container->get(UserManager::class));
+        self::assertInstanceOf(UserManager::class, $container->get('user-manager'));
     }
 
     public function testConfigurationFactories()

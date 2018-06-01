@@ -25,6 +25,7 @@ $container = $factory(
         'dependencies' => [
             'services'   => [],
             'invokables' => [],
+            'autowires'  => [], // A new key added to support PHP-DI autowire technique
             'factories'  => [],
             'aliases'    => [],
             'delegators' => [],
@@ -43,7 +44,11 @@ $container = $factory(
 The `dependencies` sub associative array can contain the following keys:
 
 - `services`: an associative array that maps a key to a specific service instance or service name.
-- `invokables`: an associative array that map a key to a **service with or without a constructor**;
+- `invokables`: an associative array that map a key to a constructor-less
+  service; i.e., for services that do not require arguments to the constructor.
+  The key and service name usually are the same; if they are not, the key is
+  treated as an alias.
+- `autowires`: an associative array that map a key to a **service with or without a constructor**;
   PHP-DI offers an autowire technique that will scan the code and see
   what are the parameters needed in the constructors.
   The key and service name usually are the same; if they are not, the key is
@@ -80,7 +85,7 @@ $factory = new ContainerFactory();
 return $factory(new Config($config));
 ```
 
-## Example of a configProvider
+## Example of a ConfigProvider class
 ```php
 <?php
 
@@ -103,7 +108,7 @@ class ConfigProvider
     public function getDependencies(): array
     {
         return [
-            'invokables' => [
+            'autowires' => [
                 UserManager::class => UserManager::class
             ]
         ];
@@ -137,4 +142,8 @@ class Mailer
 
 ```
 
+## Switching back to another container
 
+To switch back to another container is very easy:
+  1. Create your factories with `__invoke` function
+  2. Replace `autowires` key in ConfigProvider and for each class name attach the correspondent factory
