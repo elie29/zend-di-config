@@ -146,4 +146,4 @@ class Mailer
 
 To switch back to another container is very easy:
   1. Create your factories with `__invoke` function
-  2. Replace `autowires` key in ConfigProvider and for each class name attach the correspondent factory
+  2. Replace `autowires` key in ConfigProvider by `factories` key, then for each class name attach its correspondent factory.
