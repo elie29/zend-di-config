@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/elie29/zend-di-config/badge.svg)](https://coveralls.io/github/elie29/zend-di-config)
 
 ## Introduction
-Zend-PhpDi-Config allows us to use the configProvider without creating repeatable factories as suggested in Zend Framework service manager.
+[zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) allows us to use the configProvider without creating repeatable factories as suggested in Zend Framework service manager.
 
 ## Configuration
 

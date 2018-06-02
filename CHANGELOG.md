@@ -1,44 +1,74 @@
 Changelog
 =========
 
+All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V2.0.1
+## V2.0.2 - TBD
 
-- feat: Update composer #8. [Elie NEHME]
-- Renamed test folder. #7 [Elie NEHME]
-- Merge branch 'master' of https://github.com/elie29/zend-di-config.
-  [Elie NEHME]
+### Added
 
-## V2.0.0
+- Nothing.
 
-- Add type to composer.json
-- feat: Adding new autowire key support to ConfigProvider #5
-- Add type to composer.json. [Elie NEHME]
-- Readme correction. [Elie NEHME]
-- Added some explanations. [Elie NEHME]
-- Add coverage support. [Elie NEHME]
-- Travis coverage #4. [Elie NEHME]
-- Change travis for code coverage #4. [Elie NEHME]
-- Add travis icon #4. [Elie NEHME]
-- Valid travis.yml #4. [Elie NEHME]
-- Added newline #4. [Elie NEHME]
-- Adjusted config #4. [Elie NEHME]
-- Travis CI for the project #4. [Elie NEHME]
-- Fix DI_CACHE_PATH isn't recognized #3. [Elie NEHME]
-- Fix Add config key to the definition array #2. [Elie NEHME]
-- Fix Invokable class must be created with autowire function #1. [Elie
-  NEHME]
-- Changed vendor name. [Elie NEHME]
-- Changed licence. [Elie NEHME]
-- Put invokables after factories. [Elie NEHME]
-- Update issue templates. [Elie NEHME]
-- Create LICENSE. [Elie NEHME]
-- Create CODE_OF_CONDUCT.md. [Elie NEHME]
-- Added authors name and email. [Elie NEHME]
-- Added a note about the configuration. [Elie NEHME]
-- Added test for compilation and cache definition. [Elie NEHME]
-- Added delegators key support. [Elie NEHME]
-- Used ContainerInterface. [Elie NEHME]
-- Initial commit. [Elie NEHME]
+### Changed
 
+- Nothing.
 
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## V2.0.1 - 2108-06-02
+
+### Added
+
+- [#8](https://github.com/elie29/zend-di-config/issues/8) Update composer.
+- [#7](https://github.com/elie29/zend-di-config/issues/7) Renamed test folder.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## V2.0.0 - 2018-05-31
+
+### Added
+
+- [#6](https://github.com/elie29/zend-di-config/issues/6) New autowire key support to ConfigProvider.
+- [#5](https://github.com/elie29/zend-di-config/issues/5) Travis coverage.
+
+### Changed
+
+- [#4](https://github.com/elie29/zend-di-config/issues/4) Change travis for code coverage.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#3](https://github.com/elie29/zend-di-config/issues/3) DI_CACHE_PATH isn't recognized.
+- [#2](https://github.com/elie29/zend-di-config/issues/2) Added config key to the definition array.
+- [#1](https://github.com/elie29/zend-di-config/issues/1) Invokable class created with autowire function.
