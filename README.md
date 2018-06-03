@@ -4,7 +4,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/elie29/zend-di-config/badge.svg)](https://coveralls.io/github/elie29/zend-di-config)
 
 ## Introduction
-[zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) allows us to use the configProvider without creating repeatable factories as suggested in Zend Framework service manager.
+[zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](http://php-di.org) container using zend-servicemanager configuration.
+It can be used with Zend Framework and Zend Expressive.
+
+This library uses autowirng technique, cache compilation and cache definitions as defined in [PHP-DI](http://php-di.org).
 
 ## Configuration
 
