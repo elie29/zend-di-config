@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## V2.0.1 - 2108-06-02
+## V2.0.1 - 2018-06-02
 
 ### Added
 
