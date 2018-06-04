@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#9](https://github.com/elie29/zend-di-config/issues/9) Config class should use config constant instead of using config key.
 
 ### Deprecated
 
@@ -29,7 +29,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#8](https://github.com/elie29/zend-di-config/issues/8) Update composer.
+- [#8](https://github.com/elie29/zend-di-config/issues/8) Updated composer.
 - [#7](https://github.com/elie29/zend-di-config/issues/7) Renamed test folder.
 
 ### Changed

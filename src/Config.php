@@ -21,7 +21,7 @@ class Config implements ConfigInterface
 
     public function __construct(array $config)
     {
-        $this->definitions = ['config' => $config];
+        $this->definitions = [$this::CONFIG => $config];
     }
 
     public function configureContainer(ContainerBuilder $builder): void
@@ -34,7 +34,7 @@ class Config implements ConfigInterface
 
     private function setDependencies(): void
     {
-        $this->dependencies = $this->definitions['config']['dependencies'] ?? [];
+        $this->dependencies = $this->definitions[$this::CONFIG]['dependencies'] ?? [];
     }
 
     private function addDefinitions(ContainerBuilder $builder): void
@@ -104,14 +104,14 @@ class Config implements ConfigInterface
 
     private function enableCompilation(ContainerBuilder $builder): void
     {
-        if (! empty($this->definitions['config'][static::DI_CACHE_PATH])) {
-            $builder->enableCompilation($this->definitions['config'][static::DI_CACHE_PATH]);
+        if (! empty($this->definitions[$this::CONFIG][$this::DI_CACHE_PATH])) {
+            $builder->enableCompilation($this->definitions[$this::CONFIG][$this::DI_CACHE_PATH]);
         }
     }
 
     private function enableCache(ContainerBuilder $builder): void
     {
-        if (! empty($this->definitions['config'][static::ENABLE_CACHE_DEFINITION])) {
+        if (! empty($this->definitions[$this::CONFIG][$this::ENABLE_CACHE_DEFINITION])) {
             $builder->enableDefinitionCache();
         }
     }

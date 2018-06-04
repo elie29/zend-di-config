@@ -8,6 +8,8 @@ use DI\ContainerBuilder;
 
 interface ConfigInterface
 {
+
+    const CONFIG = 'config';
     const DI_CACHE_PATH = 'di_cache_path';
     const ENABLE_CACHE_DEFINITION = 'enable_cache_definition';
 
