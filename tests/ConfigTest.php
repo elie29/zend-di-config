@@ -26,7 +26,7 @@ class ConfigTest extends TestCase
 
         $container = $this->getContainer($config);
 
-        $config = $container->get('config');
+        $config = $container->get(Config::CONFIG);
 
         self::assertNotEmpty($config);
         self::assertInstanceOf(\DateTime::class, $config['a']);
@@ -40,7 +40,7 @@ class ConfigTest extends TestCase
 
         $container = $this->getContainer($config);
 
-        $config = $container->get('config');
+        $config = $container->get(Config::CONFIG);
 
         self::assertNotEmpty($config);
         self::assertSame(__DIR__, $config[Config::DI_CACHE_PATH]);
