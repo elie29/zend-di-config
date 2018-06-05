@@ -29,7 +29,7 @@ EOC;
             $config['dependencies'] = [];
         }
 
-        if (!is_array($config['dependencies'])) {
+        if (! is_array($config['dependencies'])) {
             throw new \InvalidArgumentException(
                 'Configuration dependencies key must be an array'
             );
@@ -73,7 +73,8 @@ EOC;
         foreach ($config as $key => $value) {
             $key = $this->createConfigKey($key);
             $entries[] = sprintf(
-                '%s%s%s,', $indent,
+                '%s%s%s,',
+                $indent,
                 $key ? sprintf('%s => ', $key) : '',
                 $this->createConfigValue($value, $indentLevel)
             );

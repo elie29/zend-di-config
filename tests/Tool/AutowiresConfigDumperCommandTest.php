@@ -23,7 +23,8 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->configDir = vfsStream::setup('project');
         $this->helper = $this->prophesize(ConsoleHelper::class);
         $this->command = new AutowiresConfigDumperCommand(
-            AutowiresConfigDumperCommand::class, $this->helper->reveal()
+            AutowiresConfigDumperCommand::class,
+            $this->helper->reveal()
         );
     }
 
@@ -152,4 +153,3 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->assertEquals(1, $command([$config, 'Not\A\Real\Class']));
     }
 }
-
