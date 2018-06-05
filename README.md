@@ -71,12 +71,20 @@ The `dependencies` sub associative array can contain the following keys:
 >$config = $container->get('config');
 >```
 
+## CLI command to add a new autowire entry
+![Configuration image](./config-add-entry.png)
+
+The cli command creates the configuration file if it doesn't exist otherwise it adds the entry
+the autowires key.
+
 ## Using with Expressive
 
 Replace contents of `config/container.php` with the following:
 
 ```php
 <?php
+
+declare(strict_types = 1);
 
 use Zend\DI\Config\Config;
 use Zend\DI\Config\ContainerFactory;

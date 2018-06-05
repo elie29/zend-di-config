@@ -3,6 +3,28 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## V3.0.3 - TBD
+
+### Added
+
+- [#17](https://github.com/elie29/zend-di-config/issues/17) Add documentation for the cli command.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## V3.0.2 - 2018-06-05
 
 ### Added
