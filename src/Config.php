@@ -72,8 +72,8 @@ class Config implements ConfigInterface
 
     private function addAutowires(): void
     {
-        foreach ($this->get('autowires') as $name => $object) {
-            $this->definitions[$name] = autowire($object);
+        foreach ($this->get('autowires') as $name) {
+            $this->definitions[$name] = autowire($name);
         }
     }
 

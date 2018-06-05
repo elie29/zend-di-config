@@ -3,7 +3,29 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V2.0.2 - TBD
+## V3.0.0 - 2018-06-05
+
+### Added
+
+- [#12](https://github.com/elie29/zend-di-config/issues/12) Expose a CLI command for adding an autowires entry to configuration.
+
+### Changed
+
+- [#11](https://github.com/elie29/zend-di-config/issues/11) autowires configuration should accept a straight array and not an associative key pair value. Any aliases needed should be created in the aliases configuration.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## V2.0.2 - 2018-06-04
 
 ### Added
 

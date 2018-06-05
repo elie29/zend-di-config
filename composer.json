@@ -18,11 +18,17 @@
             "email": "elie29@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/elie29/zend-di-config/issues",
+        "source": "https://github.com/elie29/zend-di-config"
+    },
     "require": {
         "php": "^7.1",
-        "php-di/php-di": "^6.0"
+        "php-di/php-di": "^6.0",
+        "zendframework/zend-stdlib": "^3.2"
     },
     "require-dev": {
+        "mikey179/vfsStream": "^1.6",
         "mockery/mockery": "^1.0",
         "phpunit/phpunit": "^7.0.2",
         "zendframework/zend-coding-standard": "~1.0.0"
@@ -40,6 +46,9 @@
     "config": {
         "sort-packages": true
     },
+    "bin": [
+        "bin/add-autowires-entry"
+    ],
     "scripts": {
         "check": [
             "@cs-check",
