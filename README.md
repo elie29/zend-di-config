@@ -74,7 +74,7 @@ The `dependencies` sub associative array can contain the following keys:
 ## CLI command to add a new autowire entry
 ![Configuration image](./config-add-entry.png)
 
-The cli command creates the configuration file if it doesn't exist otherwise it adds the entry
+The cli command `add-autowires-entry` creates the configuration file if it doesn't exist otherwise it adds the entry
 the autowires key.
 
 ## Using with Expressive
