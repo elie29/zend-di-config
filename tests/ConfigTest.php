@@ -100,8 +100,11 @@ class ConfigTest extends TestCase
     {
         $config = ['dependencies' => [
             'autowires' => [
-                UserManager::class => UserManager::class,
-                'user-manager' => UserManager::class,
+                UserManager::class, // array of service
+            ],
+            'aliases' => [
+                'user-manager1' => UserManager::class,
+                'user-manager2' => UserManager::class,
             ]
         ]];
 
@@ -109,7 +112,8 @@ class ConfigTest extends TestCase
 
         self::assertNotEmpty($container->getKnownEntryNames());
         self::assertInstanceOf(UserManager::class, $container->get(UserManager::class));
-        self::assertInstanceOf(UserManager::class, $container->get('user-manager'));
+        self::assertInstanceOf(UserManager::class, $container->get('user-manager1'));
+        self::assertSame($container->get('user-manager1'), $container->get('user-manager2'));
     }
 
     public function testConfigurationFactories()
