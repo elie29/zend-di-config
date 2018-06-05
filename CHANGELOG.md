@@ -3,6 +3,28 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## V3.0.2 - 2018-06-05
+
+### Added
+
+- [#16](https://github.com/elie29/zend-di-config/issues/16) Add entries to .gitattributes.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## V3.0.1 - 2018-06-05
 
 ### Added
