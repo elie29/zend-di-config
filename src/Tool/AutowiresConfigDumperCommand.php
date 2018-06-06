@@ -16,7 +16,7 @@ class AutowiresConfigDumperCommand
     const HELP_TEMPLATE = <<< EOH
 <info>Usage:</info>
 
-  %s [-h|--help|help] [-i|--ignore-unresolved] <configFile> <className>
+  %s [-h|--help|help] <configFile> <className>
 
 <info>Arguments:</info>
 
