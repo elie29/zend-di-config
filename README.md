@@ -75,7 +75,7 @@ The `dependencies` sub associative array can contain the following keys:
 ![Configuration image](./config-add-entry.png)
 
 The cli command `add-autowires-entry` creates the configuration file if it doesn't exist otherwise it adds the entry
-the autowires key.
+to the autowires key.
 
 ## Using with Expressive
 
@@ -119,7 +119,7 @@ class ConfigProvider
     {
         return [
             'autowires' => [
-                UserManager::class => UserManager::class
+                UserManager::class
             ]
         ];
     }
