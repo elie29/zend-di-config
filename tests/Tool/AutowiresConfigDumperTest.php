@@ -7,7 +7,6 @@ namespace ZendTest\DI\Config\Tool;
 use PHPUnit\Framework\TestCase;
 use Zend\DI\Config\Tool\AutowiresConfigDumper;
 use ZendTest\DI\Config\TestAsset\DelegatorService;
-use ZendTest\DI\Config\TestAsset\DelegatorServiceFactory;
 
 class AutowiresConfigDumperTest extends TestCase
 {
