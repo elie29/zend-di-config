@@ -16,9 +16,20 @@ use ZendTest\DI\Config\TestAsset\Service;
 use ZendTest\DI\Config\TestAsset\ServiceFactory;
 use ZendTest\DI\Config\TestAsset\ServiceInterface;
 use ZendTest\DI\Config\TestAsset\UserManager;
+use DI\ContainerBuilder;
 
 class ConfigTest extends TestCase
 {
+
+    public function testConfigurationEnableCache()
+    {
+        $builder = $this->createMock(ContainerBuilder::class);
+
+        $builder->expects($this->once())->method('enableDefinitionCache');
+
+        $config = new Config([Config::ENABLE_CACHE_DEFINITION => true]);
+        $config->configureContainer($builder);
+    }
 
     public function testConfigurationKeysValues()
     {
