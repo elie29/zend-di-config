@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace ZendTest\DI\Config;
 
 use DI\ContainerBuilder;
+use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Zend\DI\Config\Config;
@@ -47,17 +48,19 @@ class ConfigTest extends TestCase
 
     public function testConfigurationEnableCompilation()
     {
-        $config = [Config::DI_CACHE_PATH => __DIR__, Config::ENABLE_CACHE_DEFINITION => false];
+        vfsStream::setup('project');
+
+        $url = vfsStream::url('project');
+
+        $config = [Config::DI_CACHE_PATH => $url, Config::ENABLE_CACHE_DEFINITION => false];
 
         $container = $this->getContainer($config);
 
         $config = $container->get(Config::CONFIG);
 
         self::assertNotEmpty($config);
-        self::assertSame(__DIR__, $config[Config::DI_CACHE_PATH]);
+        self::assertSame($url, $config[Config::DI_CACHE_PATH]);
         self::assertFalse($config[Config::ENABLE_CACHE_DEFINITION]);
-
-        @unlink(__DIR__ . '/CompiledContainer.php');
     }
 
     public function testConfigurationServices()
