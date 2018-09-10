@@ -6,11 +6,11 @@ namespace Zend\DI\Config;
 
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
+use function DI\autowire;
 use function DI\create;
 use function DI\factory;
 use function DI\get;
 use function is_array;
-use function DI\autowire;
 
 class Config implements ConfigInterface
 {
@@ -66,7 +66,17 @@ class Config implements ConfigInterface
     private function addInvokables(): void
     {
         foreach ($this->get('invokables') as $name => $object) {
-            $this->definitions[$name] = create($object);
+            $key = is_numeric($name) ? $object : $name;
+            $this->addInvokable($key, $object);
+        }
+    }
+
+    private function addInvokable(string $key, string $service): void
+    {
+        $this->definitions[$key] = create($service);
+        if ($key !== $service) {
+            // create an alias to the service itself
+            $this->definitions[$service] = get($key);
         }
     }
 

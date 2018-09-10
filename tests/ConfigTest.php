@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace ZendTest\DI\Config;
 
+use DI\ContainerBuilder;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Zend\DI\Config\Config;
@@ -16,7 +17,6 @@ use ZendTest\DI\Config\TestAsset\Service;
 use ZendTest\DI\Config\TestAsset\ServiceFactory;
 use ZendTest\DI\Config\TestAsset\ServiceInterface;
 use ZendTest\DI\Config\TestAsset\UserManager;
-use DI\ContainerBuilder;
 
 class ConfigTest extends TestCase
 {
@@ -97,6 +97,7 @@ class ConfigTest extends TestCase
             'invokables' => [
                 Service::class => Service::class,
                 'service-1' => Service::class,
+                Service::class
             ]
         ]];
 

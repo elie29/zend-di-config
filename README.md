@@ -50,7 +50,7 @@ The `dependencies` sub associative array can contain the following keys:
 - `invokables`: an associative array that map a key to a constructor-less
   service; i.e., for services that do not require arguments to the constructor.
   The key and service name usually are the same; if they are not, the key is
-  treated as an alias.
+  treated as an alias. It could be also an array of services.
 - `autowires`: an array of service **with or without a constructor**;
   PHP-DI offers an autowire technique that will scan the code and see
   what are the parameters needed in the constructors.

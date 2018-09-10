@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#20](https://github.com/elie29/zend-di-config/issues/20) Makes invokables an array of services.
 
 ### Changed
 
