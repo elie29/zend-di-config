@@ -65,18 +65,18 @@ class Config implements ConfigInterface
 
     private function addInvokables(): void
     {
-        foreach ($this->get('invokables') as $name => $object) {
-            $key = is_numeric($name) ? $object : $name;
-            $this->addInvokable($key, $object);
+        foreach ($this->get('invokables') as $key => $object) {
+            $name = is_numeric($key) ? $object : $key;
+            $this->addInvokable($name, $object);
         }
     }
 
-    private function addInvokable(string $key, string $service): void
+    private function addInvokable(string $name, string $service): void
     {
-        $this->definitions[$key] = create($service);
-        if ($key !== $service) {
+        $this->definitions[$name] = create($service);
+        if ($name !== $service) {
             // create an alias to the service itself
-            $this->definitions[$service] = get($key);
+            $this->definitions[$service] = get($name);
         }
     }
 
