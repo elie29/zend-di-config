@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace Zend\DI\Config\Tool;
 
-use Traversable;
-
 class AutowiresConfigDumper
 {
 
@@ -66,7 +64,7 @@ EOC;
         return $dependencies;
     }
 
-    private function prepareConfig(array $config, $indentLevel = 1): string
+    private function prepareConfig(array $config, int $indentLevel = 1): string
     {
         $indent = str_repeat(' ', $indentLevel * 4);
         $entries = [];
@@ -98,9 +96,9 @@ EOC;
         return sprintf("'%s'", $key);
     }
 
-    private function createConfigValue($value, $indentLevel): string
+    private function createConfigValue($value, int $indentLevel): string
     {
-        if (is_array($value) || $value instanceof Traversable) {
+        if (is_array($value)) {
             return $this->prepareConfig($value, $indentLevel + 1);
         }
 

@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#22](https://github.com/elie29/zend-di-config/issues/22) Include PHP Static Analysis Tool.
 
 ### Changed
 

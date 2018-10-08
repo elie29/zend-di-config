@@ -5,6 +5,7 @@
 /.travis.yml export-ignore
 /CODE_OF_CONDUCT.md export-ignore
 /composer.lock export-ignore
-/phpunit.xml.dist export-ignore
 /phpcs.xml export-ignore
+/phpstan.neo export-ignore
+/phpunit.xml.dist export-ignore
 /tests/ export-ignore

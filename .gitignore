@@ -1,5 +1,6 @@
 /vendor/
 /.settings/
 /.buildpath
-
+/phpstan.xml
+/clover.xml
 /.project

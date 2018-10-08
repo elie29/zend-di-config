@@ -1,0 +1,8 @@
+# https://ne-on.org/
+
+parameters:
+    error-format: checkstyle
+    level: max
+
+includes:
+    - vendor/phpstan/phpstan-mockery/extension.neon

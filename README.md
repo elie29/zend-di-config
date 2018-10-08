@@ -77,6 +77,12 @@ The `dependencies` sub associative array can contain the following keys:
 The cli command `add-autowires-entry` creates the configuration file if it doesn't exist otherwise it adds the entry
 to the autowires key.
 
+Example of adding ConsoleHelper to a config.php:
+>```console
+>./vendor/bin/add-autowires-entry config.php "Zend\\Stdlib\\ConsoleHelper"
+>[DONE] Changes written to config.php
+>```
+
 ## Using with Expressive
 
 Replace contents of `config/container.php` with the following:
