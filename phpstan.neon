@@ -1,7 +1,6 @@
 # https://ne-on.org/
 
 parameters:
-    error-format: checkstyle
     level: max
 
 includes:

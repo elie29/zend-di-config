@@ -56,7 +56,7 @@
             "@cs-check",
             "@test"
         ],
-        "phpstan": "phpstan analyse src tests > phpstan.xml || true",
+        "phpstan": "phpstan analyse src tests --error-format=checkstyle > phpstan.xml || true",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "test": "phpunit",
