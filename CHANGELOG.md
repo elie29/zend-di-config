@@ -3,6 +3,28 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## V3.0.7 - TBD
+
+### Added
+
+- [#23](https://github.com/elie29/zend-di-config/issues/23) Launch composer udpate.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## V3.0.6 - 2018-10-08
 
 ### Added

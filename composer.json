@@ -3,6 +3,7 @@
     "description": "PSR-11 PHP-DI autowire container configurator for ZF2, ZF3 and Zend Expressive applications",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "stable",
     "keywords": [
         "expressive",
         "zf",
