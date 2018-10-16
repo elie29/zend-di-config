@@ -3,10 +3,11 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V3.0.7 - TBD
+## V3.0.7 - 2018-10-16
 
 ### Added
 
+- [#21](https://github.com/elie29/zend-di-config/issues/21) Add contributing.md document.
 - [#23](https://github.com/elie29/zend-di-config/issues/23) Launch composer udpate.
 
 ### Changed
