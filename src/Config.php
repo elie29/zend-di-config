@@ -26,10 +26,29 @@ class Config implements ConfigInterface
 
     public function configureContainer(ContainerBuilder $builder): void
     {
-        $this->setDependencies();
-        $this->addDefinitions($builder);
-        $this->enableCompilation($builder);
+        if (! $this->enableCompilation($builder)) {
+            $this->setDependencies();
+            $this->addDefinitions($builder);
+        }
+
         $this->enableCache($builder);
+    }
+
+    /**
+     * @param ContainerBuilder $builder
+     *
+     * @return bool true if compilation is enabled and CompiledContainer exists.
+     */
+    private function enableCompilation(ContainerBuilder $builder): bool
+    {
+        $path = $this->definitions[$this::CONFIG][$this::DI_CACHE_PATH] ?? null;
+
+        if ($path) {
+            $builder->enableCompilation($path);
+            return is_file(rtrim($path, '/') . '/CompiledContainer.php');
+        }
+
+        return false;
     }
 
     private function setDependencies(): void
@@ -109,13 +128,6 @@ class Config implements ConfigInterface
                 };
                 $this->definitions[$name] = $callable;
             }
-        }
-    }
-
-    private function enableCompilation(ContainerBuilder $builder): void
-    {
-        if (! empty($this->definitions[$this::CONFIG][$this::DI_CACHE_PATH])) {
-            $builder->enableCompilation($this->definitions[$this::CONFIG][$this::DI_CACHE_PATH]);
         }
     }
 
