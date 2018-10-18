@@ -66,16 +66,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.0.4",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c"
+                "reference": "d0230c5c77a7e3cfa69446febf340978540958c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fa6ee28600d21d49b2b4e1006b48426cec8e579c",
-                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/d0230c5c77a7e3cfa69446febf340978540958c0",
+                "reference": "d0230c5c77a7e3cfa69446febf340978540958c0",
                 "shasum": ""
             },
             "require": {
@@ -91,7 +91,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "4.1-dev"
                 }
             },
             "autoload": {
@@ -113,7 +113,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2018-09-18T07:03:24+00:00"
+            "time": "2018-10-10T09:24:14+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -1828,16 +1828,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "6.0.8",
+            "version": "6.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "848f78b3309780fef7ec8c4666b7ab4e6b09b22f"
+                "reference": "b097681a19a48e52706f57e47a09594bac4f7cab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/848f78b3309780fef7ec8c4666b7ab4e6b09b22f",
-                "reference": "848f78b3309780fef7ec8c4666b7ab4e6b09b22f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/b097681a19a48e52706f57e47a09594bac4f7cab",
+                "reference": "b097681a19a48e52706f57e47a09594bac4f7cab",
                 "shasum": ""
             },
             "require": {
@@ -1848,7 +1848,7 @@
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-token-stream": "^3.0",
                 "sebastian/code-unit-reverse-lookup": "^1.0.1",
-                "sebastian/environment": "^3.1",
+                "sebastian/environment": "^3.1 || ^4.0",
                 "sebastian/version": "^2.0.1",
                 "theseer/tokenizer": "^1.1"
             },
@@ -1861,7 +1861,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -1887,7 +1887,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-10-04T03:41:23+00:00"
+            "time": "2018-10-18T09:01:38+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2080,16 +2080,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.4.0",
+            "version": "7.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f3837fa1e07758057ae06e8ddec6d06ba183f126"
+                "reference": "c5a120ade60992bd671a912188ee9ee9f8083bbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f3837fa1e07758057ae06e8ddec6d06ba183f126",
-                "reference": "f3837fa1e07758057ae06e8ddec6d06ba183f126",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c5a120ade60992bd671a912188ee9ee9f8083bbd",
+                "reference": "c5a120ade60992bd671a912188ee9ee9f8083bbd",
                 "shasum": ""
             },
             "require": {
@@ -2110,7 +2110,7 @@
                 "phpunit/php-timer": "^2.0",
                 "sebastian/comparator": "^3.0",
                 "sebastian/diff": "^3.0",
-                "sebastian/environment": "^3.1",
+                "sebastian/environment": "^3.1 || ^4.0",
                 "sebastian/exporter": "^3.1",
                 "sebastian/global-state": "^2.0",
                 "sebastian/object-enumerator": "^3.0.3",
@@ -2160,7 +2160,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-10-05T04:05:24+00:00"
+            "time": "2018-10-18T09:02:52+00:00"
         },
         {
             "name": "psr/log",
