@@ -95,10 +95,17 @@ declare(strict_types = 1);
 use Zend\DI\Config\Config;
 use Zend\DI\Config\ContainerFactory;
 
-$config  = require __DIR__ . '/config.php';
-$factory = new ContainerFactory();
+// Protect variables from global scope
+return call_user_func(function () {
 
-return $factory(new Config($config));
+    $config = require __DIR__ . '/config.php';
+
+    $factory = new ContainerFactory();
+
+    // Container
+    return $factory(new Config($config));
+});
+
 ```
 
 ## Example of a ConfigProvider class
