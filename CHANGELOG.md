@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#26](https://github.com/elie29/zend-di-config/issues/26) Indicate visibility of constants.
 
 ### Deprecated
 
