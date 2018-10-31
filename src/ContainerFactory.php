@@ -13,7 +13,7 @@ class ContainerFactory
 
     public function __invoke(ConfigInterface $config): ContainerInterface
     {
-        $builder = new ContainerBuilder();
+        $builder = new ContainerBuilder(ContainerWrapper::class);
         $config->configureContainer($builder);
 
         return $builder->build();

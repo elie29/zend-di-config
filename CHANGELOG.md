@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#25](https://github.com/elie29/zend-di-config/issues/25) Use Expressive Skeleton installer with PHP-DI results in error.
 
 ### Changed
 

@@ -25,6 +25,7 @@
     },
     "require": {
         "php": "^7.1",
+        "container-interop/container-interop": "^1.2",
         "php-di/php-di": "^6.0",
         "zendframework/zend-stdlib": "^3.2"
     },
