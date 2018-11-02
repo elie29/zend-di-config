@@ -170,3 +170,6 @@ class Mailer
 To switch back to another container is very easy:
   1. Create your factories with `__invoke` function
   2. Replace `autowires` key in ConfigProvider by `factories` key, then for each class name attach its correspondent factory.
+
+## PSR 11 and Interop\Container\ContainerInterface
+V3.x supports as well Interop\Container\ContainerInterface because zend view is still using this interface.

@@ -3,11 +3,33 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V3.0.9 - TBD
+## V3.0.10 - TBD
 
 ### Added
 
 - Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## V3.0.9 - 2018-10-31
+
+### Added
+
+- [#25](https://github.com/elie29/zend-di-config/issues/25) Use Expressive Skeleton installer with PHP-DI results in error.
 
 ### Changed
 
