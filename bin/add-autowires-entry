@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-namespace Zend\DI\Config;
+namespace Zend\PHPDI\Config;
 
 // Setup/verify autoloading
 if (file_exists($a = getcwd() . '/vendor/autoload.php')) {

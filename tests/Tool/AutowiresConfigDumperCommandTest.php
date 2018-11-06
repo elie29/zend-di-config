@@ -7,7 +7,7 @@ namespace ZendTest\DI\Config\Tool;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Zend\DI\Config\Tool\AutowiresConfigDumperCommand;
+use Zend\PHPDI\Config\Tool\AutowiresConfigDumperCommand;
 use Zend\Stdlib\ConsoleHelper;
 use ZendTest\DI\Config\TestAsset\DelegatorService;
 

@@ -3,7 +3,7 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V3.0.10 - TBD
+## V4.0.1 - TBD
 
 ### Added
 
@@ -12,6 +12,31 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Changed
 
 - Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## V4.0.0 - 2018-11-06
+
+This is the complete change log. You can also read the [migration guide](docs/migration-4.0.md) for upgrading.
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- [#28](https://github.com/elie29/zend-di-config/issues/28) Consider to change namespace (BC).
+- [#31](https://github.com/elie29/zend-di-config/issues/31) Zend\Di namespace.
 
 ### Deprecated
 
