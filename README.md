@@ -5,7 +5,7 @@
 
 ## Introduction
 [zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](http://php-di.org) container using zend-servicemanager configuration.
-It can be used with Zend Framework and Zend Expressive.
+It can be used with [Zend Framework](https://framework.zend.com) and [Zend Expressive](https://docs.zendframework.com/zend-expressive).
 
 This library uses autowirng technique, cache compilation and cache definitions as defined in [PHP-DI](http://php-di.org).
 
@@ -18,8 +18,9 @@ PHP-DI container, do the following:
 
 ```php
 <?php
-use Zend\DI\Config\Config;
-use Zend\DI\Config\ContainerFactory;
+
+use Zend\PHPDI\Config\Config;
+use Zend\PHPDI\Config\ContainerFactory;
 
 $factory = new ContainerFactory();
 
@@ -92,8 +93,8 @@ Replace contents of `config/container.php` with the following:
 
 declare(strict_types = 1);
 
-use Zend\DI\Config\Config;
-use Zend\DI\Config\ContainerFactory;
+use Zend\PHPDI\Config\Config;
+use Zend\PHPDI\Config\ContainerFactory;
 
 // Protect variables from global scope
 return call_user_func(function () {
@@ -172,4 +173,7 @@ To switch back to another container is very easy:
   2. Replace `autowires` key in ConfigProvider by `factories` key, then for each class name attach its correspondent factory.
 
 ## PSR 11 and Interop\Container\ContainerInterface
-V3.x supports as well Interop\Container\ContainerInterface because zend view is still using this interface.
+V4.x supports as well Interop\Container\ContainerInterface
+
+## Migration guides
+  - [Migration from 3.x to 4.0](docs/migration-4.0.md)
