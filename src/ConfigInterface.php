@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Zend\DI\Config;
+namespace Zend\PHPDI\Config;
 
 use DI\ContainerBuilder;
 

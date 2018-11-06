@@ -39,7 +39,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Zend\\DI\\Config\\": "src"
+            "Zend\\PHPDI\\Config\\": "src"
         }
     },
     "autoload-dev": {
