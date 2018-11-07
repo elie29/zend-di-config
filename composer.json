@@ -39,12 +39,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Zend\\PHPDI\\Config\\": "src"
+            "Elie\\PHPDI\\Config\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\DI\\Config\\": "tests"
+            "ElieTest\\PHPDI\\Config\\": "tests"
         }
     },
     "config": {

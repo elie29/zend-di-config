@@ -19,8 +19,8 @@ PHP-DI container, do the following:
 ```php
 <?php
 
-use Zend\PHPDI\Config\Config;
-use Zend\PHPDI\Config\ContainerFactory;
+use Elie\PHPDI\Config\Config;
+use Elie\PHPDI\Config\ContainerFactory;
 
 $factory = new ContainerFactory();
 
@@ -93,8 +93,8 @@ Replace contents of `config/container.php` with the following:
 
 declare(strict_types = 1);
 
-use Zend\PHPDI\Config\Config;
-use Zend\PHPDI\Config\ContainerFactory;
+use Elie\PHPDI\Config\Config;
+use Elie\PHPDI\Config\ContainerFactory;
 
 // Protect variables from global scope
 return call_user_func(function () {

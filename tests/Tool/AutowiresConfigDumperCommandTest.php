@@ -2,14 +2,14 @@
 
 declare(strict_types = 1);
 
-namespace ZendTest\DI\Config\Tool;
+namespace ElieTest\PHPDI\Config\Tool;
 
+use Elie\PHPDI\Config\Tool\AutowiresConfigDumperCommand;
+use ElieTest\PHPDI\Config\TestAsset\DelegatorService;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Zend\PHPDI\Config\Tool\AutowiresConfigDumperCommand;
 use Zend\Stdlib\ConsoleHelper;
-use ZendTest\DI\Config\TestAsset\DelegatorService;
 
 class AutowiresConfigDumperCommandTest extends TestCase
 {

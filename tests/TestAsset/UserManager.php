@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace ZendTest\DI\Config\TestAsset;
+namespace ElieTest\PHPDI\Config\TestAsset;
 
 class UserManager
 {

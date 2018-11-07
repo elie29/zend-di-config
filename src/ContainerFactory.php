@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Zend\PHPDI\Config;
+namespace Elie\PHPDI\Config;
 
 use DI\ContainerBuilder;
+use Elie\PHPDI\Config\ConfigInterface;
 use Psr\Container\ContainerInterface;
-use Zend\PHPDI\Config\ConfigInterface;
 
 class ContainerFactory
 {

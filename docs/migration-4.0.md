@@ -8,7 +8,7 @@ This guide will help you migrate from a 3.x version to 4.0.
 
 The only BC occured in the namespace change.
 
-Before we used `Zend\DI\Config`, starting from 4.0, the namespace becomes `Zend\PHPDI\Config`
+Before we used `Zend\DI\Config`, starting from 4.0, the namespace becomes `Elie\PHPDI\Config`
 
 > This decision is the conclusion of a discussion with [@thomasvargiu](https://github.com/thomasvargiu) within this issue [#28](https://github.com/elie29/zend-di-config/issues/28) and [Geert Eltink](https://github.com/xtreamwayz) through [#31](https://github.com/elie29/zend-di-config/issues/31).
 > The purpose of this change, is to provide a new `definitions` key to the configuration in order to add specfic PHP-DI defintions. For more details, check this issue [#27](https://github.com/elie29/zend-di-config/issues/27).
@@ -24,8 +24,8 @@ file as explained in README.md:
 
 declare(strict_types = 1);
 
-use Zend\PHPDI\Config\Config;
-use Zend\PHPDI\Config\ContainerFactory;
+use Elie\PHPDI\Config\Config;
+use Elie\PHPDI\Config\ContainerFactory;
 
 // Protect variables from global scope
 return call_user_func(function () {

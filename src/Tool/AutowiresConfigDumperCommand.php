@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Zend\PHPDI\Config\Tool;
+namespace Elie\PHPDI\Config\Tool;
 
 use Zend\Stdlib\ConsoleHelper;
 

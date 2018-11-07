@@ -2,22 +2,22 @@
 
 declare(strict_types = 1);
 
-namespace ZendTest\DI\Config;
+namespace ElieTest\PHPDI\Config;
 
 use DI\ContainerBuilder;
+use Elie\PHPDI\Config\Config;
+use Elie\PHPDI\Config\ContainerFactory;
+use ElieTest\PHPDI\Config\TestAsset\DelegatorService;
+use ElieTest\PHPDI\Config\TestAsset\DelegatorServiceFactory;
+use ElieTest\PHPDI\Config\TestAsset\DelegatorServiceFactory1;
+use ElieTest\PHPDI\Config\TestAsset\DelegatorServiceFactory2;
+use ElieTest\PHPDI\Config\TestAsset\Service;
+use ElieTest\PHPDI\Config\TestAsset\ServiceFactory;
+use ElieTest\PHPDI\Config\TestAsset\ServiceInterface;
+use ElieTest\PHPDI\Config\TestAsset\UserManager;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Zend\PHPDI\Config\Config;
-use Zend\PHPDI\Config\ContainerFactory;
-use ZendTest\DI\Config\TestAsset\DelegatorService;
-use ZendTest\DI\Config\TestAsset\DelegatorServiceFactory;
-use ZendTest\DI\Config\TestAsset\DelegatorServiceFactory1;
-use ZendTest\DI\Config\TestAsset\DelegatorServiceFactory2;
-use ZendTest\DI\Config\TestAsset\Service;
-use ZendTest\DI\Config\TestAsset\ServiceFactory;
-use ZendTest\DI\Config\TestAsset\ServiceInterface;
-use ZendTest\DI\Config\TestAsset\UserManager;
 
 class ConfigTest extends TestCase
 {

@@ -3,29 +3,7 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V4.0.1 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V4.0.0 - 2018-11-06
+## V4.0.0 - 2018-11-07
 
 This is the complete change log. You can also read the [migration guide](docs/migration-4.0.md) for upgrading.
 

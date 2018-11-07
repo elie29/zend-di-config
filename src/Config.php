@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Zend\PHPDI\Config;
+namespace Elie\PHPDI\Config;
 
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;

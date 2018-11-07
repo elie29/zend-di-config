@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace ZendTest\DI\Config\Tool;
+namespace ElieTest\PHPDI\Config\Tool;
 
+use Elie\PHPDI\Config\Tool\AutowiresConfigDumper;
+use ElieTest\PHPDI\Config\TestAsset\DelegatorService;
 use PHPUnit\Framework\TestCase;
-use Zend\PHPDI\Config\Tool\AutowiresConfigDumper;
-use ZendTest\DI\Config\TestAsset\DelegatorService;
 
 class AutowiresConfigDumperTest extends TestCase
 {
