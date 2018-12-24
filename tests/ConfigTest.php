@@ -32,6 +32,14 @@ class ConfigTest extends TestCase
         $config->configureContainer($builder);
     }
 
+    public function testConfigurationDisableAutowire()
+    {
+        $builder = $this->createMock(ContainerBuilder::class);
+        $builder->expects($this->once())->method('useAutowiring');
+        $config = new Config([Config::USE_AUTOWIRE => false]);
+        $config->configureContainer($builder);
+    }
+
     public function testConfigurationKeysValues()
     {
         $config = ['a' => new \DateTime(), 'b' => [1, 2, 3], 'c' => 'd'];
