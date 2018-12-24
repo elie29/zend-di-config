@@ -39,6 +39,9 @@ $container = $factory(
         // Enable compilation
         Config::DI_CACHE_PATH => __DIR__, // Folder path
 
+        // Disable autowire (enabled by default)
+        Config::USE_AUTOWIRE => false
+
         // Enable cache
         Config::ENABLE_CACHE_DEFINITION => false, // boolean, true if APCu is activated
     ])

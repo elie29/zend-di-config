@@ -31,6 +31,7 @@ class Config implements ConfigInterface
             $this->addDefinitions($builder);
         }
 
+        $this->useAutowire($builder);
         $this->enableCache($builder);
     }
 
@@ -129,6 +130,13 @@ class Config implements ConfigInterface
                 $this->definitions[$name] = $callable;
             }
         }
+    }
+
+    private function useAutowire(ContainerBuilder $builder): void
+    {
+        // default autowire is true
+        $autowire = $this->definitions[$this::CONFIG][$this::USE_AUTOWIRE] ?? true;
+        $builder->useAutowiring($autowire);
     }
 
     private function enableCache(ContainerBuilder $builder): void

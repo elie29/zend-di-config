@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#35](https://github.com/elie29/zend-di-config/issues/35) Allow to disbale use autowire.
 
 ### Changed
 
