@@ -69,7 +69,7 @@ The `dependencies` sub associative array can contain the following keys:
   [Expressive delegators documentation](https://docs.zendframework.com/zend-servicemanager/delegators/)
   for more details.
 
->**N.B.:** The whole configuration is merged in a `config` key within the `$container`:
+>**N.B.:** The whole configuration -- unless `dependencies` -- is merged in a `config` key within the `$container`:
 >
 >```php
 >$config = $container->get('config');
