@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#38](https://github.com/elie29/zend-di-config/issues/38) Circular dependency detected.
 
 ## V4.0.2 - 2018-12-24
 
