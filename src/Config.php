@@ -66,6 +66,13 @@ class Config implements ConfigInterface
         $this->addAliases();
         $this->addDelegators();
 
+        /**
+         * PHPDI ArrayDefinition would resolve all keys
+         * or dependencies are already resolved
+         * (@see https://github.com/elie29/zend-di-config/issues/38)
+         */
+        unset($this->definitions[$this::CONFIG]['dependencies']);
+
         $builder->addDefinitions($this->definitions);
     }
 
