@@ -118,12 +118,10 @@ class AutowiresConfigDumperCommandTest extends TestCase
 
         $generated = include $config;
 
-        $this->assertInternalType('array', $generated);
         $this->assertArrayHasKey('dependencies', $generated);
         $dependencies = $generated['dependencies'];
         $this->assertArrayHasKey('autowires', $dependencies);
         $autowiresConfig = $dependencies['autowires'];
-        $this->assertInternalType('array', $autowiresConfig);
         $this->assertContains(DelegatorService::class, $autowiresConfig);
     }
 
