@@ -56,7 +56,7 @@ EOC;
             $dependencies[$this::AUTOWIRES] = [];
         }
 
-        // Add the classe name as an entry to the autowires configuration
+        // Add the class name as an entry to the autowires configuration
         if (! in_array($entry, $dependencies[$this::AUTOWIRES], true)) {
             $dependencies[$this::AUTOWIRES][] = $entry;
         }
