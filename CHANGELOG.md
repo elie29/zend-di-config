@@ -3,7 +3,7 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V4.0.4 - TBD
+## V4.0.4 - 2019-09-29
 
 ### Added
 
@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#40](https://github.com/elie29/zend-di-config/issues/40) Update composer.
 
 ### Deprecated
 
