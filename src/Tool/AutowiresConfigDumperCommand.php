@@ -44,9 +44,6 @@ EOH;
      */
     private $scriptName;
 
-    /**
-     * @param string $scriptName
-     */
     public function __construct($scriptName = __CLASS__, ConsoleHelper $helper = null)
     {
         $this->scriptName = $scriptName;

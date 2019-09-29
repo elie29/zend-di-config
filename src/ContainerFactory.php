@@ -6,7 +6,6 @@ namespace Zend\DI\Config;
 
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
-use Zend\DI\Config\ConfigInterface;
 
 class ContainerFactory
 {
