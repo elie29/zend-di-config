@@ -19,6 +19,12 @@ class Config implements ConfigInterface
 
     private $dependencies = [];
 
+    /**
+     * Make overridden delegator idempotent
+     * @var int
+     */
+    private $delegatorCounter = 0;
+
     public function __construct(array $config)
     {
         $this->definitions = [$this::CONFIG => $config];
@@ -125,7 +131,7 @@ class Config implements ConfigInterface
     {
         foreach ($this->get('delegators') as $name => $delegators) {
             foreach ($delegators as $delegator) {
-                $previous = uniqid($name, true);
+                $previous = sprintf('%013d-%s', ++$this->delegatorCounter, $name);
                 $this->definitions[$previous] = $this->definitions[$name];
                 $callable = function (ContainerInterface $c) use ($delegator, $previous, $name) {
                     $factory = new $delegator();

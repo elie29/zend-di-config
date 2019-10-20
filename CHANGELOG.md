@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- - [#41](https://github.com/elie29/zend-di-config/issues/41) Make overridden delegator idempotent.
 
 ### Deprecated
 
@@ -73,7 +73,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#35](https://github.com/elie29/zend-di-config/issues/35) Allow to disbale use autowire.
+- [#35](https://github.com/elie29/zend-di-config/issues/35) Allow to disable use autowire.
 - [#34](https://github.com/elie29/zend-di-config/issues/34) Add 7.3 support to travis. CS_CHECK needs zend-coding-standard to migrate to 2.0.0
 
 ### Changed
