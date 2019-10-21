@@ -9,7 +9,7 @@ use Psr\Container\ContainerInterface;
 class ServiceFactory
 {
 
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container): ServiceInterface
     {
         return new Service();
     }

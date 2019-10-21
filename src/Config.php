@@ -27,7 +27,7 @@ class Config implements ConfigInterface
 
     public function __construct(array $config)
     {
-        $this->definitions = [$this::CONFIG => $config];
+        $this->definitions = [self::CONFIG => $config];
     }
 
     public function configureContainer(ContainerBuilder $builder): void
@@ -48,7 +48,7 @@ class Config implements ConfigInterface
      */
     private function enableCompilation(ContainerBuilder $builder): bool
     {
-        $path = $this->definitions[$this::CONFIG][$this::DI_CACHE_PATH] ?? null;
+        $path = $this->definitions[self::CONFIG][self::DI_CACHE_PATH] ?? null;
 
         if ($path) {
             $builder->enableCompilation($path);
@@ -60,7 +60,7 @@ class Config implements ConfigInterface
 
     private function setDependencies(): void
     {
-        $this->dependencies = $this->definitions[$this::CONFIG]['dependencies'] ?? [];
+        $this->dependencies = $this->definitions[self::CONFIG]['dependencies'] ?? [];
     }
 
     private function addDefinitions(ContainerBuilder $builder): void
@@ -77,7 +77,7 @@ class Config implements ConfigInterface
          * or dependencies are already resolved
          * (@see https://github.com/elie29/zend-di-config/issues/38)
          */
-        unset($this->definitions[$this::CONFIG]['dependencies']);
+        unset($this->definitions[self::CONFIG]['dependencies']);
 
         $builder->addDefinitions($this->definitions);
     }
@@ -131,16 +131,16 @@ class Config implements ConfigInterface
     {
         foreach ($this->get('delegators') as $name => $delegators) {
             foreach ($delegators as $delegator) {
-                $previous = sprintf('%013d-%s', ++$this->delegatorCounter, $name);
+                $previous = $name . '-' . (++$this->delegatorCounter);
                 $this->definitions[$previous] = $this->definitions[$name];
-                $callable = function (ContainerInterface $c) use ($delegator, $previous, $name) {
+                $current = function (ContainerInterface $container) use ($delegator, $previous, $name) {
                     $factory = new $delegator();
-                    $callable = function () use ($previous, $c) {
-                        return $c->get($previous);
+                    $callable = function () use ($previous, $container) {
+                        return $container->get($previous);
                     };
-                    return $factory($c, $name, $callable);
+                    return $factory($container, $name, $callable);
                 };
-                $this->definitions[$name] = $callable;
+                $this->definitions[$name] = $current;
             }
         }
     }
@@ -148,13 +148,13 @@ class Config implements ConfigInterface
     private function useAutowire(ContainerBuilder $builder): void
     {
         // default autowire is true
-        $autowire = $this->definitions[$this::CONFIG][$this::USE_AUTOWIRE] ?? true;
+        $autowire = $this->definitions[self::CONFIG][self::USE_AUTOWIRE] ?? true;
         $builder->useAutowiring($autowire);
     }
 
     private function enableCache(ContainerBuilder $builder): void
     {
-        if (! empty($this->definitions[$this::CONFIG][$this::ENABLE_CACHE_DEFINITION])) {
+        if (! empty($this->definitions[self::CONFIG][self::ENABLE_CACHE_DEFINITION])) {
             $builder->enableDefinitionCache();
         }
     }
