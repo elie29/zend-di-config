@@ -78,6 +78,7 @@ class Config implements ConfigInterface
          * (@see https://github.com/elie29/zend-di-config/issues/38)
          */
         unset($this->definitions[self::CONFIG]['dependencies']);
+        $this->dependencies = [];
 
         $builder->addDefinitions($this->definitions);
     }
