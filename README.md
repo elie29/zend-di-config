@@ -180,3 +180,4 @@ V4.x supports as well Interop\Container\ContainerInterface
 
 ## Migration guides
   - [Migration from 3.x to 4.0](docs/migration-4.0.md)
+  - Migration from 4.x to 5.0: container-interop/container-interop was dropped in favor of [PSR-11](https://packagist.org/packages/psr/container).
