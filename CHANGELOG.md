@@ -3,6 +3,28 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## V5.0.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## V4.0.5 - 2019-11-27
 
 ### Added
@@ -11,7 +33,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- - [#41](https://github.com/elie29/zend-di-config/issues/41) Make overridden delegator idempotent.
+- [#41](https://github.com/elie29/zend-di-config/issues/41) Make overridden delegator idempotent.
 
 ### Deprecated
 
