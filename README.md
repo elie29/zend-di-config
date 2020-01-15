@@ -4,14 +4,14 @@
 [![Coverage Status](https://coveralls.io/repos/github/elie29/zend-di-config/badge.svg)](https://coveralls.io/github/elie29/zend-di-config)
 
 ## Introduction
-[zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](http://php-di.org) container using zend-servicemanager configuration.
-It can be used with [Zend Framework](https://framework.zend.com) and [Zend Expressive](https://docs.zendframework.com/zend-expressive).
+[zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](http://php-di.org) container using service manager configuration.
+It can be used with [Laminas](https://getlaminas.org/) and [Mezzio](https://docs.mezzio.dev/) starting from v6.0.0
 
 This library uses autowirng technique, cache compilation and cache definitions as defined in [PHP-DI](http://php-di.org).
 
 ## Configuration
 
-[Service Manager Configuration](https://docs.zendframework.com/zend-servicemanager/configuring-the-service-manager/)
+[Service Manager Configuration](https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/)
 
 To get a configured [PSR-11](http://www.php-fig.org/psr/psr-11/)
 PHP-DI container, do the following:
@@ -66,7 +66,7 @@ The `dependencies` sub associative array can contain the following keys:
   another alias).
 - `delegators`: an associative array that maps service names to lists of
   delegator factory keys, see the
-  [Expressive delegators documentation](https://docs.zendframework.com/zend-servicemanager/delegators/)
+  [Expressive delegators documentation](https://docs.laminas.dev/laminas-servicemanager/delegators/)
   for more details.
 
 >**N.B.:** The whole configuration -- unless `dependencies` -- is merged in a `config` key within the `$container`:
@@ -83,7 +83,7 @@ to the autowires key.
 
 Example of adding ConsoleHelper to a config.php:
 >```console
->./vendor/bin/add-autowires-entry config.php "Zend\\Stdlib\\ConsoleHelper"
+>./vendor/bin/add-autowires-entry config.php "Lamnias\\Stdlib\\ConsoleHelper"
 >[DONE] Changes written to config.php
 >```
 
