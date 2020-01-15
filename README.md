@@ -83,7 +83,7 @@ to the autowires key.
 
 Example of adding ConsoleHelper to a config.php:
 >```console
->./vendor/bin/add-autowires-entry config.php "Lamnias\\Stdlib\\ConsoleHelper"
+>./vendor/bin/add-autowires-entry config.php "Laminas\\Stdlib\\ConsoleHelper"
 >[DONE] Changes written to config.php
 >```
 
