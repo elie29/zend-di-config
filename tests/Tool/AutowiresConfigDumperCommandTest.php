@@ -6,10 +6,10 @@ namespace ElieTest\PHPDI\Config\Tool;
 
 use Elie\PHPDI\Config\Tool\AutowiresConfigDumperCommand;
 use ElieTest\PHPDI\Config\TestAsset\DelegatorService;
+use Laminas\Stdlib\ConsoleHelper;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Zend\Stdlib\ConsoleHelper;
 
 class AutowiresConfigDumperCommandTest extends TestCase
 {

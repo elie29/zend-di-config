@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elie\PHPDI\Config\Tool;
 
-use Zend\Stdlib\ConsoleHelper;
+use Laminas\Stdlib\ConsoleHelper;
 
 class AutowiresConfigDumperCommand
 {

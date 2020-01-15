@@ -3,7 +3,7 @@ Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V5.0.1 - TBD
+## V6.0.0 - TBD
 
 ### Added
 
@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+-  [#43](https://github.com/elie29/zend-di-config/issues/43) migrate to laminas framework.
 
 ### Deprecated
 

@@ -1,6 +1,6 @@
 {
     "name": "elie29/zend-phpdi-config",
-    "description": "PSR-11 PHP-DI autowire container configurator for ZF2, ZF3 and Zend Expressive applications",
+    "description": "PSR-11 PHP-DI autowire container configurator for Laminas, Mezzio, ZF2, ZF3 and Zend Expressive applications",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "stable",
@@ -8,6 +8,8 @@
         "expressive",
         "zf",
         "zendframework",
+        "laminas",
+        "mezzio",
         "php-di",
         "di",
         "container",
@@ -25,16 +27,16 @@
     },
     "require": {
         "php": "^7.1",
-        "php-di/php-di": "^6.0",
-        "zendframework/zend-stdlib": "^3.2"
+        "laminas/laminas-stdlib": "^3.2",
+        "php-di/php-di": "^6.0"
     },
     "require-dev": {
+        "laminas/laminas-coding-standard": "^1.0",
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.0",
         "phpstan/phpstan": "^0.10.3",
         "phpstan/phpstan-mockery": "^0.10.2",
-        "phpunit/phpunit": "^7.5",
-        "zendframework/zend-coding-standard": "~1.0.0"
+        "phpunit/phpunit": "^7.5"
     },
     "autoload": {
         "psr-4": {

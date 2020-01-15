@@ -6,7 +6,7 @@ This guide will help you migrate from a 3.x version to 4.0.
 
 ## Breaking change
 
-The only BC occured in the namespace change.
+The only BC occurred in the namespace change.
 
 Before we used `Zend\DI\Config`, starting from 4.0, the namespace becomes `Elie\PHPDI\Config`
 
