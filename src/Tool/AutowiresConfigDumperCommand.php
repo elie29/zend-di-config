@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Elie\PHPDI\Config\Tool;
 
 use Laminas\Stdlib\ConsoleHelper;
+use stdClass;
 
 class AutowiresConfigDumperCommand
 {
@@ -13,7 +14,7 @@ class AutowiresConfigDumperCommand
     const COMMAND_ERROR = 'error';
     const COMMAND_HELP  = 'help';
 
-    const HELP_TEMPLATE = <<< EOH
+    const HELP_TEMPLATE = <<<EOH
 <info>Usage:</info>
 
   %s [-h|--help|help] <configFile> <className>
@@ -34,28 +35,17 @@ and adds the provided class name in the autowires array, writing the changes
 back to the file. The class name is added once.
 EOH;
 
-    /**
-     * @var ConsoleHelper
-     */
-    private $helper;
-
-    /**
-     * @var string
-     */
-    private $scriptName;
-
-    public function __construct($scriptName = __CLASS__, ConsoleHelper $helper = null)
-    {
-        $this->scriptName = $scriptName;
-        $this->helper = $helper ?: new ConsoleHelper();
-    }
+    public function __construct(
+        private string $scriptName = self::class,
+        private ?ConsoleHelper $helper = null
+    ) {}
 
     /**
      * @param array $args Argument list, minus script name
      *
      * @return int Exit status
      */
-    public function __invoke(array $args)
+    public function __invoke(array $args): int
     {
         $arguments = $this->parseArgs($args);
 
@@ -103,9 +93,9 @@ EOH;
     /**
      * @param array $args
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    private function parseArgs(array $args)
+    private function parseArgs(array $args): stdClass
     {
         if (! count($args)) {
             return $this->createHelpArgument();
@@ -165,7 +155,7 @@ EOH;
      *
      * @return void
      */
-    private function help($resource = STDOUT)
+    private function help($resource = STDOUT): void
     {
         $this->helper->writeLine(sprintf(
             self::HELP_TEMPLATE,
@@ -173,7 +163,7 @@ EOH;
         ), true, $resource);
     }
 
-    private function createArguments($command, $configFile, $config, $class)
+    private function createArguments($command, $configFile, $config, $class): stdClass
     {
         return (object) [
             'command'    => $command,
@@ -187,7 +177,7 @@ EOH;
      * @param string $message
      * @return \stdClass
      */
-    private function createErrorArgument($message)
+    private function createErrorArgument($message): stdClass
     {
         return (object) [
             'command' => self::COMMAND_ERROR,
@@ -195,10 +185,7 @@ EOH;
         ];
     }
 
-    /**
-     * @return \stdClass
-     */
-    private function createHelpArgument()
+    private function createHelpArgument(): stdClass
     {
         return (object) [
             'command' => self::COMMAND_HELP,

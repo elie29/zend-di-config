@@ -6,11 +6,7 @@ namespace ElieTest\PHPDI\Config\TestAsset;
 
 class DelegatorService
 {
-
-    public $service;
-
-    public function __construct(ServiceInterface $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(
+        public ServiceInterface $service
+    ) {}
 }

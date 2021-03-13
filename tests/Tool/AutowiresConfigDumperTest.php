@@ -6,6 +6,7 @@ namespace ElieTest\PHPDI\Config\Tool;
 
 use Elie\PHPDI\Config\Tool\AutowiresConfigDumper;
 use ElieTest\PHPDI\Config\TestAsset\DelegatorService;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class AutowiresConfigDumperTest extends TestCase
@@ -13,14 +14,14 @@ class AutowiresConfigDumperTest extends TestCase
 
     private $dumper;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->dumper = new AutowiresConfigDumper();
     }
 
     public function testCreateDependencyConfigExpectsDependiciesKeyToBeArray()
     {
-        self::expectException(\InvalidArgumentException::class);
+        self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage('Configuration dependencies key must be an array');
         $this->dumper->createDependencyConfig(['dependencies' => 5], '');
     }
@@ -35,9 +36,11 @@ class AutowiresConfigDumperTest extends TestCase
 
     public function testCreateDependencyConfigExpectsAutowiresExists()
     {
-        $config = $this->dumper->createDependencyConfig(['dependencies' => [
-            'autowires' => 5
-        ]], 'test');
+        $config = $this->dumper->createDependencyConfig([
+            'dependencies' => [
+                'autowires' => 5,
+            ],
+        ], 'test');
 
         $this->assertArrayHasKey('autowires', $config['dependencies']);
         $this->assertContains('test', $config['dependencies']['autowires']);
@@ -46,10 +49,10 @@ class AutowiresConfigDumperTest extends TestCase
     public function testCreateDependencyConfigDoesNotOverrideExistingKeys()
     {
         $config = $this->dumper->createDependencyConfig([
-            'invokables' => [
+            'invokables'            => [
                 'autowires' => 5,
             ],
-            DelegatorService::class => DelegatorService::class
+            DelegatorService::class => DelegatorService::class,
         ], DelegatorService::class);
 
         $this->assertArrayHasKey('autowires', $config['dependencies']);

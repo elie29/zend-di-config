@@ -10,19 +10,21 @@ use Laminas\Stdlib\ConsoleHelper;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class AutowiresConfigDumperCommandTest extends TestCase
 {
+    use ProphecyTrait;
 
     private $configDir;
     private $helper;
     private $command;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->configDir = vfsStream::setup('project');
-        $this->helper = $this->prophesize(ConsoleHelper::class);
-        $this->command = new AutowiresConfigDumperCommand(
+        $this->helper    = $this->prophesize(ConsoleHelper::class);
+        $this->command   = new AutowiresConfigDumperCommand(
             AutowiresConfigDumperCommand::class,
             $this->helper->reveal()
         );

@@ -6,3 +6,6 @@
 /clover.xml
 /.project
 /.idea
+/tests/tmpfiles
+!/tests/tmpfiles/.gitkeep
+.phpunit.result.cache

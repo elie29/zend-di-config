@@ -23,9 +23,7 @@ EOC;
 
     public function createDependencyConfig(array $config, string $className): array
     {
-        if (! isset($config['dependencies'])) {
-            $config['dependencies'] = [];
-        }
+        $config['dependencies'] ??= [];
 
         if (! is_array($config['dependencies'])) {
             throw new \InvalidArgumentException(
@@ -44,7 +42,7 @@ EOC;
 
         return sprintf(
             self::CONFIG_TEMPLATE,
-            get_class($this),
+            static::class,
             date('Y-m-d H:i:s'),
             $prepared
         );
@@ -83,7 +81,7 @@ EOC;
         return sprintf("[\n%s\n%s]", implode("\n", $entries), $outerIndent);
     }
 
-    private function createConfigKey($key):? string
+    private function createConfigKey($key): ?string
     {
         if (is_string($key) && class_exists($key)) {
             return sprintf('\\%s::class', $key);
