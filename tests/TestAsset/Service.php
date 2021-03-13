@@ -7,9 +7,9 @@ namespace ElieTest\PHPDI\Config\TestAsset;
 class Service implements ServiceInterface
 {
 
-    protected $time;
+    protected float $time;
 
-    protected $injected = [];
+    protected array $injected = [];
 
     public function __construct()
     {

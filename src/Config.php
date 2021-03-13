@@ -15,15 +15,15 @@ use function is_array;
 class Config implements ConfigInterface
 {
 
-    private $definitions = [];
+    private array $definitions;
 
-    private $dependencies = [];
+    private array $dependencies = [];
 
     /**
      * Make overridden delegator idempotent
      * @var int
      */
-    private $delegatorCounter = 0;
+    private int $delegatorCounter = 0;
 
     public function __construct(array $config)
     {

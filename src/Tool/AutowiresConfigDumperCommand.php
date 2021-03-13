@@ -10,11 +10,11 @@ use stdClass;
 class AutowiresConfigDumperCommand
 {
 
-    const COMMAND_DUMP  = 'dump';
-    const COMMAND_ERROR = 'error';
-    const COMMAND_HELP  = 'help';
+    private const COMMAND_DUMP  = 'dump';
+    private const COMMAND_ERROR = 'error';
+    private const COMMAND_HELP  = 'help';
 
-    const HELP_TEMPLATE = <<<EOH
+    private const HELP_TEMPLATE = <<<EOH
 <info>Usage:</info>
 
   %s [-h|--help|help] <configFile> <className>

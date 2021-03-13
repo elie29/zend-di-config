@@ -7,7 +7,7 @@ namespace Elie\PHPDI\Config\Tool;
 class AutowiresConfigDumper
 {
 
-    const CONFIG_TEMPLATE = <<<EOC
+    private const CONFIG_TEMPLATE = <<<EOC
 <?php
 
 /**
@@ -19,7 +19,7 @@ return %s;
 
 EOC;
 
-    const AUTOWIRES = 'autowires';
+    private const AUTOWIRES = 'autowires';
 
     public function createDependencyConfig(array $config, string $className): array
     {
@@ -50,13 +50,13 @@ EOC;
 
     private function addAutowires(array $dependencies, string $entry): array
     {
-        if (! isset($dependencies[$this::AUTOWIRES]) || ! is_array($dependencies[$this::AUTOWIRES])) {
-            $dependencies[$this::AUTOWIRES] = [];
+        if (! isset($dependencies[self::AUTOWIRES]) || ! is_array($dependencies[self::AUTOWIRES])) {
+            $dependencies[self::AUTOWIRES] = [];
         }
 
         // Add the class name as an entry to the autowires configuration
-        if (! in_array($entry, $dependencies[$this::AUTOWIRES], true)) {
-            $dependencies[$this::AUTOWIRES][] = $entry;
+        if (! in_array($entry, $dependencies[self::AUTOWIRES], true)) {
+            $dependencies[self::AUTOWIRES][] = $entry;
         }
 
         return $dependencies;

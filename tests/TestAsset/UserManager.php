@@ -10,7 +10,7 @@ class UserManager
         private Mailer $mailer
     ) {}
 
-    public function register($email, $password)
+    public function register($email, $password): void
     {
         $this->mailer->mail($email, 'Hello and welcome!');
     }

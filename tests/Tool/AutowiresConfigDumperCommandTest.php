@@ -95,7 +95,6 @@ class AutowiresConfigDumperCommandTest extends TestCase
     public function testEmitsErrorWhenConfigurationDoesNotHaveDependenciesArray()
     {
         $command = $this->command;
-        $command = $this->command;
         vfsStream::newFile('config/invalid.config.php')
             ->at($this->configDir)
             ->setContent("<?php return ['dependencies' => 0];");

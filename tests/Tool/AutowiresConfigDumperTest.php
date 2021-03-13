@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 class AutowiresConfigDumperTest extends TestCase
 {
 
-    private $dumper;
+    private AutowiresConfigDumper $dumper;
 
     public function setUp(): void
     {

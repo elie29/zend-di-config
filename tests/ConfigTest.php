@@ -20,10 +20,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 
-use function dirname;
-use function realpath;
-use function unlink;
-
 class ConfigTest extends TestCase
 {
     public function testConfigurationEnableCache(): void
