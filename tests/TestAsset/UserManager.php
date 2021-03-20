@@ -1,16 +1,16 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace ElieTest\PHPDI\Config\TestAsset;
 
 class UserManager
 {
-    public function __construct(
-        private Mailer $mailer
-    ) {}
+    public function __construct(private Mailer $mailer)
+    {
+    }
 
-    public function register($email, $password): void
+    public function register(string $email): void
     {
         $this->mailer->mail($email, 'Hello and welcome!');
     }

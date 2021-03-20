@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace ElieTest\PHPDI\Config\Tool;
 
@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 
 class AutowiresConfigDumperTest extends TestCase
 {
-
     private AutowiresConfigDumper $dumper;
 
     public function setUp(): void
@@ -19,14 +18,14 @@ class AutowiresConfigDumperTest extends TestCase
         $this->dumper = new AutowiresConfigDumper();
     }
 
-    public function testCreateDependencyConfigExpectsDependiciesKeyToBeArray()
+    public function testCreateDependencyConfigExpectsDependiciesKeyToBeArray(): void
     {
         self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage('Configuration dependencies key must be an array');
         $this->dumper->createDependencyConfig(['dependencies' => 5], '');
     }
 
-    public function testCreateDependencyConfigExpectsAutowiresNotExists()
+    public function testCreateDependencyConfigExpectsAutowiresNotExists(): void
     {
         $config = $this->dumper->createDependencyConfig(['dependencies' => []], 'test');
 
@@ -34,7 +33,7 @@ class AutowiresConfigDumperTest extends TestCase
         $this->assertContains('test', $config['dependencies']['autowires']);
     }
 
-    public function testCreateDependencyConfigExpectsAutowiresExists()
+    public function testCreateDependencyConfigExpectsAutowiresExists(): void
     {
         $config = $this->dumper->createDependencyConfig([
             'dependencies' => [
@@ -46,7 +45,7 @@ class AutowiresConfigDumperTest extends TestCase
         $this->assertContains('test', $config['dependencies']['autowires']);
     }
 
-    public function testCreateDependencyConfigDoesNotOverrideExistingKeys()
+    public function testCreateDependencyConfigDoesNotOverrideExistingKeys(): void
     {
         $config = $this->dumper->createDependencyConfig([
             'invokables'            => [

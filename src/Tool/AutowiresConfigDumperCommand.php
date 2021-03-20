@@ -1,15 +1,29 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Elie\PHPDI\Config\Tool;
 
+use InvalidArgumentException;
 use Laminas\Stdlib\ConsoleHelper;
 use stdClass;
 
+use function array_shift;
+use function class_exists;
+use function count;
+use function dirname;
+use function file_exists;
+use function file_put_contents;
+use function in_array;
+use function is_array;
+use function is_writable;
+use function sprintf;
+
+use const STDERR;
+use const STDOUT;
+
 class AutowiresConfigDumperCommand
 {
-
     private const COMMAND_DUMP  = 'dump';
     private const COMMAND_ERROR = 'error';
     private const COMMAND_HELP  = 'help';
@@ -35,14 +49,12 @@ and adds the provided class name in the autowires array, writing the changes
 back to the file. The class name is added once.
 EOH;
 
-    public function __construct(
-        private string $scriptName = self::class,
-        private ?ConsoleHelper $helper = null
-    ) {}
+    public function __construct(private string $scriptName = self::class, private ?ConsoleHelper $helper = null)
+    {
+    }
 
     /**
      * @param array $args Argument list, minus script name
-     *
      * @return int Exit status
      */
     public function __invoke(array $args): int
@@ -70,7 +82,7 @@ EOH;
                 $arguments->config,
                 $arguments->class
             );
-        } catch (\InvalidArgumentException $e) {
+        } catch (InvalidArgumentException $e) {
             $this->helper->writeErrorMessage(sprintf(
                 'Unable to create config for "%s": %s',
                 $arguments->class,
@@ -92,8 +104,6 @@ EOH;
 
     /**
      * @param array $args
-     *
-     * @return stdClass
      */
     private function parseArgs(array $args): stdClass
     {
@@ -111,7 +121,7 @@ EOH;
             return $this->createErrorArgument('Missing class name');
         }
 
-        $configFile = $arg1;
+        $configFile = (string) $arg1;
         switch (file_exists($configFile)) {
             case true:
                 $config = require $configFile;
@@ -138,7 +148,7 @@ EOH;
                 break;
         }
 
-        $class = array_shift($args);
+        $class = (string) array_shift($args);
 
         if (! class_exists($class)) {
             return $this->createErrorArgument(sprintf(
@@ -152,8 +162,6 @@ EOH;
 
     /**
      * @param resource $resource Defaults to STDOUT
-     *
-     * @return void
      */
     private function help($resource = STDOUT): void
     {
@@ -163,7 +171,7 @@ EOH;
         ), true, $resource);
     }
 
-    private function createArguments($command, $configFile, $config, $class): stdClass
+    private function createArguments(string $command, string $configFile, array $config, string $class): stdClass
     {
         return (object) [
             'command'    => $command,
@@ -173,11 +181,7 @@ EOH;
         ];
     }
 
-    /**
-     * @param string $message
-     * @return \stdClass
-     */
-    private function createErrorArgument($message): stdClass
+    private function createErrorArgument(string $message): stdClass
     {
         return (object) [
             'command' => self::COMMAND_ERROR,

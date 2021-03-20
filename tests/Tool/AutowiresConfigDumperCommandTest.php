@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace ElieTest\PHPDI\Config\Tool;
 
@@ -8,17 +8,27 @@ use Elie\PHPDI\Config\Tool\AutowiresConfigDumperCommand;
 use ElieTest\PHPDI\Config\TestAsset\DelegatorService;
 use Laminas\Stdlib\ConsoleHelper;
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
+
+use function sprintf;
+
+use const STDERR;
+use const STDOUT;
 
 class AutowiresConfigDumperCommandTest extends TestCase
 {
     use ProphecyTrait;
 
-    private $configDir;
-    private $helper;
-    private $command;
+    private vfsStreamDirectory $configDir;
+
+    /** @var ConsoleHelper|ObjectProphecy */
+    private ObjectProphecy $helper;
+
+    private AutowiresConfigDumperCommand $command;
 
     protected function setUp(): void
     {
@@ -30,7 +40,10 @@ class AutowiresConfigDumperCommandTest extends TestCase
         );
     }
 
-    protected function assertHelp($stream = STDOUT)
+    /**
+     * @param false|resource $stream
+     */
+    protected function assertHelp($stream = STDOUT): void
     {
         $this->helper->writeLine(
             Argument::containingString('<info>Usage:</info>'),
@@ -39,14 +52,14 @@ class AutowiresConfigDumperCommandTest extends TestCase
         )->shouldBeCalled();
     }
 
-    protected function assertErrorRaised($message)
+    protected function assertErrorRaised(string $message): void
     {
         $this->helper->writeErrorMessage(
             Argument::containingString($message)
         )->shouldBeCalled();
     }
 
-    public function helpArguments()
+    public function helpArguments(): array
     {
         return [
             'short'   => ['-h'],
@@ -55,7 +68,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
         ];
     }
 
-    public function testEmitsHelpWhenNoArgumentsProvided()
+    public function testEmitsHelpWhenNoArgumentsProvided(): void
     {
         $command = $this->command;
         $this->assertHelp();
@@ -65,14 +78,14 @@ class AutowiresConfigDumperCommandTest extends TestCase
     /**
      * @dataProvider helpArguments
      */
-    public function testEmitsHelpWhenHelpArgumentProvidedAsFirstArgument($argument)
+    public function testEmitsHelpWhenHelpArgumentProvidedAsFirstArgument(string $argument): void
     {
         $command = $this->command;
         $this->assertHelp();
         $this->assertEquals(0, $command([$argument]));
     }
 
-    public function testEmitsErrorWhenTooFewArgumentsPresent()
+    public function testEmitsErrorWhenTooFewArgumentsPresent(): void
     {
         $command = $this->command;
         $this->assertErrorRaised('Missing class name');
@@ -80,7 +93,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->assertEquals(1, $command(['foo']));
     }
 
-    public function testRaisesExceptionIfConfigFileNotFoundAndDirectoryNotWritable()
+    public function testRaisesExceptionIfConfigFileNotFoundAndDirectoryNotWritable(): void
     {
         $command = $this->command;
         vfsStream::newDirectory('config', 0550)
@@ -92,7 +105,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->assertEquals(1, $command([$config, 'Not\A\Real\Class']));
     }
 
-    public function testEmitsErrorWhenConfigurationDoesNotHaveDependenciesArray()
+    public function testEmitsErrorWhenConfigurationDoesNotHaveDependenciesArray(): void
     {
         $command = $this->command;
         vfsStream::newFile('config/invalid.config.php')
@@ -107,7 +120,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->assertEquals(1, $command([$config, DelegatorService::class]));
     }
 
-    public function testGeneratesConfigFile()
+    public function testGeneratesConfigFile(): void
     {
         $command = $this->command;
         vfsStream::newDirectory('config', 0775)
@@ -126,7 +139,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->assertContains(DelegatorService::class, $autowiresConfig);
     }
 
-    public function testEmitsErrorWhenConfigurationFileDoesNotReturnArray()
+    public function testEmitsErrorWhenConfigurationFileDoesNotReturnArray(): void
     {
         $command = $this->command;
         vfsStream::newFile('config/invalid.config.php')
@@ -140,7 +153,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->assertEquals(1, $command([$config, 'Not\A\Real\Class']));
     }
 
-    public function testEmitsErrorWhenClassDoesNotExist()
+    public function testEmitsErrorWhenClassDoesNotExist(): void
     {
         $command = $this->command;
         vfsStream::newDirectory('config', 0775)

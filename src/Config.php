@@ -1,27 +1,30 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Elie\PHPDI\Config;
 
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
+
 use function DI\autowire;
 use function DI\create;
 use function DI\factory;
 use function DI\get;
 use function is_array;
+use function is_file;
+use function is_numeric;
+use function is_object;
+use function rtrim;
 
 class Config implements ConfigInterface
 {
-
     private array $definitions;
 
     private array $dependencies = [];
 
     /**
      * Make overridden delegator idempotent
-     * @var int
      */
     private int $delegatorCounter = 0;
 
@@ -42,8 +45,6 @@ class Config implements ConfigInterface
     }
 
     /**
-     * @param ContainerBuilder $builder
-     *
      * @return bool true if compilation is enabled and CompiledContainer exists.
      */
     private function enableCompilation(ContainerBuilder $builder): bool
@@ -124,7 +125,7 @@ class Config implements ConfigInterface
     private function addAliases(): void
     {
         foreach ($this->get('aliases') as $alias => $target) {
-            $this->definitions[$alias] = get($target);
+            $this->definitions[$alias] = get((string) $target);
         }
     }
 
@@ -132,16 +133,17 @@ class Config implements ConfigInterface
     {
         foreach ($this->get('delegators') as $name => $delegators) {
             foreach ($delegators as $delegator) {
-                $previous = $name . '-' . (++$this->delegatorCounter);
+                $previous                     = $name . '-' . ++$this->delegatorCounter;
                 $this->definitions[$previous] = $this->definitions[$name];
-                $current = function (ContainerInterface $container) use ($delegator, $previous, $name) {
-                    $factory = new $delegator();
-                    $callable = function () use ($previous, $container) {
-                        return $container->get($previous);
+                $current                      =
+                    function (ContainerInterface $container) use ($delegator, $previous, $name) {
+                        $factory  = new $delegator();
+                        $callable = function () use ($previous, $container) {
+                            return $container->get($previous);
+                        };
+                        return $factory($container, $name, $callable);
                     };
-                    return $factory($container, $name, $callable);
-                };
-                $this->definitions[$name] = $current;
+                $this->definitions[$name]     = $current;
             }
         }
     }
@@ -160,7 +162,7 @@ class Config implements ConfigInterface
         }
     }
 
-    private function get($key): array
+    private function get(string $key): array
     {
         if (! isset($this->dependencies[$key]) || ! is_array($this->dependencies[$key])) {
             return [];

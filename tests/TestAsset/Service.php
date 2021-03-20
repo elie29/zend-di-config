@@ -1,12 +1,13 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace ElieTest\PHPDI\Config\TestAsset;
 
+use function microtime;
+
 class Service implements ServiceInterface
 {
-
     protected float $time;
 
     protected array $injected = [];

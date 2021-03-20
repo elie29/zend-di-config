@@ -1,12 +1,24 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Elie\PHPDI\Config\Tool;
 
+use InvalidArgumentException;
+
+use function class_exists;
+use function date;
+use function implode;
+use function in_array;
+use function is_array;
+use function is_int;
+use function is_string;
+use function sprintf;
+use function str_repeat;
+use function var_export;
+
 class AutowiresConfigDumper
 {
-
     private const CONFIG_TEMPLATE = <<<EOC
 <?php
 
@@ -26,7 +38,7 @@ EOC;
         $config['dependencies'] ??= [];
 
         if (! is_array($config['dependencies'])) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Configuration dependencies key must be an array'
             );
         }
@@ -64,10 +76,10 @@ EOC;
 
     private function prepareConfig(array $config, int $indentLevel = 1): string
     {
-        $indent = str_repeat(' ', $indentLevel * 4);
+        $indent  = str_repeat(' ', $indentLevel * 4);
         $entries = [];
         foreach ($config as $key => $value) {
-            $key = $this->createConfigKey($key);
+            $key       = $this->createConfigKey($key);
             $entries[] = sprintf(
                 '%s%s%s,',
                 $indent,
@@ -81,6 +93,9 @@ EOC;
         return sprintf("[\n%s\n%s]", implode("\n", $entries), $outerIndent);
     }
 
+    /**
+     * @param string|int|mixed $key
+     */
     private function createConfigKey($key): ?string
     {
         if (is_string($key) && class_exists($key)) {
@@ -94,6 +109,9 @@ EOC;
         return sprintf("'%s'", $key);
     }
 
+    /**
+     * @param mixed $value
+     */
     private function createConfigValue($value, int $indentLevel): string
     {
         if (is_array($value)) {
