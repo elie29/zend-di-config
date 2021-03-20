@@ -28,7 +28,7 @@
     "require": {
         "php": "^8.0",
         "laminas/laminas-stdlib": "^3.2",
-        "php-di/php-di": "^6.0"
+        "php-di/php-di": "^6.3"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "^2.1.4",
