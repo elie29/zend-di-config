@@ -49,8 +49,11 @@ and adds the provided class name in the autowires array, writing the changes
 back to the file. The class name is added once.
 EOH;
 
-    public function __construct(private string $scriptName = self::class, private ?ConsoleHelper $helper = null)
+    private ConsoleHelper $helper;
+
+    public function __construct(private string $scriptName = self::class, ?ConsoleHelper $helper = null)
     {
+        $this->helper = $helper ?? new ConsoleHelper();
     }
 
     /**

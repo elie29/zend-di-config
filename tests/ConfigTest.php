@@ -18,11 +18,8 @@ use ElieTest\PHPDI\Config\TestAsset\ServiceInterface;
 use ElieTest\PHPDI\Config\TestAsset\UserManager;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use ReflectionClass;
 
-use function dirname;
-use function realpath;
-use function unlink;
+use function sys_get_temp_dir;
 
 class ConfigTest extends TestCase
 {
@@ -62,7 +59,7 @@ class ConfigTest extends TestCase
 
     public function testConfigurationEnableCompilation(): void
     {
-        $url       = realpath(__DIR__ . '/tmpfiles');
+        $url       = sys_get_temp_dir();
         $config    = [Config::DI_CACHE_PATH => $url, Config::ENABLE_CACHE_DEFINITION => false];
         $container = $this->getContainer($config);
 
@@ -71,12 +68,6 @@ class ConfigTest extends TestCase
         self::assertNotEmpty($config);
         self::assertSame($url, $config[Config::DI_CACHE_PATH]);
         self::assertFalse($config[Config::ENABLE_CACHE_DEFINITION]);
-
-        $reflection       = new ReflectionClass($container);
-        $compilerFileName = $reflection->getFileName();
-        if (dirname($compilerFileName) === $url) {
-            @unlink($compilerFileName);
-        }
     }
 
     public function testConfigurationServices(): void
