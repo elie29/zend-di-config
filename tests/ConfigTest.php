@@ -58,10 +58,7 @@ class ConfigTest extends TestCase
 
     public function testConfigurationEnableCompilation()
     {
-        vfsStream::setup('project');
-
-        $url = vfsStream::url('project');
-
+        $url    = sys_get_temp_dir();
         $config = [Config::DI_CACHE_PATH => $url, Config::ENABLE_CACHE_DEFINITION => false];
 
         $container = $this->getContainer($config);

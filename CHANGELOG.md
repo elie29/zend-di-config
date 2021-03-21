@@ -1,5 +1,4 @@
-Changelog
-=========
+# Changelog
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
@@ -7,7 +6,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- ./composer require composer/package-versions-deprecated for 7.1 backward compatibility
+- delete sudo from .travis
+- Correct ConfigTest.php
+- .composer self-update
 
 ### Changed
 
@@ -33,7 +35,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
--  [#43](https://github.com/elie29/zend-di-config/issues/43) migrate to laminas framework.
+- [#43](https://github.com/elie29/zend-di-config/issues/43) migrate to laminas framework.
 
 ### Deprecated
 
