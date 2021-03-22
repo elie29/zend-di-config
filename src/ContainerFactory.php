@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Elie\PHPDI\Config;
 
@@ -9,7 +9,6 @@ use Psr\Container\ContainerInterface;
 
 class ContainerFactory
 {
-
     public function __invoke(ConfigInterface $config): ContainerInterface
     {
         $builder = new ContainerBuilder();

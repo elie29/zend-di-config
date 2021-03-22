@@ -1,13 +1,25 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Elie\PHPDI\Config\Tool;
 
+use InvalidArgumentException;
+
+use function class_exists;
+use function date;
+use function implode;
+use function in_array;
+use function is_array;
+use function is_int;
+use function is_string;
+use function sprintf;
+use function str_repeat;
+use function var_export;
+
 class AutowiresConfigDumper
 {
-
-    const CONFIG_TEMPLATE = <<<EOC
+    private const CONFIG_TEMPLATE = <<<EOC
 <?php
 
 /**
@@ -19,16 +31,14 @@ return %s;
 
 EOC;
 
-    const AUTOWIRES = 'autowires';
+    private const AUTOWIRES = 'autowires';
 
     public function createDependencyConfig(array $config, string $className): array
     {
-        if (! isset($config['dependencies'])) {
-            $config['dependencies'] = [];
-        }
+        $config['dependencies'] ??= [];
 
         if (! is_array($config['dependencies'])) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Configuration dependencies key must be an array'
             );
         }
@@ -44,7 +54,7 @@ EOC;
 
         return sprintf(
             self::CONFIG_TEMPLATE,
-            get_class($this),
+            static::class,
             date('Y-m-d H:i:s'),
             $prepared
         );
@@ -52,13 +62,13 @@ EOC;
 
     private function addAutowires(array $dependencies, string $entry): array
     {
-        if (! isset($dependencies[$this::AUTOWIRES]) || ! is_array($dependencies[$this::AUTOWIRES])) {
-            $dependencies[$this::AUTOWIRES] = [];
+        if (! isset($dependencies[self::AUTOWIRES]) || ! is_array($dependencies[self::AUTOWIRES])) {
+            $dependencies[self::AUTOWIRES] = [];
         }
 
         // Add the class name as an entry to the autowires configuration
-        if (! in_array($entry, $dependencies[$this::AUTOWIRES], true)) {
-            $dependencies[$this::AUTOWIRES][] = $entry;
+        if (! in_array($entry, $dependencies[self::AUTOWIRES], true)) {
+            $dependencies[self::AUTOWIRES][] = $entry;
         }
 
         return $dependencies;
@@ -66,10 +76,10 @@ EOC;
 
     private function prepareConfig(array $config, int $indentLevel = 1): string
     {
-        $indent = str_repeat(' ', $indentLevel * 4);
+        $indent  = str_repeat(' ', $indentLevel * 4);
         $entries = [];
         foreach ($config as $key => $value) {
-            $key = $this->createConfigKey($key);
+            $key       = $this->createConfigKey($key);
             $entries[] = sprintf(
                 '%s%s%s,',
                 $indent,
@@ -83,7 +93,10 @@ EOC;
         return sprintf("[\n%s\n%s]", implode("\n", $entries), $outerIndent);
     }
 
-    private function createConfigKey($key):? string
+    /**
+     * @param string|int|mixed $key
+     */
+    private function createConfigKey($key): ?string
     {
         if (is_string($key) && class_exists($key)) {
             return sprintf('\\%s::class', $key);
@@ -96,6 +109,9 @@ EOC;
         return sprintf("'%s'", $key);
     }
 
+    /**
+     * @param mixed $value
+     */
     private function createConfigValue($value, int $indentLevel): string
     {
         if (is_array($value)) {

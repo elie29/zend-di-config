@@ -6,3 +6,4 @@
 /clover.xml
 /.project
 /.idea
+.phpunit.result.cache
