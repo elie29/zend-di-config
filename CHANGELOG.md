@@ -2,7 +2,9 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V6.0.2 - TBD
+## V8.0.0 - TBD
+
+- V8.0+ supports only PHP8+ et drops other versions
 
 ### Added
 
@@ -10,7 +12,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#46](https://github.com/elie29/zend-di-config/issues/46) migration to php 8 [Break Change]
 
 ### Deprecated
 
