@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ## V8.0.0 - TBD
 
-- V8.0+ supports only PHP8+ et drops other versions
+- V8.0+ supports only PHP8+ and drops other versions
 
 ### Added
 
