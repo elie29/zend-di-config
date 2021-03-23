@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V8.0.0 - TBD
+## V8.0.0 - 2021-03-23
 
 - V8.0+ supports only PHP8+ and drops other versions
 
