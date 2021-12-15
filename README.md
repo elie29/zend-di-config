@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/elie29/zend-di-config/badge.svg)](https://coveralls.io/github/elie29/zend-di-config)
 
 ## Introduction
+
 [zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](http://php-di.org) container using service manager configuration.
 It can be used with [Laminas](https://getlaminas.org/) and [Mezzio](https://docs.mezzio.dev/) starting from v6.0.0
 
@@ -39,6 +40,9 @@ $container = $factory(
         // Enable compilation
         Config::DI_CACHE_PATH => __DIR__, // Folder path
 
+        // Write proxy to file : cf. https://php-di.org/doc/lazy-injection.html
+        Config::DI_PROXY_PATH => __DIR__, // Folder path
+
         // Disable autowire (enabled by default)
         Config::USE_AUTOWIRE => false
 
@@ -69,23 +73,25 @@ The `dependencies` sub associative array can contain the following keys:
   [Expressive delegators documentation](https://docs.laminas.dev/laminas-servicemanager/delegators/)
   for more details.
 
->**N.B.:** The whole configuration -- unless `dependencies` -- is merged in a `config` key within the `$container`:
+> **N.B.:** The whole configuration -- unless `dependencies` -- is merged in a `config` key within the `$container`:
 >
->```php
->$config = $container->get('config');
->```
+> ```php
+> $config = $container->get('config');
+> ```
 
 ## CLI command to add a new autowire entry
+
 ![Configuration image](./config-add-entry.png)
 
 The cli command `add-autowires-entry` creates the configuration file if it doesn't exist otherwise it adds the entry
 to the autowires key.
 
 Example of adding ConsoleHelper to a config.php:
->```console
->./vendor/bin/add-autowires-entry config.php "Laminas\\Stdlib\\ConsoleHelper"
->[DONE] Changes written to config.php
->```
+
+> ```console
+> ./vendor/bin/add-autowires-entry config.php "Laminas\\Stdlib\\ConsoleHelper"
+> [DONE] Changes written to config.php
+> ```
 
 ## Using with Expressive
 
@@ -113,6 +119,7 @@ return call_user_func(function () {
 ```
 
 ## Example of a ConfigProvider class
+
 ```php
 <?php
 
@@ -144,6 +151,7 @@ class ConfigProvider
 ```
 
 Where UserManager depends on Mailer as follow:
+
 ```php
 class UserManager
 {
@@ -172,12 +180,15 @@ class Mailer
 ## Switching back to another container
 
 To switch back to another container is very easy:
-  1. Create your factories with `__invoke` function
-  2. Replace `autowires` key in ConfigProvider by `factories` key, then for each class name attach its correspondent factory.
+
+1. Create your factories with `__invoke` function
+2. Replace `autowires` key in ConfigProvider by `factories` key, then for each class name attach its correspondent factory.
 
 ## PSR 11 and Interop\Container\ContainerInterface
+
 V4.x supports as well Interop\Container\ContainerInterface
 
 ## Migration guides
-  - [Migration from 3.x to 4.0](docs/migration-4.0.md)
-  - Migration from 4.x to 5.0: container-interop/container-interop was dropped in favor of [PSR-11](https://packagist.org/packages/psr/container).
+
+- [Migration from 3.x to 4.0](docs/migration-4.0.md)
+- Migration from 4.x to 5.0: container-interop/container-interop was dropped in favor of [PSR-11](https://packagist.org/packages/psr/container).

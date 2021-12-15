@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## V8.0.1 - TBD
+
+### Added
+
+- [#49](https://github.com/elie29/zend-di-config/issues/49) Support writing proxy classes to files
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## V8.0.0 - 2021-03-23
 
 - V8.0+ supports only PHP8+ and drops other versions
