@@ -35,6 +35,8 @@ class Config implements ConfigInterface
 
     public function configureContainer(ContainerBuilder $builder): void
     {
+        $this->shouldWriteProxiesToFile($builder);
+
         if (! $this->enableCompilation($builder)) {
             $this->setDependencies();
             $this->addDefinitions($builder);
@@ -159,6 +161,14 @@ class Config implements ConfigInterface
     {
         if (! empty($this->definitions[self::CONFIG][self::ENABLE_CACHE_DEFINITION])) {
             $builder->enableDefinitionCache();
+        }
+    }
+
+    private function shouldWriteProxiesToFile(ContainerBuilder $builder): void
+    {
+        $path = $this->definitions[self::CONFIG][self::DI_PROXY_PATH] ?? null;
+        if ($path) {
+            $builder->writeProxiesToFile(true, $path);
         }
     }
 

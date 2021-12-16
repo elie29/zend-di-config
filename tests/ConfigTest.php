@@ -70,6 +70,18 @@ class ConfigTest extends TestCase
         self::assertFalse($config[Config::ENABLE_CACHE_DEFINITION]);
     }
 
+    public function testConfigurationWriteProxiesToFile(): void
+    {
+        $url       = sys_get_temp_dir();
+        $config    = [Config::DI_PROXY_PATH => $url];
+        $container = $this->getContainer($config);
+
+        $config = $container->get(Config::CONFIG);
+
+        self::assertNotEmpty($config);
+        self::assertSame($url, $config[Config::DI_PROXY_PATH]);
+    }
+
     public function testConfigurationServices(): void
     {
         $config = [
