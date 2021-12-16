@@ -35,7 +35,7 @@ class Config implements ConfigInterface
 
     public function configureContainer(ContainerBuilder $builder): void
     {
-        $this->shouldWriteProxyToFile($builder);
+        $this->shouldWriteProxiesToFile($builder);
 
         if (! $this->enableCompilation($builder)) {
             $this->setDependencies();
@@ -164,7 +164,7 @@ class Config implements ConfigInterface
         }
     }
 
-    private function shouldWriteProxyToFile(ContainerBuilder $builder): void
+    private function shouldWriteProxiesToFile(ContainerBuilder $builder): void
     {
         $path = $this->definitions[self::CONFIG][self::DI_PROXY_PATH] ?? null;
         if ($path) {

@@ -40,7 +40,7 @@ $container = $factory(
         // Enable compilation
         Config::DI_CACHE_PATH => __DIR__, // Folder path
 
-        // Write proxy to file : cf. https://php-di.org/doc/lazy-injection.html
+        // Write proxies to file : cf. https://php-di.org/doc/lazy-injection.html
         Config::DI_PROXY_PATH => __DIR__, // Folder path
 
         // Disable autowire (enabled by default)
