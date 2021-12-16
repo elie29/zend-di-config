@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V8.0.1 - TBD
+## V8.1.0 - 2021-12-16
 
 ### Added
 
