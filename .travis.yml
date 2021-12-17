@@ -8,6 +8,7 @@ env:
   global:
     - COMPOSER_ARGS="--no-interaction"
     - COVERAGE_DEPS="php-coveralls/php-coveralls"
+    - XDEBUG_MODE=coverage
 
 matrix:
   include:
