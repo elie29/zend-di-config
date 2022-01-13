@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## V8.1.1 - TBD
+
+### Added
+
+- Nothing
+
+### Changed
+
+- [#52](https://github.com/elie29/zend-di-config/issues/52) Container compilation and delegators
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## V8.1.0 - 2021-12-16
 
 ### Added
