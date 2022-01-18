@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Elie\PHPDI\Config;
 
 use DI\ContainerBuilder;
+use DI\Definition\Helper\DefinitionHelper;
 use Psr\Container\ContainerInterface;
 
 use function DI\autowire;
@@ -137,17 +138,27 @@ class Config implements ConfigInterface
             foreach ($delegators as $delegator) {
                 $previous                     = $name . '-' . ++$this->delegatorCounter;
                 $this->definitions[$previous] = $this->definitions[$name];
-                $current                      =
-                    function (ContainerInterface $container) use ($delegator, $previous, $name) {
-                        $factory  = new $delegator();
-                        $callable = function () use ($previous, $container) {
-                            return $container->get($previous);
-                        };
-                        return $factory($container, $name, $callable);
-                    };
-                $this->definitions[$name]     = $current;
+                $this->definitions[$name]     = $this->createDelegatorFactory($delegator, $previous, $name);
             }
         }
+    }
+
+    private function createDelegatorFactory(string $delegator, string $previous, string $name): DefinitionHelper
+    {
+        return factory(function (
+            ContainerInterface $container,
+            string $delegator,
+            string $previous,
+            string $name
+        ) {
+            $factory  = new $delegator();
+            $callable = function () use ($previous, $container) {
+                return $container->get($previous);
+            };
+            return $factory($container, $name, $callable);
+        })->parameter('delegator', $delegator)
+          ->parameter('previous', $previous)
+          ->parameter('name', $name);
     }
 
     private function useAutowire(ContainerBuilder $builder): void
