@@ -8,7 +8,7 @@
 [zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](http://php-di.org) container using service manager configuration.
 It can be used with [Laminas](https://getlaminas.org/) and [Mezzio](https://docs.mezzio.dev/) starting from v6.0.0
 
-This library uses autowirng technique, cache compilation and cache definitions as defined in [PHP-DI](http://php-di.org).
+This library uses autowiring technique, cache compilation and cache definitions as defined in [PHP-DI](http://php-di.org).
 
 ## Configuration
 
