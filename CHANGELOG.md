@@ -2,11 +2,33 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## V8.1.2 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## V8.1.1 - 2002-03-14
 
 ### Added
 
-- Nothing
+- Nothing.
 
 ### Changed
 
