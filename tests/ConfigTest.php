@@ -7,6 +7,7 @@ namespace ElieTest\PHPDI\Config;
 use DateTime;
 use DI\ContainerBuilder;
 use Elie\PHPDI\Config\Config;
+use Elie\PHPDI\Config\ConfigInterface;
 use Elie\PHPDI\Config\ContainerFactory;
 use ElieTest\PHPDI\Config\TestAsset\DelegatorService;
 use ElieTest\PHPDI\Config\TestAsset\DelegatorServiceFactory;
@@ -16,8 +17,11 @@ use ElieTest\PHPDI\Config\TestAsset\Service;
 use ElieTest\PHPDI\Config\TestAsset\ServiceFactory;
 use ElieTest\PHPDI\Config\TestAsset\ServiceInterface;
 use ElieTest\PHPDI\Config\TestAsset\UserManager;
+use Exception;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 use function sys_get_temp_dir;
 
@@ -29,7 +33,7 @@ class ConfigTest extends TestCase
 
         $builder->expects($this->once())->method('enableDefinitionCache');
 
-        $config = new Config([Config::ENABLE_CACHE_DEFINITION => true]);
+        $config = new Config([ConfigInterface::ENABLE_CACHE_DEFINITION => true]);
         $config->configureContainer($builder);
     }
 
@@ -39,17 +43,22 @@ class ConfigTest extends TestCase
 
         $builder->expects($this->once())->method('useAutowiring');
 
-        $config = new Config([Config::USE_AUTOWIRE => false]);
+        $config = new Config([ConfigInterface::USE_AUTOWIRE => false]);
         $config->configureContainer($builder);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationKeysValues(): void
     {
         $config = ['a' => new DateTime(), 'b' => [1, 2, 3], 'c' => 'd'];
 
         $container = $this->getContainer($config);
 
-        $config = $container->get(Config::CONFIG);
+        $config = $container->get(ConfigInterface::CONFIG);
 
         self::assertNotEmpty($config);
         self::assertInstanceOf(DateTime::class, $config['a']);
@@ -57,31 +66,46 @@ class ConfigTest extends TestCase
         self::assertSame('d', $config['c']);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationEnableCompilation(): void
     {
         $url       = sys_get_temp_dir();
-        $config    = [Config::DI_CACHE_PATH => $url, Config::ENABLE_CACHE_DEFINITION => false];
+        $config    = [ConfigInterface::DI_CACHE_PATH => $url, ConfigInterface::ENABLE_CACHE_DEFINITION => false];
         $container = $this->getContainer($config);
 
-        $config = $container->get(Config::CONFIG);
+        $config = $container->get(ConfigInterface::CONFIG);
 
         self::assertNotEmpty($config);
-        self::assertSame($url, $config[Config::DI_CACHE_PATH]);
-        self::assertFalse($config[Config::ENABLE_CACHE_DEFINITION]);
+        self::assertSame($url, $config[ConfigInterface::DI_CACHE_PATH]);
+        self::assertFalse($config[ConfigInterface::ENABLE_CACHE_DEFINITION]);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationWriteProxiesToFile(): void
     {
         $url       = sys_get_temp_dir();
-        $config    = [Config::DI_PROXY_PATH => $url];
+        $config    = [ConfigInterface::DI_PROXY_PATH => $url];
         $container = $this->getContainer($config);
 
-        $config = $container->get(Config::CONFIG);
+        $config = $container->get(ConfigInterface::CONFIG);
 
         self::assertNotEmpty($config);
-        self::assertSame($url, $config[Config::DI_PROXY_PATH]);
+        self::assertSame($url, $config[ConfigInterface::DI_PROXY_PATH]);
     }
 
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationServices(): void
     {
         $config = [
@@ -115,6 +139,11 @@ class ConfigTest extends TestCase
         self::assertInstanceOf(Service::class, $container->get('service-5'));
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationInvokables(): void
     {
         $config = [
@@ -134,6 +163,11 @@ class ConfigTest extends TestCase
         self::assertInstanceOf(Service::class, $container->get('service-1'));
     }
 
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationAutowires(): void
     {
         $config = [
@@ -156,6 +190,11 @@ class ConfigTest extends TestCase
         self::assertSame($container->get('user-manager1'), $container->get('user-manager2'));
     }
 
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationFactories(): void
     {
         $config = [
@@ -184,6 +223,11 @@ class ConfigTest extends TestCase
         self::assertInstanceOf(Service::class, $container->get('factory-3'));
     }
 
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationAliases(): void
     {
         $config = [
@@ -215,6 +259,11 @@ class ConfigTest extends TestCase
         self::assertInstanceOf(Service::class, $container->get('alias-4'));
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationDelegators(): void
     {
         $config = [
@@ -237,6 +286,11 @@ class ConfigTest extends TestCase
         self::assertInstanceOf(ServiceInterface::class, $container->get('service-1')->service);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws Exception
+     */
     public function testConfigurationMultiDelegators(): void
     {
         $config = [
@@ -262,6 +316,9 @@ class ConfigTest extends TestCase
         self::assertEquals($expected, $container->get('key-1')->getInjected());
     }
 
+    /**
+     * @throws Exception
+     */
     private function getContainer(array $config): ContainerInterface
     {
         $factory = new ContainerFactory();

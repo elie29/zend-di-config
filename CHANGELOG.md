@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V8.1.2 - TBD
+## V9.0.0 - 2022-09-24
 
 ### Added
 
@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#55](https://github.com/elie29/zend-di-config/issues/55) PHP8.1 Compatibility
 
 ### Deprecated
 
@@ -324,7 +324,7 @@ This is the complete change log. You can also read the [migration guide](docs/mi
 ### Added
 
 - [#21](https://github.com/elie29/zend-di-config/issues/21) Add contributing.md document.
-- [#23](https://github.com/elie29/zend-di-config/issues/23) Launch composer udpate.
+- [#23](https://github.com/elie29/zend-di-config/issues/23) Launch composer update.
 
 ### Changed
 

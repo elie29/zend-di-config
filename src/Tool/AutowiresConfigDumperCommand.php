@@ -42,7 +42,7 @@ class AutowiresConfigDumperCommand
                           array, and the file will be updated with new
                           configuration.
   <info><className></info>             Name of the class to reflect and to be added
-                          in as an new entry in the autowires configuration.
+                          in as a new entry in the autowires configuration.
 
 Reads the provided configuration file (creating it if it does not exist),
 and adds the provided class name in the autowires array, writing the changes
@@ -51,7 +51,7 @@ EOH;
 
     private ConsoleHelper $helper;
 
-    public function __construct(private string $scriptName = self::class, ?ConsoleHelper $helper = null)
+    public function __construct(private readonly string $scriptName = self::class, ?ConsoleHelper $helper = null)
     {
         $this->helper = $helper ?? new ConsoleHelper();
     }
@@ -105,9 +105,6 @@ EOH;
         return 0;
     }
 
-    /**
-     * @param array $args
-     */
     private function parseArgs(array $args): stdClass
     {
         if (! count($args)) {
@@ -160,13 +157,13 @@ EOH;
             ));
         }
 
-        return $this->createArguments(self::COMMAND_DUMP, $configFile, $config, $class);
+        return $this->createArguments($configFile, $config, $class);
     }
 
     /**
-     * @param resource $resource Defaults to STDOUT
+     * @param bool|resource $resource Defaults to STDOUT
      */
-    private function help($resource = STDOUT): void
+    private function help(mixed $resource = STDOUT): void
     {
         $this->helper->writeLine(sprintf(
             self::HELP_TEMPLATE,
@@ -174,10 +171,10 @@ EOH;
         ), true, $resource);
     }
 
-    private function createArguments(string $command, string $configFile, array $config, string $class): stdClass
+    private function createArguments(string $configFile, array $config, string $class): stdClass
     {
         return (object) [
-            'command'    => $command,
+            'command'    => self::COMMAND_DUMP,
             'configFile' => $configFile,
             'config'     => $config,
             'class'      => $class,

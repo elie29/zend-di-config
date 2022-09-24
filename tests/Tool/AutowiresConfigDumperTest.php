@@ -18,7 +18,7 @@ class AutowiresConfigDumperTest extends TestCase
         $this->dumper = new AutowiresConfigDumper();
     }
 
-    public function testCreateDependencyConfigExpectsDependiciesKeyToBeArray(): void
+    public function testCreateDependencyConfigExpectsDependenciesKeyToBeArray(): void
     {
         self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage('Configuration dependencies key must be an array');

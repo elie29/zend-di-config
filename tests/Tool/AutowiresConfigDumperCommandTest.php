@@ -25,8 +25,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
 
     private vfsStreamDirectory $configDir;
 
-    /** @var ConsoleHelper|ObjectProphecy */
-    private ObjectProphecy $helper;
+    private ObjectProphecy|ConsoleHelper $helper;
 
     private AutowiresConfigDumperCommand $command;
 
@@ -40,10 +39,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
         );
     }
 
-    /**
-     * @param false|resource $stream
-     */
-    protected function assertHelp($stream = STDOUT): void
+    protected function assertHelp(mixed $stream = STDOUT): void
     {
         $this->helper->writeLine(
             Argument::containingString('<info>Usage:</info>'),
