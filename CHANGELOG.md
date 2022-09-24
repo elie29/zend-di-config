@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V8.1.2 - TBD
+## V9.0.0 - TBD
 
 ### Added
 
@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#55](https://github.com/elie29/zend-di-config/issues/55) PHP8.1 Compatibility
 
 ### Deprecated
 

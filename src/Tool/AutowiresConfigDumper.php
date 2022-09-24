@@ -93,10 +93,7 @@ EOC;
         return sprintf("[\n%s\n%s]", implode("\n", $entries), $outerIndent);
     }
 
-    /**
-     * @param string|int|mixed $key
-     */
-    private function createConfigKey($key): ?string
+    private function createConfigKey(mixed $key): ?string
     {
         if (is_string($key) && class_exists($key)) {
             return sprintf('\\%s::class', $key);
@@ -109,10 +106,7 @@ EOC;
         return sprintf("'%s'", $key);
     }
 
-    /**
-     * @param mixed $value
-     */
-    private function createConfigValue($value, int $indentLevel): string
+    private function createConfigValue(mixed $value, int $indentLevel): string
     {
         if (is_array($value)) {
             return $this->prepareConfig($value, $indentLevel + 1);

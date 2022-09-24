@@ -6,7 +6,7 @@ namespace ElieTest\PHPDI\Config\TestAsset;
 
 class UserManager
 {
-    public function __construct(private Mailer $mailer)
+    public function __construct(private readonly Mailer $mailer)
     {
     }
 

@@ -77,7 +77,7 @@ class Config implements ConfigInterface
         $this->addDelegators();
 
         /**
-         * PHPDI ArrayDefinition would resolve all keys
+         * PHP-DI ArrayDefinition would resolve all keys
          * or dependencies are already resolved
          * (@see https://github.com/elie29/zend-di-config/issues/38)
          */
