@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V9.0.1 - TBD
+## V9.0.1 - 2023-03-28
 
 ### Added
 
@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#57](https://github.com/elie29/zend-di-config/pull/57) Added support to PHP-DI 7.0
 
 ### Deprecated
 

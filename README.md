@@ -1,6 +1,6 @@
 # zend-phpdi-config
 
-[![Build Status](https://app.travis-ci.com/elie29/zend-di-config.svg?branch=master)](https://app.travis-ci.com/elie29/zend-di-config)
+[![Build Status](https://github.com/elie29/zend-di-config/actions/workflows/php-build.yml/badge.svg)](https://github.com/elie29/zend-di-config/)
 [![Coverage Status](https://coveralls.io/repos/github/elie29/zend-di-config/badge.svg)](https://coveralls.io/github/elie29/zend-di-config)
 
 ## Introduction
