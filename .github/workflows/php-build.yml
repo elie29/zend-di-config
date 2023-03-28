@@ -1,0 +1,47 @@
+name: build
+
+on:
+  push:
+    branches: ['master', 'feature/*']
+  pull_request:
+    branches: ['master']
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: [ '8.1', '8.2' ]
+        phpunit-versions: [ 'latest' ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: xdebug
+          tools: php-cs-fixer, phpunit:${{ matrix.phpunit-versions }}
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict --no-interaction
+
+      - name: Install Dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Install coveralls
+        run: composer require --dev --no-interaction php-coveralls/php-coveralls
+
+      - name: Launch test unit in coverage mode
+        run: composer test-coverage
+
+      - name: Launch check style
+        run: composer cs-check
+
+      - name: Publish coveralls
+        if: matrix.php-versions == '8.1'
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: vendor/bin/php-coveralls -v
