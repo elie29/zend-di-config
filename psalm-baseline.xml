@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.13.1@086b94371304750d1c673315321a55d15fc59015">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/Config.php">
     <InvalidFunctionCall>
-      <code>$factory($container, $name, $callable)</code>
+      <code><![CDATA[$factory($container, $name, $callable)]]></code>
     </InvalidFunctionCall>
     <InvalidStringClass>
-      <code>new $delegator()</code>
+      <code><![CDATA[new $delegator()]]></code>
     </InvalidStringClass>
     <MissingClosureReturnType>
-      <code>function (</code>
-      <code>function () use ($previous, $container) {</code>
+      <code><![CDATA[function (]]></code>
+      <code><![CDATA[function () use ($previous, $container) {]]></code>
     </MissingClosureReturnType>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$path]]></code>
+      <code><![CDATA[$path]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Tool/AutowiresConfigDumper.php">
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$key]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Tool/AutowiresConfigDumperCommand.php">
     <LessSpecificReturnStatement>
@@ -29,45 +38,45 @@
         ]]]></code>
     </LessSpecificReturnStatement>
     <MoreSpecificReturnType>
-      <code>stdClass</code>
-      <code>stdClass</code>
-      <code>stdClass</code>
+      <code><![CDATA[stdClass]]></code>
+      <code><![CDATA[stdClass]]></code>
+      <code><![CDATA[stdClass]]></code>
     </MoreSpecificReturnType>
     <PossiblyInvalidArgument>
-      <code>$resource</code>
+      <code><![CDATA[$resource]]></code>
     </PossiblyInvalidArgument>
     <RedundantCondition>
-      <code>false</code>
+      <code><![CDATA[false]]></code>
     </RedundantCondition>
   </file>
   <file src="tests/ConfigTest.php">
     <MissingClosureReturnType>
-      <code>function () {</code>
-      <code>function (ContainerInterface $container) {</code>
-      <code>function (Service $service) {</code>
+      <code><![CDATA[function () {]]></code>
+      <code><![CDATA[function (ContainerInterface $container) {]]></code>
+      <code><![CDATA[function (Service $service) {]]></code>
     </MissingClosureReturnType>
     <UndefinedInterfaceMethod>
-      <code>getKnownEntryNames</code>
-      <code>getKnownEntryNames</code>
-      <code>getKnownEntryNames</code>
-      <code>getKnownEntryNames</code>
-      <code>getKnownEntryNames</code>
-      <code>getKnownEntryNames</code>
-      <code>getKnownEntryNames</code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="tests/Tool/AutowiresConfigDumperCommandTest.php">
     <ImplicitToStringCast>
-      <code>Argument::containingString($message)</code>
+      <code><![CDATA[Argument::containingString($message)]]></code>
       <code><![CDATA[Argument::containingString('<info>Usage:</info>')]]></code>
     </ImplicitToStringCast>
     <PossiblyNullReference>
-      <code>shouldBeCalled</code>
-      <code>shouldBeCalled</code>
-      <code>shouldBeCalled</code>
+      <code><![CDATA[shouldBeCalled]]></code>
+      <code><![CDATA[shouldBeCalled]]></code>
+      <code><![CDATA[shouldBeCalled]]></code>
     </PossiblyNullReference>
     <UnresolvableInclude>
-      <code>include $config</code>
+      <code><![CDATA[include $config]]></code>
     </UnresolvableInclude>
   </file>
 </files>
