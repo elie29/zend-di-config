@@ -1,7 +1,0 @@
-# https://ne-on.org/
-
-parameters:
-    level: max
-
-includes:
-    - vendor/phpstan/phpstan-mockery/extension.neon

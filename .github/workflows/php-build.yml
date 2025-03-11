@@ -31,17 +31,20 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
 
-      - name: Install coveralls
-        run: composer require --dev --no-interaction php-coveralls/php-coveralls
-
       - name: Launch test unit in coverage mode
         run: composer test-coverage
 
       - name: Launch check style
         run: composer cs-check
 
+      - name: Static analysis
+        if: matrix.php-versions == '8.1'
+        run: composer static-analysis
+
       - name: Publish coveralls
         if: matrix.php-versions == '8.1'
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-        run: vendor/bin/php-coveralls -v
+        run: |
+          composer global require php-coveralls/php-coveralls
+          php-coveralls -v

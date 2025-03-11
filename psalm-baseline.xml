@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+  <file src="src/Config.php">
+    <InvalidFunctionCall>
+      <code><![CDATA[$factory($container, $name, $callable)]]></code>
+    </InvalidFunctionCall>
+    <InvalidStringClass>
+      <code><![CDATA[new $delegator()]]></code>
+    </InvalidStringClass>
+    <MissingClosureReturnType>
+      <code><![CDATA[function (]]></code>
+      <code><![CDATA[function () use ($previous, $container) {]]></code>
+    </MissingClosureReturnType>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$path]]></code>
+      <code><![CDATA[$path]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Tool/AutowiresConfigDumper.php">
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$key]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Tool/AutowiresConfigDumperCommand.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[(object) [
+            'command'    => self::COMMAND_DUMP,
+            'configFile' => $configFile,
+            'config'     => $config,
+            'class'      => $class,
+        ]]]></code>
+      <code><![CDATA[(object) [
+            'command' => self::COMMAND_ERROR,
+            'message' => $message,
+        ]]]></code>
+      <code><![CDATA[(object) [
+            'command' => self::COMMAND_HELP,
+        ]]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code><![CDATA[stdClass]]></code>
+      <code><![CDATA[stdClass]]></code>
+      <code><![CDATA[stdClass]]></code>
+    </MoreSpecificReturnType>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$resource]]></code>
+    </PossiblyInvalidArgument>
+    <RedundantCondition>
+      <code><![CDATA[false]]></code>
+    </RedundantCondition>
+  </file>
+  <file src="tests/ConfigTest.php">
+    <MissingClosureReturnType>
+      <code><![CDATA[function () {]]></code>
+      <code><![CDATA[function (ContainerInterface $container) {]]></code>
+      <code><![CDATA[function (Service $service) {]]></code>
+    </MissingClosureReturnType>
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+      <code><![CDATA[getKnownEntryNames]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="tests/Tool/AutowiresConfigDumperCommandTest.php">
+    <ImplicitToStringCast>
+      <code><![CDATA[Argument::containingString($message)]]></code>
+      <code><![CDATA[Argument::containingString('<info>Usage:</info>')]]></code>
+    </ImplicitToStringCast>
+    <PossiblyNullReference>
+      <code><![CDATA[shouldBeCalled]]></code>
+      <code><![CDATA[shouldBeCalled]]></code>
+      <code><![CDATA[shouldBeCalled]]></code>
+    </PossiblyNullReference>
+    <UnresolvableInclude>
+      <code><![CDATA[include $config]]></code>
+    </UnresolvableInclude>
+  </file>
+</files>

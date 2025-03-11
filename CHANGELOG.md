@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V9.0.2 - TBD
+## V9.0.2 - 2025-03-11
 
 ### Added
 
@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#59](https://github.com/elie29/zend-di-config/pull/55) Psalm (static analysis tool) integration instead of phpstan
 
 ### Deprecated
 
