@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace ElieTest\PHPDI\Config\Tool;
 
+use Elie\PHPDI\Config\Config;
+use Elie\PHPDI\Config\ContainerFactory;
 use Elie\PHPDI\Config\Tool\AutowiresConfigDumperCommand;
 use ElieTest\PHPDI\Config\TestAsset\DelegatorService;
+use ElieTest\PHPDI\Config\TestAsset\UserManager;
+use Exception;
 use Laminas\Stdlib\ConsoleHelper;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
@@ -13,6 +17,8 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 use function sprintf;
 
@@ -159,5 +165,46 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->assertErrorRaised('Class "Not\\A\\Real\\Class" does not exist or could not be autoloaded.');
         $this->assertHelp(STDERR);
         $this->assertEquals(1, $command([$config, 'Not\A\Real\Class']));
+    }
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws Exception
+     */
+    public function testCliIntegrationAddsUserManagerToAutowires(): void
+    {
+        // Use a real ConsoleHelper for integration
+        $command   = new AutowiresConfigDumperCommand(
+            AutowiresConfigDumperCommand::class,
+            new ConsoleHelper()
+        );
+        $configDir = vfsStream::setup('project');
+        vfsStream::newDirectory('config', 0775)->at($configDir);
+        $configFile = vfsStream::url('project/config/integration.config.php');
+
+        // Run the command to add UserManager
+        $exitCode = $command([
+            $configFile,
+            UserManager::class,
+        ]);
+        $this->assertEquals(0, $exitCode);
+
+        // Check the config file was created and contains UserManager in autowires
+        $this->assertFileExists($configFile);
+        $generated = include $configFile;
+        $this->assertArrayHasKey('dependencies', $generated);
+        $this->assertArrayHasKey('autowires', $generated['dependencies']);
+        $this->assertContains(
+            UserManager::class,
+            $generated['dependencies']['autowires']
+        );
+
+        // Build a container from the generated config and check UserManager is instantiable
+        $factory     = new ContainerFactory();
+        $config      = new Config($generated);
+        $container   = $factory($config);
+        $userManager = $container->get(UserManager::class);
+        $this->assertInstanceOf(UserManager::class, $userManager);
     }
 }

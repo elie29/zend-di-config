@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ElieTest\PHPDI\Config\TestAsset;
 
-use Psr\Container\ContainerInterface;
 use Exception;
+use Psr\Container\ContainerInterface;
 
 class InvalidServiceFactory
 {
@@ -13,4 +13,4 @@ class InvalidServiceFactory
     {
         throw new Exception('Factory error: This factory always fails.');
     }
-} 
+}

@@ -20,11 +20,14 @@ use ElieTest\PHPDI\Config\TestAsset\Service;
 use ElieTest\PHPDI\Config\TestAsset\ServiceFactory;
 use ElieTest\PHPDI\Config\TestAsset\ServiceInterface;
 use ElieTest\PHPDI\Config\TestAsset\UserManager;
+use Error;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use RuntimeException;
+use TypeError;
 
 use function sys_get_temp_dir;
 
@@ -348,7 +351,7 @@ class ConfigTest extends TestCase
     {
         $config = [
             'dependencies' => [
-                'services' => [
+                'services'   => [
                     'service-1' => Service::class,
                 ],
                 'delegators' => [
@@ -379,11 +382,12 @@ class ConfigTest extends TestCase
 
     /**
      * Negative test: dependencies is not an array
+     *
      * @throws Exception
      */
     public function testConfigWithNonArrayDependencies(): void
     {
-        $this->expectException(\TypeError::class);
+        $this->expectException(TypeError::class);
         $factory = new ContainerFactory();
         $config  = new Config(['dependencies' => 'not-an-array']);
         $factory($config);
@@ -391,39 +395,41 @@ class ConfigTest extends TestCase
 
     /**
      * Negative test: service factory throws exception
+     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      * @throws Exception
      */
     public function testServiceFactoryThrowsException(): void
     {
-        $factory = new ContainerFactory();
-        $config  = new Config([
+        $factory   = new ContainerFactory();
+        $config    = new Config([
             'dependencies' => [
                 'factories' => [
                     'bad-service' => function () {
-                        throw new \RuntimeException('Factory error');
+                        throw new RuntimeException('Factory error');
                     },
                 ],
             ],
         ]);
         $container = $factory($config);
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $container->get('bad-service');
     }
 
     /**
      * Negative test: delegator is not callable
+     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      * @throws Exception
      */
     public function testDelegatorNotCallable(): void
     {
-        $factory = new ContainerFactory();
-        $config  = new Config([
+        $factory   = new ContainerFactory();
+        $config    = new Config([
             'dependencies' => [
-                'services' => [
+                'services'   => [
                     'service-1' => Service::class,
                 ],
                 'delegators' => [
@@ -434,20 +440,21 @@ class ConfigTest extends TestCase
             ],
         ]);
         $container = $factory($config);
-        $this->expectException(\Error::class);
+        $this->expectException(Error::class);
         $container->get('service-1');
     }
 
     /**
      * Negative test: autowires contains invalid value
+     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      * @throws Exception
      */
     public function testAutowiresWithInvalidValue(): void
     {
-        $factory = new ContainerFactory();
-        $config  = new Config([
+        $factory   = new ContainerFactory();
+        $config    = new Config([
             'dependencies' => [
                 'autowires' => ['123'],
             ],
