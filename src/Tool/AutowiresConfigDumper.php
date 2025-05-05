@@ -93,6 +93,10 @@ EOC;
         return sprintf("[\n%s\n%s]", implode("\n", $entries), $outerIndent);
     }
 
+    /**
+     * @param (int|string) $key
+     * @psalm-param array-key $key
+     */
     private function createConfigKey(mixed $key): ?string
     {
         if (is_string($key) && class_exists($key)) {

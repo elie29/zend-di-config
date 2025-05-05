@@ -121,13 +121,13 @@ class ConfigTest extends TestCase
                     'service-1'    => Service::class, // service -> service name
                     'service-2'    => new Service(), // service -> object
                     // service -> callable
-                    'service-3' => function () {
+                    'service-3' => function (): Service {
                         return new Service();
                     },
                     'service-4' => function (ContainerInterface $container) {
                         return $container->get('service-3');
                     },
-                    'service-5' => function (Service $service) {
+                    'service-5' => function (Service $service): Service {
                         return $service;
                     },
                 ],

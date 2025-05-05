@@ -2,15 +2,47 @@
 
 [![Build Status](https://github.com/elie29/zend-di-config/actions/workflows/php-build.yml/badge.svg)](https://github.com/elie29/zend-di-config/)
 [![Coverage Status](https://coveralls.io/repos/github/elie29/zend-di-config/badge.svg)](https://coveralls.io/github/elie29/zend-di-config)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/elie29/zend-phpdi-config.svg)](https://packagist.org/packages/elie29/zend-phpdi-config)
+<!-- Add static analysis badge if available -->
 
-## Introduction
+---
+
+## 🚀 Quick Start
+
+```bash
+composer require elie29/zend-phpdi-config
+```
+
+```php
+// config.php
+use Elie\PHPDI\Config\Config;
+use Elie\PHPDI\Config\ContainerFactory;
+
+$container = (new ContainerFactory())(
+    new Config(require __DIR__ . '/config.php')
+);
+```
+
+---
+
+## ✨ Features
+- 🧩 PSR-11 compatible container configuration
+- ⚡ Autowiring support
+- 🔗 Service manager compatibility (Laminas/Mezzio)
+- 💻 CLI tool for autowire entry management
+- 🗃️ Cache and proxy support
+- 🔄 Easy migration from other containers
+
+---
+
+## 📖 Introduction
 
 [zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](http://php-di.org) container using service manager configuration.
 It can be used with [Laminas](https://getlaminas.org/) and [Mezzio](https://docs.mezzio.dev/) starting from v6.0.0
 
 This library uses autowiring technique, cache compilation and cache definitions as defined in [PHP-DI](http://php-di.org).
 
-## Configuration
+## 🛠️ Configuration
 
 [Service Manager Configuration](https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/)
 
@@ -79,19 +111,42 @@ The `dependencies` sub associative array can contain the following keys:
 > $config = $container->get('config');
 > ```
 
-## CLI command to add a new autowire entry
+---
 
-![Configuration image](./config-add-entry.png)
+## 💻 CLI Usage
 
-The cli command `add-autowires-entry` creates the configuration file if it doesn't exist otherwise it adds the entry
+The CLI command `add-autowires-entry` creates the configuration file if it doesn't exist, otherwise it adds the entry
 to the autowires key.
 
 Example of adding ConsoleHelper to a config.php:
 
-> ```console
-> ./vendor/bin/add-autowires-entry config.php "Laminas\\Stdlib\\ConsoleHelper"
-> [DONE] Changes written to config.php
-> ```
+```console
+./vendor/bin/add-autowires-entry config.php "Laminas\\Stdlib\\ConsoleHelper"
+[DONE] Changes written to config.php
+```
+
+You can also add this as a Composer script:
+
+```json
+"scripts": {
+    "add-autowire": "add-autowires-entry config.php \"My\\Service\\Class\""
+}
+```
+
+---
+
+## 🐞 Troubleshooting / FAQ
+
+**Q: My service is not autowired.**
+A: Ensure it is listed in the `autowires` array and all dependencies are available.
+
+**Q: The CLI tool fails with a permissions error.**
+A: Make sure the config file directory is writable.
+
+**Q: How do I debug container errors?**
+A: Check that all dependencies are correctly defined and that your factories do not throw exceptions.
+
+---
 
 ## Using with Expressive
 
@@ -192,3 +247,15 @@ V4.x supports as well Interop\Container\ContainerInterface
 
 - [Migration from 3.x to 4.0](docs/migration-4.0.md)
 - Migration from 4.x to 5.0: container-interop/container-interop was dropped in favor of [PSR-11](https://packagist.org/packages/psr/container).
+
+---
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute, run tests, and submit pull requests.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.

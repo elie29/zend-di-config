@@ -45,6 +45,9 @@ class AutowiresConfigDumperCommandTest extends TestCase
         );
     }
 
+    /**
+     * @param resource $stream
+     */
     protected function assertHelp(mixed $stream = STDOUT): void
     {
         $this->helper->writeLine(
@@ -132,6 +135,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->helper->writeLine('<info>[DONE]</info> Changes written to ' . $config)->shouldBeCalled();
         $this->assertEquals(0, $command([$config, DelegatorService::class]));
 
+        /** @psalm-suppress UnresolvableInclude */
         $generated = include $config;
 
         $this->assertArrayHasKey('dependencies', $generated);
@@ -192,7 +196,10 @@ class AutowiresConfigDumperCommandTest extends TestCase
 
         // Check the config file was created and contains UserManager in autowires
         $this->assertFileExists($configFile);
+
+        /** @psalm-suppress UnresolvableInclude */
         $generated = include $configFile;
+
         $this->assertArrayHasKey('dependencies', $generated);
         $this->assertArrayHasKey('autowires', $generated['dependencies']);
         $this->assertContains(
