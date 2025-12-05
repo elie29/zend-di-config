@@ -19,7 +19,9 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+
 use function sprintf;
+
 use const STDERR;
 use const STDOUT;
 
@@ -36,8 +38,8 @@ class AutowiresConfigDumperCommandTest extends TestCase
     public static function helpArguments(): array
     {
         return [
-            'short' => ['-h'],
-            'long' => ['--help'],
+            'short'   => ['-h'],
+            'long'    => ['--help'],
             'literal' => ['help'],
         ];
     }
@@ -148,7 +150,7 @@ class AutowiresConfigDumperCommandTest extends TestCase
     public function testCliIntegrationAddsUserManagerToAutowires(): void
     {
         // Use a real ConsoleHelper for integration
-        $command = new AutowiresConfigDumperCommand(
+        $command   = new AutowiresConfigDumperCommand(
             AutowiresConfigDumperCommand::class,
             new ConsoleHelper()
         );
@@ -177,9 +179,9 @@ class AutowiresConfigDumperCommandTest extends TestCase
         );
 
         // Build a container from the generated config and check UserManager is instantiable
-        $factory = new ContainerFactory();
-        $config = new Config($generated);
-        $container = $factory($config);
+        $factory     = new ContainerFactory();
+        $config      = new Config($generated);
+        $container   = $factory($config);
         $userManager = $container->get(UserManager::class);
         $this->assertInstanceOf(UserManager::class, $userManager);
     }
@@ -187,8 +189,8 @@ class AutowiresConfigDumperCommandTest extends TestCase
     protected function setUp(): void
     {
         $this->configDir = vfsStream::setup('project');
-        $this->helper = $this->prophesize(ConsoleHelper::class);
-        $this->command = new AutowiresConfigDumperCommand(
+        $this->helper    = $this->prophesize(ConsoleHelper::class);
+        $this->command   = new AutowiresConfigDumperCommand(
             AutowiresConfigDumperCommand::class,
             $this->helper->reveal()
         );
