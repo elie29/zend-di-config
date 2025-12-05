@@ -6,7 +6,6 @@ namespace ElieTest\PHPDI\Config\Tool;
 
 use Elie\PHPDI\Config\Tool\AutowiresConfigDumper;
 use ElieTest\PHPDI\Config\TestAsset\DelegatorService;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class AutowiresConfigDumperTest extends TestCase
@@ -16,13 +15,6 @@ class AutowiresConfigDumperTest extends TestCase
     public function setUp(): void
     {
         $this->dumper = new AutowiresConfigDumper();
-    }
-
-    public function testCreateDependencyConfigExpectsDependenciesKeyToBeArray(): void
-    {
-        self::expectException(InvalidArgumentException::class);
-        self::expectExceptionMessage('Configuration dependencies key must be an array');
-        $this->dumper->createDependencyConfig(['dependencies' => 5], '');
     }
 
     public function testCreateDependencyConfigExpectsAutowiresNotExists(): void

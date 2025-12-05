@@ -151,14 +151,15 @@ class Config implements ConfigInterface
             string $previous,
             string $name
         ) {
+            /** @psalm-suppress InvalidFunctionCall */
             $factory  = new $delegator();
             $callable = function () use ($previous, $container) {
                 return $container->get($previous);
             };
             return $factory($container, $name, $callable);
         })->parameter('delegator', $delegator)
-          ->parameter('previous', $previous)
-          ->parameter('name', $name);
+            ->parameter('previous', $previous)
+            ->parameter('name', $name);
     }
 
     private function useAutowire(ContainerBuilder $builder): void

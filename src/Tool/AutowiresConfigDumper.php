@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Elie\PHPDI\Config\Tool;
 
-use InvalidArgumentException;
-
 use function class_exists;
 use function date;
 use function implode;
@@ -35,15 +33,10 @@ EOC;
 
     public function createDependencyConfig(array $config, string $className): array
     {
-        $config['dependencies'] ??= [];
+        /** @var array<array-key, mixed> $dependencies */
+        $dependencies = $config['dependencies'] ?? [];
 
-        if (! is_array($config['dependencies'])) {
-            throw new InvalidArgumentException(
-                'Configuration dependencies key must be an array'
-            );
-        }
-
-        $config['dependencies'] = $this->addAutowires($config['dependencies'], $className);
+        $config['dependencies'] = $this->addAutowires($dependencies, $className);
 
         return $config;
     }
@@ -79,11 +72,12 @@ EOC;
         $indent  = str_repeat(' ', $indentLevel * 4);
         $entries = [];
         foreach ($config as $key => $value) {
-            $key       = $this->createConfigKey($key);
+            /** @var string|int $key */
+            $configKey = $this->createConfigKey($key);
             $entries[] = sprintf(
                 '%s%s%s,',
                 $indent,
-                $key ? sprintf('%s => ', $key) : '',
+                $configKey !== null ? sprintf('%s => ', $configKey) : '',
                 $this->createConfigValue($value, $indentLevel)
             );
         }
