@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Elie\PHPDI\Config\Tool;
 
-use InvalidArgumentException;
 use Laminas\Stdlib\ConsoleHelper;
 use stdClass;
 
@@ -79,21 +78,11 @@ EOH;
 
         $dumper = new AutowiresConfigDumper();
 
-        try {
-            /** @var array<array-key, mixed> $config */
-            $config = $arguments->config;
-            /** @var string $class */
-            $class  = $arguments->class;
-            $config = $dumper->createDependencyConfig($config, $class);
-        } catch (InvalidArgumentException $e) {
-            $this->helper->writeErrorMessage(sprintf(
-                'Unable to create config for "%s": %s',
-                $arguments->class,
-                $e->getMessage()
-            ));
-            $this->help(STDERR);
-            return 1;
-        }
+        /** @var array<array-key, mixed> $config */
+        $config = $arguments->config;
+        /** @var string $class */
+        $class  = $arguments->class;
+        $config = $dumper->createDependencyConfig($config, $class);
 
         file_put_contents($arguments->configFile, $dumper->dumpConfigFile($config));
 
