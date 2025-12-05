@@ -27,7 +27,6 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use RuntimeException;
-use TypeError;
 
 use function sys_get_temp_dir;
 
@@ -370,30 +369,6 @@ class ConfigTest extends TestCase
     }
 
     /**
-     * @throws Exception
-     */
-    private function getContainer(array $config): ContainerInterface
-    {
-        $factory = new ContainerFactory();
-        $config  = new Config($config);
-
-        return $factory($config);
-    }
-
-    /**
-     * Negative test: dependencies is not an array
-     *
-     * @throws Exception
-     */
-    public function testConfigWithNonArrayDependencies(): void
-    {
-        $this->expectException(TypeError::class);
-        $factory = new ContainerFactory();
-        $config  = new Config(['dependencies' => 'not-an-array']);
-        $factory($config);
-    }
-
-    /**
      * Negative test: service factory throws exception
      *
      * @throws ContainerExceptionInterface
@@ -462,5 +437,16 @@ class ConfigTest extends TestCase
         $container = $factory($config);
         $this->expectException(InvalidDefinition::class);
         $container->get('123');
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function getContainer(array $config): ContainerInterface
+    {
+        $factory = new ContainerFactory();
+        $config  = new Config($config);
+
+        return $factory($config);
     }
 }

@@ -81,10 +81,11 @@ EOH;
         $dumper = new AutowiresConfigDumper();
 
         try {
-            $config = $dumper->createDependencyConfig(
-                $arguments->config,
-                $arguments->class
-            );
+            /** @var array<array-key, mixed> $config */
+            $config = $arguments->config;
+            /** @var string $class */
+            $class  = $arguments->class;
+            $config = $dumper->createDependencyConfig($config, $class);
         } catch (InvalidArgumentException $e) {
             $this->helper->writeErrorMessage(sprintf(
                 'Unable to create config for "%s": %s',
@@ -111,6 +112,7 @@ EOH;
             return $this->createHelpArgument();
         }
 
+        /** @var string|int|null $arg1 */
         $arg1 = array_shift($args);
 
         if (in_array($arg1, ['-h', '--help', 'help'], true)) {
@@ -171,6 +173,7 @@ EOH;
         ), true, $resource);
     }
 
+    /** @psalm-suppress LessSpecificReturnStatement */
     private function createArguments(string $configFile, array $config, string $class): stdClass
     {
         return (object) [
@@ -181,6 +184,7 @@ EOH;
         ];
     }
 
+    /** @psalm-suppress LessSpecificReturnStatement */
     private function createErrorArgument(string $message): stdClass
     {
         return (object) [
@@ -189,6 +193,7 @@ EOH;
         ];
     }
 
+    /** @psalm-suppress LessSpecificReturnStatement */
     private function createHelpArgument(): stdClass
     {
         return (object) [

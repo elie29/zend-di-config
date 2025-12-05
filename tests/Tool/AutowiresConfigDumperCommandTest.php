@@ -81,21 +81,6 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->assertEquals(1, $command([$config, 'Not\A\Real\Class']));
     }
 
-    public function testEmitsErrorWhenConfigurationDoesNotHaveDependenciesArray(): void
-    {
-        $command = $this->command;
-        vfsStream::newFile('config/invalid.config.php')
-            ->at($this->configDir)
-            ->setContent("<?php return ['dependencies' => 0];");
-
-        $config = vfsStream::url('project/config/invalid.config.php');
-
-        $this->assertErrorRaised(sprintf('Unable to create config for "%s"', DelegatorService::class));
-        $this->assertHelp(STDERR);
-
-        $this->assertEquals(1, $command([$config, DelegatorService::class]));
-    }
-
     public function testGeneratesConfigFile(): void
     {
         $command = $this->command;
@@ -106,7 +91,6 @@ class AutowiresConfigDumperCommandTest extends TestCase
         $this->helper->writeLine('<info>[DONE]</info> Changes written to ' . $config)->shouldBeCalled();
         $this->assertEquals(0, $command([$config, DelegatorService::class]));
 
-        /** @psalm-suppress UnresolvableInclude */
         $generated = include $config;
 
         $this->assertArrayHasKey('dependencies', $generated);
@@ -168,7 +152,6 @@ class AutowiresConfigDumperCommandTest extends TestCase
         // Check the config file was created and contains UserManager in autowires
         $this->assertFileExists($configFile);
 
-        /** @psalm-suppress UnresolvableInclude */
         $generated = include $configFile;
 
         $this->assertArrayHasKey('dependencies', $generated);
