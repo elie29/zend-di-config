@@ -2,11 +2,33 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## V10.0.1 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## V10.0.0 - 2025-12-05
 
 ### Added
 
-- Nothing
+- Nothing.
 
 ### Changed
 
