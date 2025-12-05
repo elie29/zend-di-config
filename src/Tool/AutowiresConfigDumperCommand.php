@@ -15,7 +15,6 @@ use function dirname;
 use function file_exists;
 use function file_put_contents;
 use function in_array;
-use function is_array;
 use function is_writable;
 use function sprintf;
 
@@ -128,14 +127,11 @@ EOH;
             case true:
                 $config = require $configFile;
 
-                if (! is_array($config)) {
-                    return $this->createErrorArgument(sprintf(
-                        'Configuration at path "%s" does not return an array.',
-                        $configFile
-                    ));
-                }
+                return $this->createErrorArgument(sprintf(
+                    'Configuration at path "%s" does not return an array.',
+                    $configFile
+                ));
 
-                break;
             case false:
                 // fall-through
             default:
