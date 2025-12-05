@@ -2,7 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V9.0.3 - 2025-12-05
+## V10.0.0 - 2025-12-05
+
+### Added
+
+- Nothing
+
+### Changed
+
+- [#61](https://github.com/elie29/zend-di-config/issues/61) Upgrade project to PHP 8.2 and PHPUnit 10 with updated dependency stack
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## V9.0.3 2025-12-05
 
 ### Added
 
