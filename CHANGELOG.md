@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V10.0.1 - TBD
+## V10.0.1 - 2025-12-12
 
 ### Added
 
@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- PHPUnit v11 and some typo in readme file.
 
 ### Deprecated
 
@@ -32,7 +32,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- [#61](https://github.com/elie29/zend-di-config/issues/61) Upgrade project to PHP 8.2 and PHPUnit 10 with updated dependency stack
+- [#61](https://github.com/elie29/zend-di-config/issues/61) Upgrade project to PHP 8.2 and PHPUnit 10 with updated
+  dependency stack
 
 ### Deprecated
 
@@ -342,7 +343,8 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Added
 
 - [#35](https://github.com/elie29/zend-di-config/issues/35) Allow to disable use autowire.
-- [#34](https://github.com/elie29/zend-di-config/issues/34) Add 7.3 support to travis. CS_CHECK needs zend-coding-standard to migrate to 2.0.0
+- [#34](https://github.com/elie29/zend-di-config/issues/34) Add 7.3 support to travis. CS_CHECK needs
+  zend-coding-standard to migrate to 2.0.0
 
 ### Changed
 
@@ -389,7 +391,8 @@ This is the complete change log. You can also read the [migration guide](docs/mi
 
 ### Added
 
-- [#25](https://github.com/elie29/zend-di-config/issues/25) Use Expressive Skeleton installer with PHP-DI results in error.
+- [#25](https://github.com/elie29/zend-di-config/issues/25) Use Expressive Skeleton installer with PHP-DI results in
+  error.
 
 ### Changed
 
@@ -588,11 +591,13 @@ This is the complete change log. You can also read the [migration guide](docs/mi
 
 ### Added
 
-- [#12](https://github.com/elie29/zend-di-config/issues/12) Expose a CLI command for adding an autowires entry to configuration.
+- [#12](https://github.com/elie29/zend-di-config/issues/12) Expose a CLI command for adding an autowires entry to
+  configuration.
 
 ### Changed
 
-- [#11](https://github.com/elie29/zend-di-config/issues/11) autowires configuration should accept a straight array and not an associative key pair value. Any aliases needed should be created in the aliases configuration.
+- [#11](https://github.com/elie29/zend-di-config/issues/11) autowires configuration should accept a straight array and
+  not an associative key pair value. Any aliases needed should be created in the aliases configuration.
 
 ### Deprecated
 
@@ -614,7 +619,8 @@ This is the complete change log. You can also read the [migration guide](docs/mi
 
 ### Changed
 
-- [#9](https://github.com/elie29/zend-di-config/issues/9) Config class should use config constant instead of using config key.
+- [#9](https://github.com/elie29/zend-di-config/issues/9) Config class should use config constant instead of using
+  config key.
 
 ### Deprecated
 
