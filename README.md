@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/elie29/zend-di-config/actions/workflows/php-build.yml/badge.svg)](https://github.com/elie29/zend-di-config/)
 [![Coverage Status](https://coveralls.io/repos/github/elie29/zend-di-config/badge.svg)](https://coveralls.io/github/elie29/zend-di-config)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/elie29/zend-phpdi-config.svg)](https://packagist.org/packages/elie29/zend-phpdi-config)
-<!-- Add static analysis badge if available -->
+[![PHP Version](https://img.shields.io/packagist/php-v/elie29/zend-phpdi-config.svg)](https://packagist.org/packages/elie29/zend-phpdi-config)
 
 ---
 
@@ -14,18 +14,22 @@ composer require elie29/zend-phpdi-config
 ```
 
 ```php
-// config.php
+<?php
+
+declare(strict_types=1);
+
 use Elie\PHPDI\Config\Config;
 use Elie\PHPDI\Config\ContainerFactory;
 
 $container = (new ContainerFactory())(
-    new Config(require __DIR__ . '/config.php')
+    new Config(require __DIR__ . '/config/config.php')
 );
 ```
 
 ---
 
 ## ✨ Features
+
 - 🧩 PSR-11 compatible container configuration
 - ⚡ Autowiring support
 - 🔗 Service manager compatibility (Laminas/Mezzio)
@@ -37,20 +41,25 @@ $container = (new ContainerFactory())(
 
 ## 📖 Introduction
 
-[zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](http://php-di.org) container using service manager configuration.
-It can be used with [Laminas](https://getlaminas.org/) and [Mezzio](https://docs.mezzio.dev/) starting from v6.0.0
+[zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](https://php-di.org) container using service manager configuration.
 
-This library uses autowiring technique, cache compilation and cache definitions as defined in [PHP-DI](http://php-di.org).
+**Requirements:** PHP 8.2 or higher
+
+It can be used with [Laminas](https://getlaminas.org/) and [Mezzio](https://docs.mezzio.dev/) starting from v10.0.0
+
+This library uses autowiring technique, cache compilation and cache definitions as defined in [PHP-DI](https://php-di.org).
 
 ## 🛠️ Configuration
 
 [Service Manager Configuration](https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/)
 
-To get a configured [PSR-11](http://www.php-fig.org/psr/psr-11/)
+To get a configured [PSR-11](https://www.php-fig.org/psr/psr-11/)
 PHP-DI container, do the following:
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 use Elie\PHPDI\Config\Config;
 use Elie\PHPDI\Config\ContainerFactory;
@@ -148,14 +157,14 @@ A: Check that all dependencies are correctly defined and that your factories do 
 
 ---
 
-## Using with Expressive
+## Using with Mezzio (formerly Expressive)
 
 Replace contents of `config/container.php` with the following:
 
 ```php
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Elie\PHPDI\Config\Config;
 use Elie\PHPDI\Config\ContainerFactory;
@@ -177,6 +186,8 @@ return call_user_func(function () {
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 class ConfigProvider
 {
@@ -208,6 +219,10 @@ class ConfigProvider
 Where UserManager depends on Mailer as follow:
 
 ```php
+<?php
+
+declare(strict_types=1);
+
 class UserManager
 {
     private $mailer;
