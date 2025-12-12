@@ -9,6 +9,9 @@ use Psr\Container\ContainerInterface;
 
 class InvalidServiceFactory
 {
+    /**
+     * @throws Exception
+     */
     public function __invoke(ContainerInterface $container)
     {
         throw new Exception('Factory error: This factory always fails.');

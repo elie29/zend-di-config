@@ -6,7 +6,6 @@ namespace Elie\PHPDI\Config\Tool;
 
 use Laminas\Stdlib\ConsoleHelper;
 use stdClass;
-
 use function array_shift;
 use function class_exists;
 use function count;
@@ -16,15 +15,14 @@ use function file_put_contents;
 use function in_array;
 use function is_writable;
 use function sprintf;
-
 use const STDERR;
 use const STDOUT;
 
 class AutowiresConfigDumperCommand
 {
-    private const COMMAND_DUMP  = 'dump';
+    private const COMMAND_DUMP = 'dump';
     private const COMMAND_ERROR = 'error';
-    private const COMMAND_HELP  = 'help';
+    private const COMMAND_HELP = 'help';
 
     private const HELP_TEMPLATE = <<<EOH
 <info>Usage:</info>
@@ -42,7 +40,7 @@ class AutowiresConfigDumperCommand
   <info><className></info>             Name of the class to reflect and to be added
                           in as a new entry in the autowires configuration.
 
-Reads the provided configuration file (creating it if it does not exist),
+Reads the provided configuration file (creating it if it does not exist) 
 and adds the provided class name in the autowires array, writing the changes
 back to the file. The class name is added once.
 EOH;
@@ -81,7 +79,7 @@ EOH;
         /** @var array<array-key, mixed> $config */
         $config = $arguments->config;
         /** @var string $class */
-        $class  = $arguments->class;
+        $class = $arguments->class;
         $config = $dumper->createDependencyConfig($config, $class);
 
         file_put_contents($arguments->configFile, $dumper->dumpConfigFile($config));
@@ -96,7 +94,7 @@ EOH;
 
     private function parseArgs(array $args): stdClass
     {
-        if (! count($args)) {
+        if (!count($args)) {
             return $this->createHelpArgument();
         }
 
@@ -107,14 +105,14 @@ EOH;
             return $this->createHelpArgument();
         }
 
-        if (! count($args)) {
+        if (!count($args)) {
             return $this->createErrorArgument('Missing class name');
         }
 
-        $configFile = (string) $arg1;
+        $configFile = (string)$arg1;
         switch (file_exists($configFile)) {
             case true:
-                $config = require $configFile;
+                require $configFile;
 
                 return $this->createErrorArgument(sprintf(
                     'Configuration at path "%s" does not return an array.',
@@ -124,7 +122,7 @@ EOH;
             case false:
                 // fall-through
             default:
-                if (! is_writable(dirname($configFile))) {
+                if (!is_writable(dirname($configFile))) {
                     return $this->createErrorArgument(sprintf(
                         'Cannot create configuration at path "%s"; not writable.',
                         $configFile
@@ -135,9 +133,9 @@ EOH;
                 break;
         }
 
-        $class = (string) array_shift($args);
+        $class = (string)array_shift($args);
 
-        if (! class_exists($class)) {
+        if (!class_exists($class)) {
             return $this->createErrorArgument(sprintf(
                 'Class "%s" does not exist or could not be autoloaded.',
                 $class
@@ -161,18 +159,18 @@ EOH;
     /** @psalm-suppress LessSpecificReturnStatement */
     private function createArguments(string $configFile, array $config, string $class): stdClass
     {
-        return (object) [
-            'command'    => self::COMMAND_DUMP,
+        return (object)[
+            'command' => self::COMMAND_DUMP,
             'configFile' => $configFile,
-            'config'     => $config,
-            'class'      => $class,
+            'config' => $config,
+            'class' => $class,
         ];
     }
 
     /** @psalm-suppress LessSpecificReturnStatement */
     private function createErrorArgument(string $message): stdClass
     {
-        return (object) [
+        return (object)[
             'command' => self::COMMAND_ERROR,
             'message' => $message,
         ];
@@ -181,7 +179,7 @@ EOH;
     /** @psalm-suppress LessSpecificReturnStatement */
     private function createHelpArgument(): stdClass
     {
-        return (object) [
+        return (object)[
             'command' => self::COMMAND_HELP,
         ];
     }

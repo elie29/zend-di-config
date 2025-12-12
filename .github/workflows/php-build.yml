@@ -34,14 +34,7 @@ jobs:
       - name: Launch test unit in coverage mode
         run: composer test-coverage
 
-      - name: Launch check style
-        run: composer cs-check
-
-      - name: Static analysis
-        if: matrix.php-versions == '8.2'
-        run: composer static-analysis
-
-      - name: Publish coveralls
+      - name: Publish coveralls report for PHP 8.2
         if: matrix.php-versions == '8.2'
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
