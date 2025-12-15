@@ -15,22 +15,14 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use function sprintf;
-use const STDERR;
-use const STDOUT;
 
 class AutowiresConfigDumperCommandTest extends TestCase
 {
-    use ProphecyTrait;
-
     private vfsStreamDirectory $configDir;
 
-    private ObjectProphecy|ConsoleHelper $helper;
+    private ConsoleHelper $helper;
 
     private AutowiresConfigDumperCommand $command;
 
@@ -85,7 +77,10 @@ class AutowiresConfigDumperCommandTest extends TestCase
             ->at($this->configDir);
         $config = vfsStream::url('project/config/test.config.php');
 
-        $this->helper->writeLine('<info>[DONE]</info> Changes written to ' . $config)->shouldBeCalled();
+        $this->helper->expects($this->once())
+            ->method('writeLine')
+            ->with('<info>[DONE]</info> Changes written to ' . $config);
+        
         $this->assertEquals(0, $command([$config, DelegatorService::class]));
 
         $generated = include $config;
@@ -169,10 +164,10 @@ class AutowiresConfigDumperCommandTest extends TestCase
     protected function setUp(): void
     {
         $this->configDir = vfsStream::setup('project');
-        $this->helper = $this->prophesize(ConsoleHelper::class);
+        $this->helper = $this->createMock(ConsoleHelper::class);
         $this->command = new AutowiresConfigDumperCommand(
             AutowiresConfigDumperCommand::class,
-            $this->helper->reveal()
+            $this->helper
         );
     }
 
@@ -181,17 +176,19 @@ class AutowiresConfigDumperCommandTest extends TestCase
      */
     protected function assertHelp(mixed $stream = STDOUT): void
     {
-        $this->helper->writeLine(
-            Argument::containingString('<info>Usage:</info>'),
-            true,
-            $stream
-        )->shouldBeCalled();
+        $this->helper->expects($this->once())
+            ->method('writeLine')
+            ->with(
+                $this->stringContains('<info>Usage:</info>'),
+                true,
+                $stream
+            );
     }
 
     protected function assertErrorRaised(string $message): void
     {
-        $this->helper->writeErrorMessage(
-            Argument::containingString($message)
-        )->shouldBeCalled();
+        $this->helper->expects($this->once())
+            ->method('writeErrorMessage')
+            ->with($this->stringContains($message));
     }
 }

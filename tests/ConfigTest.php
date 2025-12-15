@@ -28,8 +28,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use RuntimeException;
 
-use function sys_get_temp_dir;
-
 class ConfigTest extends TestCase
 {
     public function testConfigurationEnableCache(): void
@@ -65,10 +63,10 @@ class ConfigTest extends TestCase
 
         $config = $container->get(ConfigInterface::CONFIG);
 
-        self::assertNotEmpty($config);
-        self::assertInstanceOf(DateTime::class, $config['a']);
-        self::assertSame([1, 2, 3], $config['b']);
-        self::assertSame('d', $config['c']);
+        $this->assertNotEmpty($config);
+        $this->assertInstanceOf(DateTime::class, $config['a']);
+        $this->assertSame([1, 2, 3], $config['b']);
+        $this->assertSame('d', $config['c']);
     }
 
     /**
@@ -78,15 +76,15 @@ class ConfigTest extends TestCase
      */
     public function testConfigurationEnableCompilation(): void
     {
-        $url       = sys_get_temp_dir();
-        $config    = [ConfigInterface::DI_CACHE_PATH => $url, ConfigInterface::ENABLE_CACHE_DEFINITION => false];
+        $url = sys_get_temp_dir();
+        $config = [ConfigInterface::DI_CACHE_PATH => $url, ConfigInterface::ENABLE_CACHE_DEFINITION => false];
         $container = $this->getContainer($config);
 
         $config = $container->get(ConfigInterface::CONFIG);
 
-        self::assertNotEmpty($config);
-        self::assertSame($url, $config[ConfigInterface::DI_CACHE_PATH]);
-        self::assertFalse($config[ConfigInterface::ENABLE_CACHE_DEFINITION]);
+        $this->assertNotEmpty($config);
+        $this->assertSame($url, $config[ConfigInterface::DI_CACHE_PATH]);
+        $this->assertFalse($config[ConfigInterface::ENABLE_CACHE_DEFINITION]);
     }
 
     /**
@@ -96,14 +94,14 @@ class ConfigTest extends TestCase
      */
     public function testConfigurationWriteProxiesToFile(): void
     {
-        $url       = sys_get_temp_dir();
-        $config    = [ConfigInterface::DI_PROXY_PATH => $url];
+        $url = sys_get_temp_dir();
+        $config = [ConfigInterface::DI_PROXY_PATH => $url];
         $container = $this->getContainer($config);
 
         $config = $container->get(ConfigInterface::CONFIG);
 
-        self::assertNotEmpty($config);
-        self::assertSame($url, $config[ConfigInterface::DI_PROXY_PATH]);
+        $this->assertNotEmpty($config);
+        $this->assertSame($url, $config[ConfigInterface::DI_PROXY_PATH]);
     }
 
     /**
@@ -117,8 +115,8 @@ class ConfigTest extends TestCase
             'dependencies' => [
                 'services' => [
                     Service::class => Service::class, // service -> service same key name
-                    'service-1'    => Service::class, // service -> service name
-                    'service-2'    => new Service(), // service -> object
+                    'service-1' => Service::class, // service -> service name
+                    'service-2' => new Service(), // service -> object
                     // service -> callable
                     'service-3' => function (): Service {
                         return new Service();
@@ -135,13 +133,13 @@ class ConfigTest extends TestCase
 
         $container = $this->getContainer($config);
 
-        self::assertNotEmpty($container->getKnownEntryNames());
-        self::assertInstanceOf(Service::class, $container->get(Service::class));
-        self::assertInstanceOf(Service::class, $container->get('service-1'));
-        self::assertInstanceOf(Service::class, $container->get('service-2'));
-        self::assertInstanceOf(Service::class, $container->get('service-3'));
-        self::assertInstanceOf(Service::class, $container->get('service-4'));
-        self::assertInstanceOf(Service::class, $container->get('service-5'));
+        $this->assertNotEmpty($container->getKnownEntryNames());
+        $this->assertInstanceOf(Service::class, $container->get(Service::class));
+        $this->assertInstanceOf(Service::class, $container->get('service-1'));
+        $this->assertInstanceOf(Service::class, $container->get('service-2'));
+        $this->assertInstanceOf(Service::class, $container->get('service-3'));
+        $this->assertInstanceOf(Service::class, $container->get('service-4'));
+        $this->assertInstanceOf(Service::class, $container->get('service-5'));
     }
 
     /**
@@ -155,7 +153,7 @@ class ConfigTest extends TestCase
             'dependencies' => [
                 'invokables' => [
                     Service::class => Service::class,
-                    'service-1'    => Service::class,
+                    'service-1' => Service::class,
                     Service::class,
                 ],
             ],
@@ -163,9 +161,9 @@ class ConfigTest extends TestCase
 
         $container = $this->getContainer($config);
 
-        self::assertNotEmpty($container->getKnownEntryNames());
-        self::assertInstanceOf(Service::class, $container->get(Service::class));
-        self::assertInstanceOf(Service::class, $container->get('service-1'));
+        $this->assertNotEmpty($container->getKnownEntryNames());
+        $this->assertInstanceOf(Service::class, $container->get(Service::class));
+        $this->assertInstanceOf(Service::class, $container->get('service-1'));
     }
 
     /**
@@ -180,7 +178,7 @@ class ConfigTest extends TestCase
                 'autowires' => [
                     UserManager::class, // array of service
                 ],
-                'aliases'   => [
+                'aliases' => [
                     'user-manager1' => UserManager::class,
                     'user-manager2' => UserManager::class,
                 ],
@@ -189,10 +187,10 @@ class ConfigTest extends TestCase
 
         $container = $this->getContainer($config);
 
-        self::assertNotEmpty($container->getKnownEntryNames());
-        self::assertInstanceOf(UserManager::class, $container->get(UserManager::class));
-        self::assertInstanceOf(UserManager::class, $container->get('user-manager1'));
-        self::assertSame($container->get('user-manager1'), $container->get('user-manager2'));
+        $this->assertNotEmpty($container->getKnownEntryNames());
+        $this->assertInstanceOf(UserManager::class, $container->get(UserManager::class));
+        $this->assertInstanceOf(UserManager::class, $container->get('user-manager1'));
+        $this->assertSame($container->get('user-manager1'), $container->get('user-manager2'));
     }
 
     /**
@@ -204,28 +202,28 @@ class ConfigTest extends TestCase
     {
         $config = [
             'dependencies' => [
-                'services'  => [
+                'services' => [
                     'service-1' => ServiceFactory::class,
                     'service-2' => new ServiceFactory(),
                 ],
                 'factories' => [
                     ServiceInterface::class => ServiceFactory::class,
-                    'factory-1'             => ServiceFactory::class,
-                    'factory-2'             => 'service-1', // factory -> factory instance
-                    'factory-3'             => 'service-2', // factory -> factory instance
+                    'factory-1' => ServiceFactory::class,
+                    'factory-2' => 'service-1', // factory -> factory instance
+                    'factory-3' => 'service-2', // factory -> factory instance
                 ],
             ],
         ];
 
         $container = $this->getContainer($config);
 
-        self::assertNotEmpty($container->getKnownEntryNames());
-        self::assertInstanceOf(ServiceFactory::class, $container->get('service-1'));
-        self::assertInstanceOf(ServiceFactory::class, $container->get('service-2'));
-        self::assertInstanceOf(Service::class, $container->get(ServiceInterface::class));
-        self::assertInstanceOf(Service::class, $container->get('factory-1'));
-        self::assertInstanceOf(Service::class, $container->get('factory-2'));
-        self::assertInstanceOf(Service::class, $container->get('factory-3'));
+        $this->assertNotEmpty($container->getKnownEntryNames());
+        $this->assertInstanceOf(ServiceFactory::class, $container->get('service-1'));
+        $this->assertInstanceOf(ServiceFactory::class, $container->get('service-2'));
+        $this->assertInstanceOf(Service::class, $container->get(ServiceInterface::class));
+        $this->assertInstanceOf(Service::class, $container->get('factory-1'));
+        $this->assertInstanceOf(Service::class, $container->get('factory-2'));
+        $this->assertInstanceOf(Service::class, $container->get('factory-3'));
     }
 
     /**
@@ -237,16 +235,16 @@ class ConfigTest extends TestCase
     {
         $config = [
             'dependencies' => [
-                'services'   => [
+                'services' => [
                     'service-1' => Service::class,
                 ],
-                'factories'  => [
+                'factories' => [
                     'factory-1' => ServiceFactory::class,
                 ],
                 'invokables' => [
                     'invokable-1' => Service::class,
                 ],
-                'aliases'    => [
+                'aliases' => [
                     'alias-1' => 'service-1', // alias -> service
                     'alias-2' => 'factory-1', // alias -> factory
                     'alias-3' => 'invokable-1', // alias -> invokable
@@ -257,11 +255,11 @@ class ConfigTest extends TestCase
 
         $container = $this->getContainer($config);
 
-        self::assertNotEmpty($container->getKnownEntryNames());
-        self::assertInstanceOf(Service::class, $container->get('alias-1'));
-        self::assertInstanceOf(Service::class, $container->get('alias-2'));
-        self::assertInstanceOf(Service::class, $container->get('alias-3'));
-        self::assertInstanceOf(Service::class, $container->get('alias-4'));
+        $this->assertNotEmpty($container->getKnownEntryNames());
+        $this->assertInstanceOf(Service::class, $container->get('alias-1'));
+        $this->assertInstanceOf(Service::class, $container->get('alias-2'));
+        $this->assertInstanceOf(Service::class, $container->get('alias-3'));
+        $this->assertInstanceOf(Service::class, $container->get('alias-4'));
     }
 
     /**
@@ -273,7 +271,7 @@ class ConfigTest extends TestCase
     {
         $config = [
             'dependencies' => [
-                'services'   => [
+                'services' => [
                     'service-1' => Service::class,
                 ],
                 'delegators' => [
@@ -286,9 +284,9 @@ class ConfigTest extends TestCase
 
         $container = $this->getContainer($config);
 
-        self::assertNotEmpty($container->getKnownEntryNames());
-        self::assertInstanceOf(DelegatorService::class, $container->get('service-1'));
-        self::assertInstanceOf(ServiceInterface::class, $container->get('service-1')->service);
+        $this->assertNotEmpty($container->getKnownEntryNames());
+        $this->assertInstanceOf(DelegatorService::class, $container->get('service-1'));
+        $this->assertInstanceOf(ServiceInterface::class, $container->get('service-1')->service);
     }
 
     /**
@@ -300,7 +298,7 @@ class ConfigTest extends TestCase
     {
         $config = [
             'dependencies' => [
-                'factories'  => [
+                'factories' => [
                     'key-1' => ServiceFactory::class,
                 ],
                 'delegators' => [
@@ -316,9 +314,9 @@ class ConfigTest extends TestCase
 
         $expected = [DelegatorServiceFactory1::class, DelegatorServiceFactory2::class];
 
-        self::assertNotEmpty($container->getKnownEntryNames());
-        self::assertInstanceOf(ServiceInterface::class, $container->get('key-1'));
-        self::assertEquals($expected, $container->get('key-1')->getInjected());
+        $this->assertNotEmpty($container->getKnownEntryNames());
+        $this->assertInstanceOf(ServiceInterface::class, $container->get('key-1'));
+        $this->assertEquals($expected, $container->get('key-1')->getInjected());
     }
 
     /**
@@ -350,7 +348,7 @@ class ConfigTest extends TestCase
     {
         $config = [
             'dependencies' => [
-                'services'   => [
+                'services' => [
                     'service-1' => Service::class,
                 ],
                 'delegators' => [
@@ -377,8 +375,8 @@ class ConfigTest extends TestCase
      */
     public function testServiceFactoryThrowsException(): void
     {
-        $factory   = new ContainerFactory();
-        $config    = new Config([
+        $factory = new ContainerFactory();
+        $config = new Config([
             'dependencies' => [
                 'factories' => [
                     'bad-service' => function () {
@@ -401,10 +399,10 @@ class ConfigTest extends TestCase
      */
     public function testDelegatorNotCallable(): void
     {
-        $factory   = new ContainerFactory();
-        $config    = new Config([
+        $factory = new ContainerFactory();
+        $config = new Config([
             'dependencies' => [
-                'services'   => [
+                'services' => [
                     'service-1' => Service::class,
                 ],
                 'delegators' => [
@@ -428,8 +426,8 @@ class ConfigTest extends TestCase
      */
     public function testAutowiresWithInvalidValue(): void
     {
-        $factory   = new ContainerFactory();
-        $config    = new Config([
+        $factory = new ContainerFactory();
+        $config = new Config([
             'dependencies' => [
                 'autowires' => ['123'],
             ],
@@ -445,7 +443,7 @@ class ConfigTest extends TestCase
     private function getContainer(array $config): ContainerInterface
     {
         $factory = new ContainerFactory();
-        $config  = new Config($config);
+        $config = new Config($config);
 
         return $factory($config);
     }
