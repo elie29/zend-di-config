@@ -41,13 +41,15 @@ $container = (new ContainerFactory())(
 
 ## 📖 Introduction
 
-[zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11 compatible [PHP-DI](https://php-di.org) container using service manager configuration.
+[zend-phpdi-config](https://packagist.org/packages/elie29/zend-phpdi-config) acts as a bridge to configure a PSR-11
+compatible [PHP-DI](https://php-di.org) container using service manager configuration.
 
 **Requirements:** PHP 8.2 or higher
 
 It can be used with [Laminas](https://getlaminas.org/) and [Mezzio](https://docs.mezzio.dev/) starting from v10.0.0
 
-This library uses autowiring technique, cache compilation and cache definitions as defined in [PHP-DI](https://php-di.org).
+This library uses autowiring technique, cache compilation and cache definitions as defined
+in [PHP-DI](https://php-di.org).
 
 ## 🛠️ Configuration
 
@@ -81,7 +83,7 @@ $container = $factory(
         // Enable compilation
         Config::DI_CACHE_PATH => __DIR__, // Folder path
 
-        // Write proxies to file : cf. https://php-di.org/doc/lazy-injection.html
+        // Write proxies to file: cf. https://php-di.org/doc/lazy-injection.html
         Config::DI_PROXY_PATH => __DIR__, // Folder path
 
         // Disable autowire (enabled by default)
@@ -93,28 +95,40 @@ $container = $factory(
 );
 ```
 
-The `dependencies` sub associative array can contain the following keys:
+### Configuration Keys
 
-- `services`: an associative array that maps a key to a specific service instance or service name.
-- `invokables`: an associative array that map a key to a constructor-less
-  service; i.e., for services that do not require arguments to the constructor.
-  The key and service name usually are the same; if they are not, the key is
-  treated as an alias. It could also be an array of services.
-- `autowires`: an array of service **with or without a constructor**;
-  PHP-DI offers an autowire technique that will scan the code and see
-  what are the parameters needed in the constructors.
-  Any aliases needed should be created in the aliases configuration.
-- `factories`: an associative array that maps a service name to a factory class
-  name, or any callable. Factory classes must be instantiable without arguments,
-  and callable once instantiated (i.e., implement the `__invoke()` method).
-- `aliases`: an associative array that maps an alias to a service name (or
-  another alias).
-- `delegators`: an associative array that maps service names to lists of
-  delegator factory keys, see the
-  [Expressive delegators documentation](https://docs.laminas.dev/laminas-servicemanager/delegators/)
-  for more details.
+The `dependencies` configuration array supports the following keys:
 
-> **N.B.:** The whole configuration -- unless `dependencies` -- is merged in a `config` key within the `$container`:
+- **`services`**: Maps a service name to a specific service instance, class name, or callable.
+  - Values can be object instances, class names, or callables
+  - Used for registering pre-instantiated services or simple service definitions
+
+- **`invokables`**: Maps service names to classes with no constructor dependencies.
+  - Can be an associative array (alias => class name) or indexed array (class names)
+  - When alias differs from class name, the alias is created automatically
+  - Classes must have no required constructor parameters
+
+- **`autowires`**: Array of fully qualified class names to be autowired by PHP-DI.
+  - PHP-DI automatically resolves constructor dependencies through type-hinting
+  - Works with or without constructor parameters
+  - Create aliases separately in the `aliases` configuration if needed
+
+- **`factories`**: Maps service names to factory classes or callables.
+  - Factory classes must implement `__invoke(ContainerInterface $container)`
+  - Can reference other registered factories by name
+  - Factories must return the actual service instance (object, array, scalar, etc.), not service names
+  - Used when service instantiation requires custom or dynamic logic
+
+- **`aliases`**: Maps alias names to service names or other aliases.
+  - Allows multiple names to resolve to the same service instance
+  - Can chain aliases (alias → alias → service)
+
+- **`delegators`**: Maps service names to arrays of delegator factory classes.
+  - Decorates or wraps services with additional functionality
+  - Delegators are applied in the order specified
+  - See [Laminas delegators documentation](https://docs.laminas.dev/laminas-servicemanager/delegators/) for details
+
+> **N.B.:** All configuration except `dependencies` is merged into a `config` key within the `$container`:
 >
 > ```php
 > $config = $container->get('config');
@@ -138,7 +152,7 @@ You can also add this as a Composer script:
 
 ```json
 "scripts": {
-    "add-autowire": "add-autowires-entry config.php \"My\\Service\\Class\""
+"add-autowire": "add-autowires-entry config.php \"My\\Service\\Class\""
 }
 ```
 
@@ -216,7 +230,7 @@ class ConfigProvider
 }
 ```
 
-Where UserManager depends on Mailer as follow:
+Where UserManager depends on Mailer as follows:
 
 ```php
 <?php
@@ -249,10 +263,11 @@ class Mailer
 
 ## Switching back to another container
 
-To switch back to another container is very easy:
+To switch back to another container is straightforward:
 
 1. Create your factories with `__invoke` function
-2. Replace `autowires` key in ConfigProvider by `factories` key, then for each class name attach its correspondent factory.
+2. Replace `autowires` key in ConfigProvider by `factories` key, then for each class name attach its correspondent
+   factory.
 
 ## PSR 11 and Interop\Container\ContainerInterface
 
@@ -261,7 +276,8 @@ V4.x supports as well Interop\Container\ContainerInterface
 ## Migration guides
 
 - [Migration from 3.x to 4.0](docs/migration-4.0.md)
-- Migration from 4.x to 5.0: container-interop/container-interop was dropped in favor of [PSR-11](https://packagist.org/packages/psr/container).
+- Migration from 4.x to 5.0: container-interop/container-interop was dropped in favor
+  of [PSR-11](https://packagist.org/packages/psr/container).
 
 ---
 
