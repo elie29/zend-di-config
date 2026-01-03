@@ -107,6 +107,7 @@ The `dependencies` configuration array supports the following keys:
   - Can be an associative array (alias => class name) or indexed array (class names)
   - When alias differs from class name, the alias is created automatically
   - Classes must have no required constructor parameters
+  - See [InvokablesTest.php](tests/InvokablesTest.php) for comprehensive examples
 
 - **`autowires`**: Array of fully qualified class names to be autowired by PHP-DI.
   - PHP-DI automatically resolves constructor dependencies through type-hinting
