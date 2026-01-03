@@ -46,7 +46,7 @@ class ServicesTest extends TestCase
     public function testServiceAsPreInstantiatedObject(): void
     {
         $serviceInstance = new Service();
-        $initialTime = $serviceInstance->getTime();
+        $unique = $serviceInstance->getUnique();
 
         $container = $this->getContainer([
             'dependencies' => [
@@ -62,7 +62,7 @@ class ServicesTest extends TestCase
         // Should return the exact same instance
         $this->assertSame($serviceInstance, $instance1);
         $this->assertSame($instance1, $instance2);
-        $this->assertSame($initialTime, $instance1->getTime());
+        $this->assertSame($unique, $instance1->getUnique());
     }
 
     /**
@@ -213,6 +213,45 @@ class ServicesTest extends TestCase
 
         $this->assertInstanceOf(ServiceFactory::class, $factoryInstance);
         // The factory itself is returned, not what it would create
+    }
+
+    /**
+     * Test prototype pattern: Factory service to get new instances on each call.
+     * PHP-DI removed the prototype scope, so use this pattern for non-shared instances.
+     *
+     * Register a factory as a service, then manually invoke it to get fresh instances.
+     * This is the recommended way to get new instances on each call since PHP-DI 7.x
+     * removed the SCOPE_PROTOTYPE feature.
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws Exception
+     */
+    public function testPrototypePatternUsingFactoryService(): void
+    {
+        $container = $this->getContainer([
+            'dependencies' => [
+                'services' => [
+                    'service.factory' => new ServiceFactory(),
+                ],
+            ],
+        ]);
+
+        // Get the factory instance (shared)
+        $factory = $container->get('service.factory');
+
+        // Each invocation creates a NEW instance (prototype behavior)
+        $instance1 = $factory($container);
+        $instance2 = $factory($container);
+
+        $this->assertInstanceOf(Service::class, $instance1);
+        $this->assertInstanceOf(Service::class, $instance2);
+        $this->assertNotSame($instance1, $instance2);
+
+        // This pattern is useful when:
+        // - You need a new instance each time
+        // - The service has a mutable state
+        // - You want to avoid shared instance side effects
     }
 
     /**

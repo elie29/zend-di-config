@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ElieTest\PHPDI\Config;
 
 use DateTime;
+use DI\Container;
 use DI\ContainerBuilder;
 use DI\Definition\Exception\InvalidDefinition;
 use Elie\PHPDI\Config\Config;
@@ -439,8 +440,9 @@ class ConfigTest extends TestCase
 
     /**
      * @throws Exception
+     * @noinspection PhpIncompatibleReturnTypeInspection
      */
-    private function getContainer(array $config): ContainerInterface
+    private function getContainer(array $config): Container
     {
         $factory = new ContainerFactory();
         $config = new Config($config);

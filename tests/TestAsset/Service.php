@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace ElieTest\PHPDI\Config\TestAsset;
 
-use function microtime;
+use Random\RandomException;
 
 class Service implements ServiceInterface
 {
-    protected float $time;
+    protected string $uniqid;
 
     protected array $injected = [];
 
+    /**
+     * @throws RandomException
+     */
     public function __construct()
     {
-        $this->time = microtime(true);
+        $this->uniqid = uniqid(bin2hex(random_bytes(8)), true);
     }
 
-    public function getTime(): string
+    public function getUnique(): string
     {
-        return '' . $this->time;
+        return $this->uniqid;
     }
 
     public function inject(string $name): void

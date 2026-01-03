@@ -6,7 +6,7 @@ namespace ElieTest\PHPDI\Config\TestAsset;
 
 interface ServiceInterface
 {
-    public function getTime(): string;
+    public function getUnique(): string;
 
     public function inject(string $name): void;
 

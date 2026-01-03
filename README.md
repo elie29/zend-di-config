@@ -120,10 +120,12 @@ The `dependencies` configuration array supports the following keys:
   - Can reference other registered factories by name
   - Factories must return the actual service instance (object, array, scalar, etc.), not service names
   - Used when service instantiation requires custom or dynamic logic
+  - See [FactoriesTest.php](tests/FactoriesTest.php) for comprehensive examples
 
 - **`aliases`**: Maps alias names to service names or other aliases.
   - Allows multiple names to resolve to the same service instance
   - Can chain aliases (alias → alias → service)
+  - Only **`invokables`** create aliases automatically
 
 - **`delegators`**: Maps service names to arrays of delegator factory classes.
   - Decorates or wraps services with additional functionality
