@@ -1,0 +1,13 @@
+grumphp:
+  process_timeout: 300
+  stop_on_failure: false
+  hide_circumvention_tip: true
+
+  hooks_dir: ~
+  hooks_preset: local
+
+  tasks:
+    composer_script:
+      script: test
+      # Only run tests if PHP files changed
+      triggered_by: [ php ]

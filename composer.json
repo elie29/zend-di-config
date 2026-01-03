@@ -32,7 +32,8 @@
   },
   "require-dev": {
     "mikey179/vfsstream": "^1.6",
-    "phpunit/phpunit": "^11.0"
+    "phpunit/phpunit": "^11.0",
+    "phpro/grumphp": "^2.0"
   },
   "autoload": {
     "psr-4": {
@@ -46,7 +47,9 @@
   },
   "config": {
     "sort-packages": true,
-    "allow-plugins": true,
+    "allow-plugins": {
+      "phpro/grumphp": true
+    },
     "optimize-autoloader": true,
     "platform": {
       "php": "8.2"

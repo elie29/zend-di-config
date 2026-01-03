@@ -160,6 +160,41 @@ You can also add this as a Composer script:
 
 ---
 
+## 🧪 Development & Testing
+
+### Running Tests
+
+```bash
+# Run tests (no coverage)
+composer test
+
+# Run with coverage (requires Xdebug)
+composer test-coverage
+
+# Run coverage + serve HTML report
+composer cover  # Opens localhost:5001
+```
+
+### Git Hooks with GrumPHP
+
+This project uses [GrumPHP](https://github.com/phpro/grumphp) to automatically run tests before each commit.
+
+After running `composer install`, GrumPHP will:
+
+- Install git hooks automatically
+- Run `composer test` before every commit
+- Block commits if tests fail
+
+**Bypass the hook** (not recommended):
+
+```bash
+git commit --no-verify -m "Your message"
+```
+
+**Configure GrumPHP**: Edit [grumphp.yml](grumphp.yml) to customize tasks and behavior.
+
+---
+
 ## 🐞 Troubleshooting / FAQ
 
 **Q: My service is not autowired.**
