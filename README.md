@@ -102,6 +102,7 @@ The `dependencies` configuration array supports the following keys:
 - **`services`**: Maps a service name to a specific service instance, class name, or callable.
   - Values can be object instances, class names, or callables
   - Used for registering pre-instantiated services or simple service definitions
+  - See [ServicesTest.php](tests/ServicesTest.php) for comprehensive examples
 
 - **`invokables`**: Maps service names to classes with no constructor dependencies.
   - Can be an associative array (alias => class name) or indexed array (class names)

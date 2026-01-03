@@ -37,10 +37,16 @@ Delegators wrap services via closure-based factories ([Config.php#L149-165](../s
 ### Performance Considerations
 
 - **Use autowires freely** - with compilation enabled, autowired services perform identically to factories/invokables
+- **Explicit registration recommended**: Even though unregistered classes can be autowired with no performance penalty:
+  - Register application services in config for clarity and documentation
+  - Makes service inventory visible in configuration files
+  - Easier to customize, mock, or replace implementations
+  - IDE-friendly for finding service definitions
 - **Choose by semantics, not performance**: 
   - `autowires` for classes with typed constructor dependencies
   - `invokables` for classes with no/optional dependencies
   - `factories` for custom instantiation logic
+  - `services` for pre-instantiated objects or scalar values
 - Enable compilation (`DI_CACHE_PATH`) in production for optimal performance
 
 ## Testing Patterns
