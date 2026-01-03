@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V10.0.2 - TBD
+## V10.0.2 - 2026-01-03
 
 ### Added
 
@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Changed
 
 - [#63](https://github.com/elie29/zend-di-config/issues/63) Update tests to use only PHPUnit
+- Tests and documentation improvements
 
 ### Deprecated
 
