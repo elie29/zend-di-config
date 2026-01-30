@@ -2,727 +2,179 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## V10.0.3 - TBD
+## [10.0.0+] - PHP 8.2 & Modern Tooling Era
 
-### Added
+### V10.0.3 - TBD
 
-- Nothing.
+- [#66](https://github.com/elie29/zend-di-config/issues/66) Compact the CHANGELOG file
 
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V10.0.2 - 2026-01-03
-
-### Added
-
-- Nothing.
-
-### Changed
+### V10.0.2 - 2026-01-03
 
 - [#63](https://github.com/elie29/zend-di-config/issues/63) Update tests to use only PHPUnit
-- Tests and documentation improvements
+- Documentation improvements
 
-### Deprecated
+### V10.0.1 - 2025-12-12
 
-- Nothing.
+- PHPUnit v11 support
+- Documentation fixes
 
-### Removed
+### V10.0.0 - 2025-12-05
 
-- Nothing.
+- [#61](https://github.com/elie29/zend-di-config/issues/61) **Major upgrade:** PHP 8.2 minimum + PHPUnit 10+ with updated dependency stack
 
-### Fixed
+---
 
-- Nothing.
+## [9.0.0+] - PHP 8.1 & Modern Analysis
 
-## V10.0.1 - 2025-12-12
+### V9.0.3 - 2025-12-05
 
-### Added
+- [#60](https://github.com/elie29/zend-di-config/pull/60) Minor dependencies update
 
-- Nothing.
+### V9.0.2 - 2025-03-11
 
-### Changed
+- [#59](https://github.com/elie29/zend-di-config/pull/59) Switched from PHPStan to Psalm for static analysis
 
-- PHPUnit v11 and some typos in a readme file.
+### V9.0.1 - 2023-03-28
 
-### Deprecated
+- [#57](https://github.com/elie29/zend-di-config/pull/57) Added PHP-DI 7.0 support
 
-- Nothing.
+### V9.0.0 - 2022-09-24
 
-### Removed
+- [#55](https://github.com/elie29/zend-di-config/issues/55) PHP 8.1 compatibility
 
-- Nothing.
+---
 
-### Fixed
+## [8.x] - PHP 8 Era
 
-- Nothing.
+### V8.1.1 - 2022-01-18
 
-## V10.0.0 - 2025-12-05
+- [#52](https://github.com/elie29/zend-di-config/issues/52) Enhanced container compilation and delegators
 
-### Added
+### V8.1.0 - 2021-12-16
 
-- Nothing.
+- [#49](https://github.com/elie29/zend-di-config/issues/49) Support for writing proxy classes to files
 
-### Changed
+### V8.0.0 - 2021-03-23
 
-- [#61](https://github.com/elie29/zend-di-config/issues/61) Upgrade project to PHP 8.2 and PHPUnit 10 with updated
-  dependency stack
+- **Breaking Change:** PHP 8.0+ only (dropped support for PHP 7.x)
+- [#46](https://github.com/elie29/zend-di-config/issues/46) Migration to PHP 8---
 
-### Deprecated
+## [6.0+] & [7.x] - Pre-PHP-8 Maintenance Era
 
-- Nothing.
+### V7.x (2020-2021)
 
-### Removed
+- General maintenance and dependency updates during v7 lifecycle
 
-- Nothing.
+### V6.0.1 - 2021-03-21
 
-### Fixed
+- Added `composer/package-versions-deprecated` for PHP 7.1 backward compatibility
+- Test corrections and CI improvements
 
-- Nothing.
+### V6.0.0 - 2020-01-15
 
-## V9.0.3 2025-12-05
+- [#43](https://github.com/elie29/zend-di-config/issues/43) **Breaking Change:** Migrated from Zend Framework to Laminas framework
 
-### Added
+---
 
-- Nothing.
+## [5.x] - PSR-11 Transition Era
 
-### Changed
+### V5.0.0 - 2019-11-27
 
-- [#60](https://github.com/elie29/zend-di-config/pull/60) Perform a minor dependencies update with Composer
+- [#42](https://github.com/elie29/zend-di-config/issues/42) Removed container-interop/container-interop dependency
+- Full PSR-11 compliance
 
-### Deprecated
+---
 
-- Nothing.
+## [4.x] - Namespace & Delegator Refinement Era
 
-### Removed
+### V4.0.5 - 2019-11-27
 
-- Nothing.
+- [#41](https://github.com/elie29/zend-di-config/issues/41) Made delegator override behavior idempotent
 
-### Fixed
+### V4.0.4 - 2019-09-29
 
-- Nothing.
+- [#40](https://github.com/elie29/zend-di-config/issues/40) Composer dependency updates
 
-## V9.0.2 - 2025-03-11
+### V4.0.3 - 2019-02-13
 
-### Added
+- **Fixed:** [#38](https://github.com/elie29/zend-di-config/issues/38) Resolved circular dependency detection issue
 
-- Nothing.
+### V4.0.2 - 2018-12-24
 
-### Changed
+- **Added:** [#35](https://github.com/elie29/zend-di-config/issues/35) Option to disable autowire via configuration
+- **Added:** [#34](https://github.com/elie29/zend-di-config/issues/34) PHP 7.3 support
+- [#36](https://github.com/elie29/zend-di-config/issues/36) Composer updates and coding standards migration
 
-- [#59](https://github.com/elie29/zend-di-config/pull/59) Psalm (static analysis tool) integration instead of phpstan
+### V4.0.1 - 2018-11-07
 
-### Deprecated
+- **Breaking Change:** [#28](https://github.com/elie29/zend-di-config/issues/28) & [#31](https://github.com/elie29/zend-di-config/issues/31) Changed namespace from `Zend\Di` to `Elie\PHPDI\Config`
+- See [migration guide](docs/migration-4.0.md) for upgrade details
 
-- Nothing.
+---
 
-### Removed
+## [3.0.x] - Autowire Foundation Era (2018)
 
-- Nothing.
+### V3.0.9 - 2018-10-31
 
-### Fixed
+- **Added:** [#25](https://github.com/elie29/zend-di-config/issues/25) Support for Expressive Skeleton with PHP-DI
+- [#26](https://github.com/elie29/zend-di-config/issues/26) Added visibility modifiers to constants
 
-- Nothing.
+### V3.0.8 - 2018-10-19
 
-## V9.0.1 - 2023-03-28
+- [#24](https://github.com/elie29/zend-di-config/issues/24) Enhanced `Config::configureContainer()` method
 
-### Added
+### V3.0.7 - 2018-10-16
 
-- Nothing.
+- [#21](https://github.com/elie29/zend-di-config/issues/21) Added CONTRIBUTING.md document
+- [#23](https://github.com/elie29/zend-di-config/issues/23) Composer dependency updates
 
-### Changed
+### V3.0.6 - 2018-10-08
 
-- [#57](https://github.com/elie29/zend-di-config/pull/57) Added support to PHP-DI 7.0
+- [#22](https://github.com/elie29/zend-di-config/issues/22) Integrated PHP static analysis tool (PHPStan)
 
-### Deprecated
+### V3.0.5 - 2018-09-12
 
-- Nothing.
+- [#20](https://github.com/elie29/zend-di-config/issues/20) Made invokables support array format
 
-### Removed
+### V3.0.4 - 2018-09-10
 
-- Nothing.
+- [#19](https://github.com/elie29/zend-di-config/issues/19) Added CLI command documentation
 
-### Fixed
+### V3.0.3 - 2018-06-06
 
-- Nothing.
+- [#17](https://github.com/elie29/zend-di-config/issues/17) CLI command documentation
 
-## V9.0.0 - 2022-09-24
+### V3.0.2 - 2018-06-05
 
-### Added
+- [#16](https://github.com/elie29/zend-di-config/issues/16) Added .gitattributes for release packaging
 
-- Nothing.
+### V3.0.1 - 2018-06-05
 
-### Changed
+- [#14](https://github.com/elie29/zend-di-config/issues/14) Added .gitattributes file to exclude test files from release
 
-- [#55](https://github.com/elie29/zend-di-config/issues/55) PHP8.1 Compatibility
+### V3.0.0 - 2018-06-05
 
-### Deprecated
+- **Added:** [#12](https://github.com/elie29/zend-di-config/issues/12) CLI command for adding autowires entries to configuration
+- **Changed:** [#11](https://github.com/elie29/zend-di-config/issues/11) **Breaking Change:** `autowires` now accepts array format instead of key-value pairs; use `aliases` for mappings
 
-- Nothing.
+---
 
-### Removed
+## [2.0.x] - Foundation Era (2018)
 
-- Nothing.
+### V2.0.2 - 2018-06-04
 
-### Fixed
+- [#9](https://github.com/elie29/zend-di-config/issues/9) Refactored `Config` class to use constant instead of string key
 
-- Nothing.
+### V2.0.1 - 2018-06-02
 
-## V8.1.1 - 2002-03-14
+- [#8](https://github.com/elie29/zend-di-config/issues/8) Updated composer dependencies
+- [#7](https://github.com/elie29/zend-di-config/issues/7) Renamed test folder to follow PSR-4
 
-### Added
+### V2.0.0 - 2018-05-31
 
-- Nothing.
-
-### Changed
-
-- [#52](https://github.com/elie29/zend-di-config/issues/52) Container compilation and delegators
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V8.1.0 - 2021-12-16
-
-### Added
-
-- [#49](https://github.com/elie29/zend-di-config/issues/49) Support writing proxy classes to files
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V8.0.0 - 2021-03-23
-
-- V8.0+ supports only PHP8+ and drops other versions
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#46](https://github.com/elie29/zend-di-config/issues/46) migration to php 8 [Break Change]
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V6.0.1 - 2021-03-21
-
-### Added
-
-- ./composer require composer/package-versions-deprecated for 7.1 backward compatibility
-- delete sudo from .travis
-- Correct ConfigTest.php
-- .composer self-update
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V6.0.0 - 2020-01-15
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#43](https://github.com/elie29/zend-di-config/issues/43) migrate to laminas framework.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V5.0.0 - 2019-11-27
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#42](https://github.com/elie29/zend-di-config/issues/42) Delete container-interop/container-interop.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V4.0.5 - 2019-11-27
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#41](https://github.com/elie29/zend-di-config/issues/41) Make overridden delegator idempotent.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V4.0.4 - 2019-09-29
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#40](https://github.com/elie29/zend-di-config/issues/40) Update composer.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V4.0.3 - 2019-02-13
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- [#38](https://github.com/elie29/zend-di-config/issues/38) Circular dependency detected.
-
-## V4.0.2 - 2018-12-24
-
-### Added
-
-- [#35](https://github.com/elie29/zend-di-config/issues/35) Allow to disable use autowire.
-- [#34](https://github.com/elie29/zend-di-config/issues/34) Add 7.3 support to travis. CS_CHECK needs
-  zend-coding-standard to migrate to 2.0.0
-
-### Changed
-
-- [#36](https://github.com/elie29/zend-di-config/issues/36) Launch composer update.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V4.0.1 - 2018-11-07
-
-This is the complete change log. You can also read the [migration guide](docs/migration-4.0.md) for upgrading.
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#28](https://github.com/elie29/zend-di-config/issues/28) Consider to change namespace (BC).
-- [#31](https://github.com/elie29/zend-di-config/issues/31) Zend\Di namespace.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.9 - 2018-10-31
-
-### Added
-
-- [#25](https://github.com/elie29/zend-di-config/issues/25) Use Expressive Skeleton installer with PHP-DI results in
-  error.
-
-### Changed
-
-- [#26](https://github.com/elie29/zend-di-config/issues/26) Indicate visibility of constants.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.8 - 2018-10-19
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#24](https://github.com/elie29/zend-di-config/issues/24) Config::configureContainer improvements.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.7 - 2018-10-16
-
-### Added
-
-- [#21](https://github.com/elie29/zend-di-config/issues/21) Add contributing.md document.
-- [#23](https://github.com/elie29/zend-di-config/issues/23) Launch composer update.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.6 - 2018-10-08
-
-### Added
-
-- [#22](https://github.com/elie29/zend-di-config/issues/22) Include PHP Static Analysis Tool.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.5 - 2018-09-12
-
-### Added
-
-- [#20](https://github.com/elie29/zend-di-config/issues/20) Makes invokables an array of services.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.4 - 2018-09-10
-
-### Added
-
-- [#19](https://github.com/elie29/zend-di-config/issues/19) Add documentation for the cli command.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.3 - 2018-06-06
-
-### Added
-
-- [#17](https://github.com/elie29/zend-di-config/issues/17) Add documentation for the cli command.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.2 - 2018-06-05
-
-### Added
-
-- [#16](https://github.com/elie29/zend-di-config/issues/16) Add entries to .gitattributes.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.1 - 2018-06-05
-
-### Added
-
-- [#14](https://github.com/elie29/zend-di-config/issues/14) Add .gitattributes file to exclude files from release.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V3.0.0 - 2018-06-05
-
-### Added
-
-- [#12](https://github.com/elie29/zend-di-config/issues/12) Expose a CLI command for adding an autowires entry to
-  configuration.
-
-### Changed
-
-- [#11](https://github.com/elie29/zend-di-config/issues/11) autowires configuration should accept a straight array and
-  not an associative key pair value. Any aliases needed should be created in the aliases configuration.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V2.0.2 - 2018-06-04
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- [#9](https://github.com/elie29/zend-di-config/issues/9) Config class should use config constant instead of using
-  config key.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V2.0.1 - 2018-06-02
-
-### Added
-
-- [#8](https://github.com/elie29/zend-di-config/issues/8) Updated composer.
-- [#7](https://github.com/elie29/zend-di-config/issues/7) Renamed test folder.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## V2.0.0 - 2018-05-31
-
-### Added
-
-- [#6](https://github.com/elie29/zend-di-config/issues/6) New autowire key support to ConfigProvider.
-- [#5](https://github.com/elie29/zend-di-config/issues/5) Travis coverage.
-
-### Changed
-
-- [#4](https://github.com/elie29/zend-di-config/issues/4) Change travis for code coverage.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- [#3](https://github.com/elie29/zend-di-config/issues/3) DI_CACHE_PATH isn't recognized.
-- [#2](https://github.com/elie29/zend-di-config/issues/2) Added config key to the definition array.
-- [#1](https://github.com/elie29/zend-di-config/issues/1) Invokable class created with autowire function.
+- **Added:** [#6](https://github.com/elie29/zend-di-config/issues/6) New `autowires` configuration key support
+- **Added:** [#5](https://github.com/elie29/zend-di-config/issues/5) Travis CI coverage integration
+- [#4](https://github.com/elie29/zend-di-config/issues/4) Enhanced Travis CI with code coverage reporting
+- **Fixed:** [#3](https://github.com/elie29/zend-di-config/issues/3) `DI_CACHE_PATH` constant recognition
+- **Fixed:** [#2](https://github.com/elie29/zend-di-config/issues/2) Added config key to definition array
+- **Fixed:** [#1](https://github.com/elie29/zend-di-config/issues/1) Invokable class creation with autowire function

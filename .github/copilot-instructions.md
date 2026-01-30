@@ -4,7 +4,9 @@
 
 This library bridges Laminas/Mezzio service manager configuration with PHP-DI's PSR-11 container. It translates familiar `dependencies` array syntax into PHP-DI definitions while adding autowiring support.
 
-**Key architecture**: [ContainerFactory.php](../src/ContainerFactory.php) instantiates a `ContainerBuilder`, [Config.php](../src/Config.php) translates service manager configuration into PHP-DI definitions (using `DI\autowire()`, `DI\create()`, `DI\factory()`, `DI\get()`), then builds the container.
+**Core responsibility**: Accept service manager-style configuration arrays and emit fully-configured PSR-11 containers.
+
+**Key architecture**: [ContainerFactory.php](../src/ContainerFactory.php) (`__invoke(ConfigInterface): ContainerInterface`) instantiates a `ContainerBuilder`. [Config.php](../src/Config.php) implements `ConfigInterface::configureContainer()` to translate service manager configuration into PHP-DI definitions (using `DI\autowire()`, `DI\create()`, `DI\factory()`, `DI\get()`), then the builder creates the container.
 
 ## Core Patterns
 
@@ -42,7 +44,7 @@ Delegators wrap services via closure-based factories ([Config.php#L149-165](../s
   - Makes service inventory visible in configuration files
   - Easier to customize, mock, or replace implementations
   - IDE-friendly for finding service definitions
-- **Choose by semantics, not performance**: 
+- **Choose by semantics, not performance**:
   - `autowires` for classes with typed constructor dependencies
   - `invokables` for classes with no/optional dependencies
   - `factories` for custom instantiation logic
@@ -51,21 +53,38 @@ Delegators wrap services via closure-based factories ([Config.php#L149-165](../s
 
 ## Testing Patterns
 
-- All tests extend `PHPUnit\Framework\TestCase` (PHPUnit 11.x)
-- Use `$this->getContainer($config)` helper to build containers in tests
-- Test assets in [tests/TestAsset/](../tests/TestAsset/) follow service manager conventions:
+All tests follow a consistent structure:
+- **Base class**: `PHPUnit\Framework\TestCase` (PHPUnit 11.x)
+- **Helper method**: Each test file implements `private function getContainer(array $config): ContainerInterface` that instantiates `new ContainerFactory()(new Config($config))`
+- **Test organization**: Separate test files by service type:
+  - [ConfigTest.php](../tests/ConfigTest.php) - core configuration behavior, compiler, caching, general features
+  - [FactoriesTest.php](../tests/FactoriesTest.php) - factory registration and invocation
+  - [InvokablesTest.php](../tests/InvokablesTest.php) - invokable registration, including numeric keys and aliases
+  - [ServicesTest.php](../tests/ServicesTest.php) - service registration (pre-instantiated, closures, etc.)
+  - [Tool/](../tests/Tool/) - CLI tool tests (dumper logic, command parsing)
+
+- **Test assets** in [tests/TestAsset/](../tests/TestAsset/) follow service manager conventions:
   - Factories implement `__invoke(ContainerInterface $container): ServiceInterface`
   - Delegators implement `__invoke(ContainerInterface $container, string $name, callable $callback): Service`
-- Mock `ContainerBuilder` to verify configuration methods (`enableDefinitionCache()`, `useAutowiring()`, etc.)
+  - Includes edge cases: required parameters, nullable parameters, optional parameters, container dependencies
+- **Mock `ContainerBuilder`** to verify configuration methods (`enableDefinitionCache()`, `useAutowiring()`, `enableCompilation()`, `writeProxiesToFile()`)
 
 ### Example Test Pattern
 ```php
-$container = $this->getContainer([
-    'dependencies' => [
-        'factories' => [ServiceInterface::class => ServiceFactory::class],
-    ],
-]);
-$this->assertInstanceOf(Service::class, $container->get(ServiceInterface::class));
+public function testMyFeature(): void
+{
+    $container = $this->getContainer([
+        'dependencies' => [
+            'factories' => [ServiceInterface::class => ServiceFactory::class],
+        ],
+    ]);
+    $this->assertInstanceOf(Service::class, $container->get(ServiceInterface::class));
+}
+
+private function getContainer(array $config): ContainerInterface
+{
+    return (new ContainerFactory())(new Config($config));
+}
 ```
 
 ## CLI Tool
@@ -95,11 +114,39 @@ composer cover  # Opens localhost:5001
 - **No mixing definition types**: Each service name should appear in only ONE of services/factories/invokables/autowires/aliases
 - **Factory return values**: Factories must return actual service instances, not service names
 - **Test namespace**: `ElieTest\PHPDI\Config`
+- **Invokables limitations**: Cannot have required constructor parameters (only optional/nullable); use `autowires` or `factories` for classes with required dependencies
+- **Unregistered classes**: PHP-DI can autowire unregistered classes if autowiring is enabled, but explicit registration is recommended
+- **Container parameter injection**: Only works via factory/autowire, NOT via invokable
+
+## Error Handling Notes
+
+Services that violate constraints will throw runtime exceptions:
+- Missing factory return type leads to `ContainerExceptionInterface`
+- Delegator chain breaks if delegator class doesn't exist
+- Invokable with required constructor params throws `DI\Definition\Exception\InvalidDefinition`
+- Invalid aliases cause `NotFoundExceptionInterface` on retrieval
 
 ## Common Tasks
 
-**Add new configuration option**: Update [ConfigInterface.php](../src/ConfigInterface.php) constants, implement in [Config.php](../src/Config.php) `configureContainer()` method, add test in [ConfigTest.php](../tests/ConfigTest.php).
+**Add new configuration option**:
+1. Add constant to [ConfigInterface.php](../src/ConfigInterface.php)
+2. Implement retrieval in [Config.php](../src/Config.php) via `$this->definitions[self::CONFIG][CONSTANT_NAME] ?? default`
+3. Call appropriate `$builder->method()` in `configureContainer()`
+4. Add test in [ConfigTest.php](../tests/ConfigTest.php) using mock verification
 
-**Handle new service type**: Add private method in [Config.php](../src/Config.php) called from `addDefinitions()`, use appropriate PHP-DI function (`autowire()`, `create()`, `factory()`, `get()`).
+**Handle new service type**:
+1. Add private method in [Config.php](../src/Config.php) (e.g., `addMyServices()`)
+2. Call from `addDefinitions()` in correct order (services → factories → invokables → autowires → aliases → delegators)
+3. Use appropriate PHP-DI function: `autowire()` for type-hint injection, `create()` for instantiation, `factory()` for callables, `get()` for references
+4. Add corresponding test file following the pattern of [FactoriesTest.php](../tests/FactoriesTest.php)
 
-**CLI tool changes**: Modify [AutowiresConfigDumper.php](../src/Tool/AutowiresConfigDumper.php) for logic, [AutowiresConfigDumperCommand.php](../src/Tool/AutowiresConfigDumperCommand.php) for argument handling.
+**CLI tool changes**:
+1. Modify [AutowiresConfigDumper.php](../src/Tool/AutowiresConfigDumper.php) for logic
+2. Update [AutowiresConfigDumperCommand.php](../src/Tool/AutowiresConfigDumperCommand.php) for CLI argument handling
+3. Add tests in [tests/Tool/](../tests/Tool/)
+
+**Fix service resolution issues**:
+- Check if service appears in multiple definition sections (violates no-mixing constraint)
+- Verify invokables don't have required constructor params
+- Ensure factories/delegators return service instances, not names
+- Validate delegator chain order in config (first applied = first in array)
