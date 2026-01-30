@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### V10.0.3 - TBD
 
 - [#66](https://github.com/elie29/zend-di-config/issues/66) Compact the CHANGELOG file
+- [#65](https://github.com/elie29/zend-di-config/issues/65) Update composer.lock to upgrade packages to latest versions
 
 ### V10.0.2 - 2026-01-03
 
