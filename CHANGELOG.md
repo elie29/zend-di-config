@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ## [10.0.0+] - PHP 8.2 & Modern Tooling Era
 
+### V10.0.4 - TBD
+
+- Update composer.lock dependencies and composer.phar to latest versions
+
 ### V10.0.3 - 2026-02-09
 
 - [#66](https://github.com/elie29/zend-di-config/issues/66) Compact the CHANGELOG file
