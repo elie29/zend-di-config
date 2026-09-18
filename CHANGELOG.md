@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ## [10.0.0+] - PHP 8.2 & Modern Tooling Era
 
+### V10.0.6 - TBD
+
 ### V10.0.5 - 2026-09-18
 
 - Update composer.lock dependencies and composer.phar to latest versions
